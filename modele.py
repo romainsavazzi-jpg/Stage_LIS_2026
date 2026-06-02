@@ -24,6 +24,12 @@ class Joueur:
         if direction == "vertical":
             self.y += marge_a_tp
 
+    def change_taille(self, increment):
+        self.taille += increment
+
+    def change_vitesse(self, increment):
+        self.vitesse += increment
+
     # def bouger_click(self, x, y):
     #     self.x = x
     #     self.y = y
