@@ -12,7 +12,7 @@ class Vue:
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
-        self.clock = pygame.time.Clock() 
+        self.clock = pygame.time.Clock()
 
     def run(self):
         while self.etat:
@@ -64,7 +64,7 @@ class Vue:
                 pygame.draw.circle(
                     self.screen,
                     couleur_joueur,
-                    (int(self.joueur.x), int(self.joueur.y)),
+                    (int(self.joueur.position.x), int(self.joueur.position.y)),
                     self.joueur.taille,
                 )
 

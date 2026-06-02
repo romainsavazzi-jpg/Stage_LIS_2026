@@ -10,11 +10,11 @@ class Controleur:
         if dx != 0 or dy != 0:
             self.cible_souris = None
             if dx != 0 and dy != 0:
-                facteur = joueur.vitesse / math.sqrt(2)
+                facteur = joueur.vitesse_max / math.sqrt(2)
             else:
-                facteur = joueur.vitesse
+                facteur = joueur.vitesse_max
             dx, dy = limite_bord(joueur, dx, dy, facteur)
-            joueur.bouger_fleche(dx, dy, facteur)
+            joueur.bouger(dx, dy, facteur)
 
     # def gerer_click(self, joueur, x, y):
     #     joueur.bouger_click(x, y)
@@ -28,15 +28,15 @@ class Controleur:
 
         dx, dy = 0, 0
 
-        if joueur.x < mx - joueur.vitesse:
+        if joueur.position.x < mx - joueur.vitesse_max:
             dx = 1
-        elif joueur.x > mx + joueur.vitesse:
+        elif joueur.position.x > mx + joueur.vitesse_max:
             dx = -1
         else:
             dx = 0
-        if joueur.y < my - joueur.vitesse:
+        if joueur.position.y < my - joueur.vitesse_max:
             dy = 1
-        elif joueur.y > my + joueur.vitesse:
+        elif joueur.position.y > my + joueur.vitesse_max:
             dy = -1
         else:
             dy = 0
@@ -48,18 +48,18 @@ class Controleur:
 
         # Si déplacement diagonal : la vitesse est adaptée
         if dx != 0 and dy != 0:
-            facteur = joueur.vitesse / math.sqrt(2)
+            facteur = joueur.vitesse_max / math.sqrt(2)
         else:
-            facteur = joueur.vitesse
+            facteur = joueur.vitesse_max
         dx, dy = limite_bord(joueur, dx, dy, facteur)
-        joueur.bouger_fleche(dx, dy, facteur)
+        joueur.bouger(dx, dy, facteur)
 
 
 def limite_bord(joueur, dx, dy, facteur):
-    bord_droit = joueur.x + joueur.taille
-    bord_gauche = joueur.x - joueur.taille
-    bord_haut = joueur.y - joueur.taille
-    bord_bas = joueur.y + joueur.taille
+    bord_droit = joueur.position.x + joueur.taille
+    bord_gauche = joueur.position.x - joueur.taille
+    bord_haut = joueur.position.y - joueur.taille
+    bord_bas = joueur.position.y + joueur.taille
     if bord_droit + facteur >= largeur and dx == 1:
         joueur.tp_bord(largeur - bord_droit, "horizontal")
         dx = 0
