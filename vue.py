@@ -18,8 +18,12 @@ class Vue:
         while self.etat:
             self.gerer_evenement()
             self.gerer_entrees()
+            self.boucle_principale()
             self.dessiner()
             self.clock.tick(FPS)
+
+    def boucle_principale(self):
+        self.controleur.deplacer_vers_cible(self.joueur)
 
     def gerer_evenement(self):
         for event in pygame.event.get():
@@ -36,7 +40,7 @@ class Vue:
             #     self.controleur.gerer_click(self.joueur, x, y)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mx, my = pygame.mouse.get_pos()
-                self.controleur.deplacer(self.joueur, mx, my)
+                self.controleur.cible_souris = mx, my
 
     def gerer_entrees(self):
         touches = pygame.key.get_pressed()
