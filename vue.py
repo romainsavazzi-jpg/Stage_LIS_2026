@@ -3,10 +3,11 @@ from configuration import FPS, largeur, hauteur, couleur_fond, couleur_joueur
 
 
 class Vue:
-    def __init__(self, joueur, controleur):
+    def __init__(self, joueur, controleur, carte):
         self.joueur = joueur
         self.controleur = controleur
         self.etat = True
+        self.carte = carte
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
@@ -36,6 +37,19 @@ class Vue:
     def dessiner(self):
         # Dessin : récupère les données du modèle
         self.screen.fill(couleur_fond)
-        pygame.draw.circle(self.screen, couleur_joueur,
-                           (int(self.joueur.x), int(self.joueur.y)), self.joueur.taille)
+
+        for obj in self.carte.liste:
+            if isinstance(obj, Obstacle_rect):
+                pygame.draw.rect(
+                    self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
+                )
+
+            if isinstance(obj, Joueur):
+                pygame.draw.circle(
+                    self.screen,
+                    couleur_joueur,
+                    (int(self.joueur.x), int(self.joueur.y)),
+                    self.joueur.taille,
+                )
+
         pygame.display.flip()
