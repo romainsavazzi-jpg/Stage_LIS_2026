@@ -4,9 +4,11 @@ from vue import Vue
 from configuration import largeur, hauteur
 import random
 
+
 # Instanciation dans le bon ordre
 joueur = Joueur(largeur // 2, hauteur // 2)
 controleur = Controleur()
+
 carte = Carte()
 carte.ajouter(joueur)
 for i in range(80):
@@ -26,4 +28,3 @@ for i in range(80):
 vue = Vue(joueur, controleur, carte)
 
 vue.run()
-
