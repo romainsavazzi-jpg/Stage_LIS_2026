@@ -12,7 +12,7 @@ class Vue:
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
-        self.clock = pygame.time.Clock()
+        self.clock = pygame.time.Clock() 
 
     def run(self):
         while self.etat:

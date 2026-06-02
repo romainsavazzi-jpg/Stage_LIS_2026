@@ -1,3 +1,5 @@
+from vecteurs import Vecteur2D
+
 
 class Carte:
     def __init__(self):
@@ -9,12 +11,17 @@ class Carte:
 
 class Joueur:
     def __init__(self, x, y, vitesse=15, taille=40):
-        self.x = x
-        self.y = y
-        self.vitesse = vitesse
         self.taille = taille
 
-    def bouger_fleche(self, dx, dy, facteur):
+        self.position = Vecteur2D(x, y) 
+        self.vitesse = Vecteur2D(0, 0)
+        self.acceleration = Vecteur2D(0, 0)
+
+
+
+
+
+    def bouger(self, dx, dy, facteur): # sert pour le déplacement 
         self.x += dx * facteur
         self.y += dy * facteur
 
