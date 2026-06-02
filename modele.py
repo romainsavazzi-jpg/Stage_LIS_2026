@@ -17,6 +17,12 @@ class Joueur:
         self.x += dx * facteur
         self.y += dy * facteur
 
+    def tp_bord(self, marge_a_tp, direction):
+        if direction == "horizontal":
+            self.x += marge_a_tp
+        elif direction == "vertical":
+            self.y += marge_a_tp
+
     def bouger_click(self, x, y):
         self.x = x
         self.y = y

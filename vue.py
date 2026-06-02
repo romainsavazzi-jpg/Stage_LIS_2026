@@ -1,5 +1,6 @@
 import pygame
 from configuration import FPS, largeur, hauteur, couleur_fond, couleur_joueur
+from modele import Obstacle_rect, Joueur
 
 
 class Vue:
@@ -25,13 +26,17 @@ class Vue:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 self.etat = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x = event.pos[0]
+                y = event.pos[1]
+                self.controleur.gerer_click(self.joueur, x, y)
 
     def gerer_entrees(self):
         touches = pygame.key.get_pressed()
         if touches[pygame.K_ESCAPE] == 1:
             self.etat = False
-        dx = (touches[pygame.K_RIGHT] - touches[pygame.K_LEFT])
-        dy = (touches[pygame.K_DOWN] - touches[pygame.K_UP])
+        dx = touches[pygame.K_RIGHT] - touches[pygame.K_LEFT]
+        dy = touches[pygame.K_DOWN] - touches[pygame.K_UP]
         self.controleur.gerer_fleches(self.joueur, dx, dy)
 
     def dessiner(self):

@@ -5,6 +5,7 @@ from configuration import largeur, hauteur
 class Controleur:
     def __init__(self):
         pass
+
     # self.controleur = 0
 
     def gerer_fleches(self, joueur, dx, dy):
@@ -31,7 +32,5 @@ class Controleur:
                 dy = 0
             joueur.bouger_fleche(dx, dy, facteur)
 
-        
-        def gerer_click(self, joueur, x, y): 
-            joueur.bouger_click(x,y) 
-            
+    def gerer_click(self, joueur, x, y):
+        joueur.bouger_click(x, y)
