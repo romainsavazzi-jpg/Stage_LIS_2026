@@ -1,3 +1,4 @@
+
 class Carte:
     def __init__(self):
         self.liste = []
@@ -7,7 +8,7 @@ class Carte:
 
 
 class Joueur:
-    def __init__(self, x, y, vitesse=15, taille=20):
+    def __init__(self, x, y, vitesse=15, taille=40):
         self.x = x
         self.y = y
         self.vitesse = vitesse
@@ -20,12 +21,12 @@ class Joueur:
     def tp_bord(self, marge_a_tp, direction):
         if direction == "horizontal":
             self.x += marge_a_tp
-        elif direction == "vertical":
+        if direction == "vertical":
             self.y += marge_a_tp
 
-    def bouger_click(self, x, y):
-        self.x = x
-        self.y = y
+    # def bouger_click(self, x, y):
+    #     self.x = x
+    #     self.y = y
 
 
 class Obstacle_rect:

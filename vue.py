@@ -26,10 +26,17 @@ class Vue:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 self.etat = False
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+            #     couleur_clic = self.screen.get_at(event.pos)[:3]
+            #     if couleur_clic == (24, 57, 125):
+            #         pygame.quit()
+            # if event.type == pygame.MOUSEBUTTONDOWN:
+            #     x = event.pos[0]
+            #     y = event.pos[1]
+            #     self.controleur.gerer_click(self.joueur, x, y)
             if event.type == pygame.MOUSEBUTTONDOWN:
-                x = event.pos[0]
-                y = event.pos[1]
-                self.controleur.gerer_click(self.joueur, x, y)
+                mx, my = pygame.mouse.get_pos()
+                self.controleur.deplacer(self.joueur, mx, my)
 
     def gerer_entrees(self):
         touches = pygame.key.get_pressed()

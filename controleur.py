@@ -6,8 +6,6 @@ class Controleur:
     def __init__(self):
         pass
 
-    # self.controleur = 0
-
     def gerer_fleches(self, joueur, dx, dy):
         if dx != 0 or dy != 0:
             if dx != 0 and dy != 0:
@@ -32,5 +30,32 @@ class Controleur:
                 dy = 0
             joueur.bouger_fleche(dx, dy, facteur)
 
-    def gerer_click(self, joueur, x, y):
-        joueur.bouger_click(x, y)
+
+    # def gerer_click(self, joueur, x, y):
+    #     joueur.bouger_click(x, y)
+
+
+    # def 
+
+
+
+
+    def deplacer(self, joueur, mx, my):
+        # while joueur.x != mx and joueur.y != my:
+        dx, dy = 0, 0
+        
+        if joueur.x < mx:
+            dx = 1
+        elif joueur.x > mx:
+            dx = -1
+        if joueur.y < my:
+            dy = 1
+        elif joueur.y > my:
+            dy = -1
+        # else:
+        #     dx, dy = 0, 0
+        if dx != 0 and dy != 0:
+            facteur = joueur.vitesse / math.sqrt(2)
+        else:
+            facteur = joueur.vitesse
+        joueur.bouger_fleche(dx, dy, facteur)
