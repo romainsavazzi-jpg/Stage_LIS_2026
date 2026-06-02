@@ -30,3 +30,8 @@ class Controleur:
                 joueur.tp_bord(hauteur - bord_bas, "vertical")
                 dy = 0
             joueur.bouger_fleche(dx, dy, facteur)
+
+        
+        def gerer_click(self, joueur, x, y): 
+            joueur.bouger_click(x,y) 
+            
