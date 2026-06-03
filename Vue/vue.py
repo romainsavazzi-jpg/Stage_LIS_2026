@@ -1,18 +1,24 @@
 import pygame
-from configuration import FPS, largeur, hauteur, couleur_fond, couleur_joueur
+from configuration import couleur_fond, couleur_joueur
 from Modele import modele  # Obstacle_rect, Joueur
 
 
 class Vue:
-    def __init__(self, controleur, objets_jeu):
-        self.joueur = objets_jeu.get_joueur(0)
-        self.controleur = controleur
+    def __init__(self, largeur, hauteur, FPS=60):
+        self.controleur = None
+        self.objets_jeu = None
         self.etat = True
-        self.objet_jeu = objets_jeu
+        self.FPS = FPS
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
         self.clock = pygame.time.Clock()
+
+    def attacher_modele(self, modele):
+        self.objets_jeu = modele
+
+    def attacher_controleur(self, controleur):
+        self.controleur = controleur
 
     def run(self):
         while self.etat:
@@ -20,10 +26,10 @@ class Vue:
             self.gerer_entrees()
             self.boucle_principale()
             self.dessiner()
-            self.clock.tick(FPS)
+            self.clock.tick(self.FPS)
 
     def boucle_principale(self):
-        self.controleur.deplacer_vers_cible(self.joueur)
+        self.controleur.deplacer_vers_cible()
 
     def gerer_evenement(self):
         for event in pygame.event.get():
@@ -65,22 +71,22 @@ class Vue:
             self.joueur.change_vitesse(-0.3)
         dx = touches[pygame.K_RIGHT] - touches[pygame.K_LEFT]
         dy = touches[pygame.K_DOWN] - touches[pygame.K_UP]
-        self.controleur.gerer_deplacement(self.joueur, dx, dy)
+        self.controleur.gerer_deplacement(dx, dy)
 
     def dessiner(self):
         # Dessin : récupère les données du modèle
         self.screen.fill(couleur_fond)
 
-        for obj in self.objet_jeu.liste_joueurs:
-            if isinstance(obj, modele.Joueur):
+        for joueur in self.objets_jeu.liste_joueurs:
+            if isinstance(joueur, modele.Joueur):
                 pygame.draw.circle(
                     self.screen,
                     couleur_joueur,
-                    (int(self.joueur.x), int(self.joueur.y)),
-                    self.joueur.taille,
+                    (int(joueur.x), int(joueur.y)),
+                    joueur.taille,
                 )
 
-        for obj in self.objet_jeu.liste_obstacles:
+        for obj in self.objets_jeu.liste_obstacles:
             if isinstance(obj, modele.Obstacle_rect):
                 pygame.draw.rect(
                     self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)

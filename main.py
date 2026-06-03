@@ -1,14 +1,12 @@
 from Modele import modele  # Joueur, Objet_jeu, Obstacle_rect
 from Controleur import controleur  # Controleur
 from Vue import vue  # Vue
-from configuration import largeur, hauteur
+from configuration import largeur, hauteur, FPS
 import random
 
 
 # Instanciation dans le bon ordre
 joueur = modele.Joueur(largeur // 2, hauteur // 2)
-controleur = controleur.Controleur()
-
 objets_jeu = modele.Objets_jeu()
 objets_jeu.ajouter_joueur(joueur)
 for i in range(80):
@@ -25,6 +23,11 @@ for i in range(80):
             ),
         )
     )
-vue = vue.Vue(controleur, objets_jeu)
+controleur1 = controleur.Controleur()
+controleur1.attacher_modele(objets_jeu)
 
-vue.run()
+vue1 = vue.Vue(largeur, hauteur, FPS)
+vue1.attacher_modele(objets_jeu)
+vue1.attacher_controleur(controleur1)
+
+vue1.run()

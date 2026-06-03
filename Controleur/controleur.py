@@ -5,8 +5,14 @@ from configuration import largeur, hauteur
 class Controleur:
     def __init__(self):
         self.cible_souris = None
+        self.objets_jeu = None
 
-    def gerer_deplacement(self, joueur, dx, dy):
+    def attacher_modele(self, modele):
+        self.objets_jeu = modele
+
+    def gerer_deplacement(self, dx, dy):
+        joueur = self.objets_jeu.get_joueur(0)
+
         if dx != 0 or dy != 0:
             self.cible_souris = None
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
@@ -17,7 +23,10 @@ class Controleur:
 
     # def
 
-    def deplacer_vers_cible(self, joueur):
+    def deplacer_vers_cible(self):
+
+        joueur = self.objets_jeu.get_joueur(0)
+
         if self.cible_souris is None:
             return
         mx, my = self.cible_souris
@@ -46,6 +55,7 @@ class Controleur:
 
 
 def limite_bord_et_diago(joueur, dx, dy):
+
     # Si déplacement diagonal : la vitesse est adaptée
     if dx != 0 and dy != 0:
         facteur = joueur.vitesse / math.sqrt(2)
