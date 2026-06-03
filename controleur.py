@@ -9,12 +9,8 @@ class Controleur:
     def gerer_fleches(self, joueur, dx, dy):
         if dx != 0 or dy != 0:
             self.cible_souris = None
-            if dx != 0 and dy != 0:
-                facteur = joueur.vitesse_max / math.sqrt(2)
-            else:
-                facteur = joueur.vitesse_max
-            dx, dy = limite_bord(joueur, dx, dy, facteur)
-            joueur.bouger(dx, dy, facteur)
+            dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
+            joueur.bouger_fleche(dx, dy, facteur)
 
     # def gerer_click(self, joueur, x, y):
     #     joueur.bouger_click(x, y)
@@ -28,15 +24,15 @@ class Controleur:
 
         dx, dy = 0, 0
 
-        if joueur.position.x < mx - joueur.vitesse_max:
+        if joueur.x < mx - joueur.vitesse:
             dx = 1
-        elif joueur.position.x > mx + joueur.vitesse_max:
+        elif joueur.x > mx + joueur.vitesse:
             dx = -1
         else:
             dx = 0
-        if joueur.position.y < my - joueur.vitesse_max:
+        if joueur.y < my - joueur.vitesse:
             dy = 1
-        elif joueur.position.y > my + joueur.vitesse_max:
+        elif joueur.y > my + joueur.vitesse:
             dy = -1
         else:
             dy = 0
@@ -45,21 +41,22 @@ class Controleur:
         if dx == 0 and dy == 0:
             self.cible_souris = None
             return
-
-        # Si déplacement diagonal : la vitesse est adaptée
-        if dx != 0 and dy != 0:
-            facteur = joueur.vitesse_max / math.sqrt(2)
-        else:
-            facteur = joueur.vitesse_max
-        dx, dy = limite_bord(joueur, dx, dy, facteur)
-        joueur.bouger(dx, dy, facteur)
+        dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
+        joueur.bouger_fleche(dx, dy, facteur)
 
 
-def limite_bord(joueur, dx, dy, facteur):
-    bord_droit = joueur.position.x + joueur.taille
-    bord_gauche = joueur.position.x - joueur.taille
-    bord_haut = joueur.position.y - joueur.taille
-    bord_bas = joueur.position.y + joueur.taille
+def limite_bord_et_diago(joueur, dx, dy):
+    # Si déplacement diagonal : la vitesse est adaptée
+    if dx != 0 and dy != 0:
+        facteur = joueur.vitesse / math.sqrt(2)
+    else:
+        facteur = joueur.vitesse
+
+    # Si le déplacement va dépasser le cadre, on ne déplace que vers la limite du bord
+    bord_droit = joueur.x + joueur.taille
+    bord_gauche = joueur.x - joueur.taille
+    bord_haut = joueur.y - joueur.taille
+    bord_bas = joueur.y + joueur.taille
     if bord_droit + facteur >= largeur and dx == 1:
         joueur.tp_bord(largeur - bord_droit, "horizontal")
         dx = 0
@@ -72,4 +69,4 @@ def limite_bord(joueur, dx, dy, facteur):
     if bord_bas + facteur >= hauteur and dy == 1:
         joueur.tp_bord(hauteur - bord_bas, "vertical")
         dy = 0
-    return dx, dy
+    return dx, dy, facteur

@@ -1,5 +1,3 @@
-from vecteurs import Vecteur2D
-
 
 class Carte:
     def __init__(self):
@@ -10,10 +8,10 @@ class Carte:
 
 
 class Joueur:
-    def __init__(self, x, y, taille=40):
-        self.friction = 0.8
-        self.cst_acceleration = 2
-        self.vitesse_max = 15
+    def __init__(self, x, y, vitesse=15, taille=40):
+        self.x = x
+        self.y = y
+        self.vitesse = vitesse
         self.taille = taille
 
         self.position = Vecteur2D(x, y)
@@ -26,9 +24,15 @@ class Joueur:
 
     def tp_bord(self, marge_a_tp, direction):
         if direction == "horizontal":
-            self.position.x += marge_a_tp
+            self.x += marge_a_tp
         if direction == "vertical":
-            self.position.y += marge_a_tp
+            self.y += marge_a_tp
+
+    def change_taille(self, increment):
+        self.taille += increment
+
+    def change_vitesse(self, increment):
+        self.vitesse += increment
 
     # def bouger_click(self, x, y):
     #     self.x = x

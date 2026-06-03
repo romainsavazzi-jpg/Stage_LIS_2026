@@ -41,11 +41,28 @@ class Vue:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mx, my = pygame.mouse.get_pos()
                 self.controleur.cible_souris = mx, my
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_u:
+                    self.joueur.change_taille(1)
+                if event.key == pygame.K_y:
+                    self.joueur.change_taille(-1)
+                if event.key == pygame.K_n:
+                    self.joueur.change_vitesse(1)
+                if event.key == pygame.K_b:
+                    self.joueur.change_vitesse(-1)
 
     def gerer_entrees(self):
         touches = pygame.key.get_pressed()
         if touches[pygame.K_ESCAPE] == 1:
             self.etat = False
+        if touches[pygame.K_t] == 1:
+            self.joueur.change_taille(0.5)
+        if touches[pygame.K_r] == 1:
+            self.joueur.change_taille(-0.5)
+        if touches[pygame.K_v] == 1:
+            self.joueur.change_vitesse(0.3)
+        if touches[pygame.K_c] == 1:
+            self.joueur.change_vitesse(-0.3)
         dx = touches[pygame.K_RIGHT] - touches[pygame.K_LEFT]
         dy = touches[pygame.K_DOWN] - touches[pygame.K_UP]
         self.controleur.gerer_fleches(self.joueur, dx, dy)
