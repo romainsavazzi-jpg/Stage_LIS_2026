@@ -1,19 +1,19 @@
-from modele import Joueur, Carte, Obstacle_rect
-from controleur import Controleur
-from vue import Vue
+from Modele import modele  # Joueur, Carte, Obstacle_rect
+from Controleur import controleur  # Controleur
+from Vue import vue  # Vue
 from configuration import largeur, hauteur
 import random
 
 
 # Instanciation dans le bon ordre
-joueur = Joueur(largeur // 2, hauteur // 2)
-controleur = Controleur()
+joueur = modele.Joueur(largeur // 2, hauteur // 2)
+controleur = controleur.Controleur()
 
-carte = Carte()
+carte = modele.Carte()
 carte.ajouter(joueur)
 for i in range(80):
     carte.ajouter(
-        Obstacle_rect(
+        modele.Obstacle_rect(
             x=random.randint(0, largeur - 100),
             y=random.randint(0, hauteur - 100),
             largeur=random.randint(50, 100),
@@ -25,6 +25,6 @@ for i in range(80):
             ),
         )
     )
-vue = Vue(joueur, controleur, carte)
+vue = vue.Vue(joueur, controleur, carte)
 
 vue.run()

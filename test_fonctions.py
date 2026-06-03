@@ -1,11 +1,11 @@
-from modele import Joueur
-from controleur import Controleur
+from Modele import modele  # Joueur
+from Controleur import controleur  # Controleur
 import math
 
 
 def test_mouvement_bord():
-    jim = Joueur(0, 0)
-    control = Controleur()
+    jim = modele.Joueur(0, 0)
+    control = controleur.Controleur()
     control.gerer_deplacement(jim, -1, -1)
     assert jim.x == jim.y == jim.taille
     control.gerer_deplacement(jim, -1, 0)
@@ -19,15 +19,15 @@ def test_mouvement_bord():
 
 
 def test_mouvement():
-    jack = Joueur(0, 0)
+    jack = modele.Joueur(0, 0)
     jack.bouger_fleche(2, 8, 10)
     assert jack.x == 20
     assert jack.y == 80
 
 
 def test_mouvement_click_souris():
-    john = Joueur(0, 0)
-    controle = Controleur()
+    john = modele.Joueur(0, 0)
+    controle = controleur.Controleur()
     coordonnees = 200
     controle.cible_souris = (coordonnees, coordonnees)
     while controle.cible_souris is not None:
