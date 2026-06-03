@@ -4,11 +4,11 @@ from Modele import modele  # Obstacle_rect, Joueur
 
 
 class Vue:
-    def __init__(self, joueur, controleur, carte):
-        self.joueur = joueur
+    def __init__(self, controleur, objets_jeu):
+        self.joueur = objets_jeu.get_joueur(0)
         self.controleur = controleur
         self.etat = True
-        self.carte = carte
+        self.objet_jeu = objets_jeu
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
@@ -71,18 +71,19 @@ class Vue:
         # Dessin : récupère les données du modèle
         self.screen.fill(couleur_fond)
 
-        for obj in self.carte.liste:
-            if isinstance(obj, modele.Obstacle_rect):
-                pygame.draw.rect(
-                    self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
-                )
-
+        for obj in self.objet_jeu.liste_joueurs:
             if isinstance(obj, modele.Joueur):
                 pygame.draw.circle(
                     self.screen,
                     couleur_joueur,
                     (int(self.joueur.x), int(self.joueur.y)),
                     self.joueur.taille,
+                )
+
+        for obj in self.objet_jeu.liste_obstacles:
+            if isinstance(obj, modele.Obstacle_rect):
+                pygame.draw.rect(
+                    self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
                 )
 
         pygame.display.flip()

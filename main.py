@@ -1,4 +1,4 @@
-from Modele import modele  # Joueur, Carte, Obstacle_rect
+from Modele import modele  # Joueur, Objet_jeu, Obstacle_rect
 from Controleur import controleur  # Controleur
 from Vue import vue  # Vue
 from configuration import largeur, hauteur
@@ -9,10 +9,10 @@ import random
 joueur = modele.Joueur(largeur // 2, hauteur // 2)
 controleur = controleur.Controleur()
 
-carte = modele.Carte()
-carte.ajouter(joueur)
+objets_jeu = modele.Objets_jeu()
+objets_jeu.ajouter_joueur(joueur)
 for i in range(80):
-    carte.ajouter(
+    objets_jeu.ajouter_obstacle(
         modele.Obstacle_rect(
             x=random.randint(0, largeur - 100),
             y=random.randint(0, hauteur - 100),
@@ -25,6 +25,6 @@ for i in range(80):
             ),
         )
     )
-vue = vue.Vue(joueur, controleur, carte)
+vue = vue.Vue(controleur, objets_jeu)
 
 vue.run()

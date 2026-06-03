@@ -1,10 +1,17 @@
 
-class Carte:
+class Objets_jeu:
     def __init__(self):
-        self.liste = []
+        self.liste_joueurs = []
+        self.liste_obstacles = []
 
-    def ajouter(self, objet):
-        self.liste.append(objet)
+    def ajouter_joueur(self, objet):
+        self.liste_joueurs.append(objet)
+
+    def ajouter_obstacle(self, objet):
+        self.liste_obstacles.append(objet)
+
+    def get_joueur(self, indice):
+        return self.liste_joueurs[indice]
 
 
 class Joueur:
