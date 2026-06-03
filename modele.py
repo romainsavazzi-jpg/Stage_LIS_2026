@@ -14,13 +14,9 @@ class Joueur:
         self.vitesse = vitesse
         self.taille = taille
 
-        self.position = Vecteur2D(x, y)
-        self.vitesse = Vecteur2D(0, 0)
-        self.acceleration = Vecteur2D(0, 0)
-
-    def bouger(self, dx, dy, facteur):  # sert pour le déplacement
-        self.position.x += dx * facteur
-        self.position.y += dy * facteur
+    def bouger_fleche(self, dx, dy, facteur):
+        self.x += dx * facteur
+        self.y += dy * facteur
 
     def tp_bord(self, marge_a_tp, direction):
         if direction == "horizontal":

@@ -6,7 +6,7 @@ class Controleur:
     def __init__(self):
         self.cible_souris = None
 
-    def gerer_fleches(self, joueur, dx, dy):
+    def gerer_deplacement(self, joueur, dx, dy):
         if dx != 0 or dy != 0:
             self.cible_souris = None
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
@@ -24,15 +24,15 @@ class Controleur:
 
         dx, dy = 0, 0
 
-        if joueur.x < mx - joueur.vitesse:
+        if joueur.x < mx - (joueur.vitesse // 2 + 1):
             dx = 1
-        elif joueur.x > mx + joueur.vitesse:
+        elif joueur.x > mx + (joueur.vitesse // 2 + 1):
             dx = -1
         else:
             dx = 0
-        if joueur.y < my - joueur.vitesse:
+        if joueur.y < my - (joueur.vitesse // 2 + 1):
             dy = 1
-        elif joueur.y > my + joueur.vitesse:
+        elif joueur.y > my + (joueur.vitesse // 2 + 1):
             dy = -1
         else:
             dy = 0

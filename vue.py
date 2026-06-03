@@ -65,7 +65,7 @@ class Vue:
             self.joueur.change_vitesse(-0.3)
         dx = touches[pygame.K_RIGHT] - touches[pygame.K_LEFT]
         dy = touches[pygame.K_DOWN] - touches[pygame.K_UP]
-        self.controleur.gerer_fleches(self.joueur, dx, dy)
+        self.controleur.gerer_deplacement(self.joueur, dx, dy)
 
     def dessiner(self):
         # Dessin : récupère les données du modèle
@@ -81,7 +81,7 @@ class Vue:
                 pygame.draw.circle(
                     self.screen,
                     couleur_joueur,
-                    (int(self.joueur.position.x), int(self.joueur.position.y)),
+                    (int(self.joueur.x), int(self.joueur.y)),
                     self.joueur.taille,
                 )
 
