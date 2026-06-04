@@ -7,6 +7,7 @@ class Vue:
     def __init__(self, largeur, hauteur, FPS=60):
         self.controleur = None
         self.objets_jeu = None
+        self.grille = None
         self.etat = True
         self.FPS = FPS
 
@@ -19,6 +20,9 @@ class Vue:
 
     def attacher_controleur(self, controleur):
         self.controleur = controleur
+
+    def attacher_grille(self, grille):
+        self.grille = grille
 
     def run(self):
         while self.etat:
@@ -40,35 +44,31 @@ class Vue:
             #     couleur_clic = self.screen.get_at(event.pos)[:3]
             #     if couleur_clic == (24, 57, 125):
             #         pygame.quit()
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #     x = event.pos[0]
-            #     y = event.pos[1]
-            #     self.controleur.gerer_click(self.joueur, x, y)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mx, my = pygame.mouse.get_pos()
                 self.controleur.cible_souris = mx, my
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_u:
-                    self.joueur.change_taille(1)
-                if event.key == pygame.K_y:
-                    self.joueur.change_taille(-1)
-                if event.key == pygame.K_n:
-                    self.joueur.change_vitesse(1)
-                if event.key == pygame.K_b:
-                    self.joueur.change_vitesse(-1)
+                if event.key == touches["agrandir_un_peu"]:
+                    self.objets_jeu.liste_joueurs[0].change_taille(1)
+                if event.key == touches["retrecir_un_peu"]:
+                    self.objets_jeu.liste_joueurs[0].change_taille(-1)
+                if event.key == touches["aug_vitesse_un_peu"]:
+                    self.objets_jeu.liste_joueurs[0].change_vitesse(1)
+                if event.key == touches["red_vitesse_un_peu"]:
+                    self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
 
     def gerer_entrees(self):
         touches_pressees = pygame.key.get_pressed()
         if touches_pressees[touches["quitter"]] == 1:
             self.etat = False
         if touches_pressees[touches["agrandir"]] == 1:
-            self.joueur.change_taille(0.5)
+            self.objets_jeu.liste_joueurs[0].change_taille(0.5)
         if touches_pressees[touches["retrecir"]] == 1:
-            self.joueur.change_taille(-0.5)
+            self.objets_jeu.liste_joueurs[0].change_taille(-0.5)
         if touches_pressees[touches["aug_vitesse"]] == 1:
-            self.joueur.change_vitesse(0.3)
+            self.objets_jeu.liste_joueurs[0].change_vitesse(0.3)
         if touches_pressees[touches["red_vitesse"]] == 1:
-            self.joueur.change_vitesse(-0.3)
+            self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
         dx = touches_pressees[touches["droite"]] - touches_pressees[touches["gauche"]]
         dy = touches_pressees[touches["bas"]] - touches_pressees[touches["haut"]]
         self.controleur.gerer_deplacement(dx, dy)
@@ -91,5 +91,15 @@ class Vue:
                 pygame.draw.rect(
                     self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
                 )
+
+        for ligne in self.grille.grille:
+            for point_grille in ligne:
+                if isinstance(point_grille, modele.Point):
+                    pygame.draw.circle(
+                        self.screen,
+                        (238, 0, 0),
+                        (point_grille.x, point_grille.y),
+                        400 / self.grille.nbr_division,
+                    )
 
         pygame.display.flip()

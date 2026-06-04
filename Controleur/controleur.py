@@ -18,11 +18,6 @@ class Controleur:
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             joueur.bouger_fleche(dx, dy, facteur)
 
-    # def gerer_click(self, joueur, x, y):
-    #     joueur.bouger_click(x, y)
-
-    # def
-
     def deplacer_vers_cible(self):
 
         joueur = self.objets_jeu.get_joueur(0)
