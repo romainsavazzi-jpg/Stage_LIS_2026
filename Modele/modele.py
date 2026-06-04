@@ -1,5 +1,3 @@
-from configuration import largeur, hauteur
-
 
 class Objets_jeu:
     def __init__(self):
@@ -51,29 +49,3 @@ class Obstacle_rect:
         self.largeur = largeur
         self.hauteur = hauteur
         self.couleur = couleur
-
-
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-
-class Grille:
-    def __init__(self, nbr_division=10):
-        self.ligne = []
-        self.grille = []
-        self.nbr_division = nbr_division
-
-    def diviser_ecran(self):
-        ecart = largeur / self.nbr_division
-        premier = Point(0 + ecart // 2, 0 + ecart // 2)
-        coordonnee = premier
-        nbr_carres_hauteur = int((hauteur // ecart) + 1)
-        for i in range(nbr_carres_hauteur):
-            for j in range(self.nbr_division):
-                self.ligne.append(coordonnee)
-                coordonnee = Point(coordonnee.x + ecart, coordonnee.y)
-            self.grille.append(self.ligne)
-            self.ligne = []
-            coordonnee = Point(premier.x, coordonnee.y + ecart)

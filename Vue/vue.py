@@ -1,5 +1,5 @@
 import pygame
-from configuration import couleur_fond, couleur_joueur
+from configuration import couleur_fond, couleur_joueur, touches
 from Modele import modele  # Obstacle_rect, Joueur
 
 
@@ -7,7 +7,6 @@ class Vue:
     def __init__(self, largeur, hauteur, FPS=60):
         self.controleur = None
         self.objets_jeu = None
-        self.grille = None
         self.etat = True
         self.FPS = FPS
 
@@ -20,9 +19,6 @@ class Vue:
 
     def attacher_controleur(self, controleur):
         self.controleur = controleur
-
-    def attacher_grille(self, grille):
-        self.grille = grille
 
     def run(self):
         while self.etat:
@@ -53,28 +49,28 @@ class Vue:
                 self.controleur.cible_souris = mx, my
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_u:
-                    self.objets_jeu.liste_joueurs[0].change_taille(1)
+                    self.joueur.change_taille(1)
                 if event.key == pygame.K_y:
-                    self.objets_jeu.liste_joueurs[0].change_taille(-1)
+                    self.joueur.change_taille(-1)
                 if event.key == pygame.K_n:
-                    self.objets_jeu.liste_joueurs[0].change_vitesse(1)
+                    self.joueur.change_vitesse(1)
                 if event.key == pygame.K_b:
-                    self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
+                    self.joueur.change_vitesse(-1)
 
     def gerer_entrees(self):
-        touches = pygame.key.get_pressed()
-        if touches[pygame.K_ESCAPE] == 1:
+        touches_pressees = pygame.key.get_pressed()
+        if touches_pressees[touches["quitter"]] == 1:
             self.etat = False
-        if touches[pygame.K_t] == 1:
-            self.objets_jeu.liste_joueurs[0].change_taille(0.5)
-        if touches[pygame.K_r] == 1:
-            self.objets_jeu.liste_joueurs[0].change_taille(-0.5)
-        if touches[pygame.K_v] == 1:
-            self.objets_jeu.liste_joueurs[0].change_vitesse(0.3)
-        if touches[pygame.K_c] == 1:
-            self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
-        dx = touches[pygame.K_RIGHT] - touches[pygame.K_LEFT]
-        dy = touches[pygame.K_DOWN] - touches[pygame.K_UP]
+        if touches_pressees[touches["agrandir"]] == 1:
+            self.joueur.change_taille(0.5)
+        if touches_pressees[touches["retrecir"]] == 1:
+            self.joueur.change_taille(-0.5)
+        if touches_pressees[touches["aug_vitesse"]] == 1:
+            self.joueur.change_vitesse(0.3)
+        if touches_pressees[touches["red_vitesse"]] == 1:
+            self.joueur.change_vitesse(-0.3)
+        dx = touches_pressees[touches["droite"]] - touches_pressees[touches["gauche"]]
+        dy = touches_pressees[touches["bas"]] - touches_pressees[touches["haut"]]
         self.controleur.gerer_deplacement(dx, dy)
 
     def dessiner(self):
@@ -90,20 +86,10 @@ class Vue:
                     joueur.taille,
                 )
 
-        # for obj in self.objets_jeu.liste_obstacles:
-        #     if isinstance(obj, modele.Obstacle_rect):
-        #         pygame.draw.rect(
-        #             self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
-        #         )
-
-        for ligne in self.grille.grille:
-            for point_grille in ligne:
-                if isinstance(point_grille, modele.Point):
-                    pygame.draw.circle(
-                        self.screen,
-                        (238, 0, 0),
-                        (point_grille.x, point_grille.y),
-                        400 / self.grille.nbr_division,
-                    )
+        for obj in self.objets_jeu.liste_obstacles:
+            if isinstance(obj, modele.Obstacle_rect):
+                pygame.draw.rect(
+                    self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
+                )
 
         pygame.display.flip()

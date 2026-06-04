@@ -1,13 +1,36 @@
 import pygame
+import tomllib
+
 pygame.init()
 
-# Paramètres de l'écran
+
+with open("données.toml", "rb") as f:
+    tom = tomllib.load(f)
+
 info = pygame.display.Info()
-largeur = info.current_w
-hauteur = info.current_h
+
+if tom["ecran"]["plein_ecran"]:
+    largeur = info.current_w
+    hauteur = info.current_h
+else:
+    largeur = tom["ecran"]["largeur_fixe"]
+    hauteur = tom["ecran"]["hauteur_fixe"]
+
 size = largeur, hauteur
-couleur_fond = (227, 255, 80)
-couleur_joueur = (24, 57, 125)
 screen = pygame.display.set_mode(size)
-FPS = 60
-Couleur_fond = (30, 30, 30)
+
+FPS = tom["ecran"]["fps"]
+
+# Couleurs
+couleur_fond = tuple(tom["couleurs"]["fond"])
+couleur_joueur = tuple(tom["couleurs"]["joueur"])
+
+# Joueur
+vitesse = tom["joueur"]["vitesse"]
+taille = tom["joueur"]["taille"]
+
+# Touches — on résout les getattr ici une bonne fois pour toutes
+touches = {nom: getattr(pygame, val) for nom, val in tom["touches"].items()}
+
+# Grille
+taille_cellule = tom["grille"]["taille_cellule"]
