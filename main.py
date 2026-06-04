@@ -9,13 +9,13 @@ import random
 joueur = modele.Joueur(largeur // 2, hauteur // 2)
 objets_jeu = modele.Objets_jeu()
 objets_jeu.ajouter_joueur(joueur)
-for i in range(80):
+for i in range(7):
     objets_jeu.ajouter_obstacle(
         modele.Obstacle_rect(
             x=random.randint(0, largeur - 100),
             y=random.randint(0, hauteur - 100),
             largeur=random.randint(50, 100),
-            hauteur=random.randint(50, 100),
+            hauteur=random.randint(50, 1000),
             couleur=(
                 random.randint(0, 255),
                 random.randint(0, 255),

@@ -1,5 +1,5 @@
 import pygame
-from configuration import couleur_fond, couleur_joueur
+from configuration import couleur_fond, couleur_joueur, touches
 from Modele import modele  # Obstacle_rect, Joueur
 
 
@@ -58,20 +58,20 @@ class Vue:
                     self.joueur.change_vitesse(-1)
 
     def gerer_entrees(self):
-        touches = pygame.key.get_pressed()
-        if touches[pygame.K_ESCAPE] == 1:
+        touches_pressees = pygame.key.get_pressed()
+        if touches_pressees[touches["quitter"]] == 1:
             self.etat = False
-        if touches[pygame.K_t] == 1:
+        if touches_pressees[touches["agrandir"]] == 1:
             self.joueur.change_taille(0.5)
-        if touches[pygame.K_r] == 1:
+        if touches_pressees[touches["retrecir"]] == 1:
             self.joueur.change_taille(-0.5)
-        if touches[pygame.K_v] == 1:
+        if touches_pressees[touches["aug_vitesse"]] == 1:
             self.joueur.change_vitesse(0.3)
-        if touches[pygame.K_c] == 1:
+        if touches_pressees[touches["red_vitesse"]] == 1:
             self.joueur.change_vitesse(-0.3)
-        dx = touches[pygame.K_RIGHT] - touches[pygame.K_LEFT]
-        dy = touches[pygame.K_DOWN] - touches[pygame.K_UP]
-        self.controleur.gerer_deplacement(dx, dy)
+        dx = touches_pressees[touches["droite"]] - touches_pressees[touches["gauche"]]
+        dy = touches_pressees[touches["bas"]] - touches_pressees[touches["haut"]]
+        self.controleur.gerer_deplacement(self.joueur, dx, dy)
 
     def dessiner(self):
         # Dessin : récupère les données du modèle
