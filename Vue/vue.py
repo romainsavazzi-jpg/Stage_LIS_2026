@@ -1,13 +1,12 @@
 import pygame
-from configuration import couleur_fond, couleur_joueur, touches
+from configuration import couleur_fond, couleur_joueur, touches, FPS
 from Modele import modele  # Obstacle_rect, Joueur
 
 
 class Vue:
-    def __init__(self, largeur, hauteur, FPS=60):
+    def __init__(self, largeur, hauteur, FPS=FPS):
         self.controleur = None
         self.objets_jeu = None
-        self.grille = None
         self.etat = True
         self.FPS = FPS
 
@@ -20,9 +19,6 @@ class Vue:
 
     def attacher_controleur(self, controleur):
         self.controleur = controleur
-
-    def attacher_grille(self, grille):
-        self.grille = grille
 
     def run(self):
         while self.etat:
@@ -46,7 +42,10 @@ class Vue:
             #         pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mx, my = pygame.mouse.get_pos()
-                self.controleur.cible_souris = mx, my
+                self.controleur.selection_point(mx, my)
+
+                # self.controleur.cible_souris = mx, my
+
             if event.type == pygame.KEYDOWN:
                 if event.key == touches["agrandir_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_taille(1)
@@ -71,7 +70,7 @@ class Vue:
             self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
         dx = touches_pressees[touches["droite"]] - touches_pressees[touches["gauche"]]
         dy = touches_pressees[touches["bas"]] - touches_pressees[touches["haut"]]
-        self.controleur.gerer_deplacement(dx, dy)
+        self.controleur.gerer_deplacement_touches(dx, dy)
 
     def dessiner(self):
         # Dessin : récupère les données du modèle
@@ -92,14 +91,14 @@ class Vue:
                     self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
                 )
 
-        for ligne in self.grille.grille:
+        for ligne in self.objets_jeu.grille.grille:
             for point_grille in ligne:
                 if isinstance(point_grille, modele.Point):
                     pygame.draw.circle(
                         self.screen,
-                        (238, 0, 0),
+                        point_grille.couleur,
                         (point_grille.x, point_grille.y),
-                        400 / self.grille.nbr_division,
+                        400 / self.objets_jeu.grille.nbr_division,
                     )
 
         pygame.display.flip()

@@ -24,6 +24,8 @@ FPS = tom["ecran"]["fps"]
 # Couleurs
 couleur_fond = tuple(tom["couleurs"]["fond"])
 couleur_joueur = tuple(tom["couleurs"]["joueur"])
+couleur_point = tuple(tom["couleurs"]["points"])
+couleur_rectangle = tuple(tom["couleurs"]["rectangle"])
 
 # Joueur
 vitesse = tom["joueur"]["vitesse"]
@@ -33,4 +35,7 @@ taille = tom["joueur"]["taille"]
 touches = {nom: getattr(pygame, val) for nom, val in tom["touches"].items()}
 
 # Grille
-taille_cellule = tom["grille"]["taille_cellule"]
+divisions = tom["grille"]["divisions"]
+
+# Rectangles
+nbr_rect = tom["obstacles"]["nombre_rectangles"]

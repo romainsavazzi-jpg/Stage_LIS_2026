@@ -1,10 +1,11 @@
-from configuration import largeur, hauteur
+from configuration import largeur, hauteur, couleur_joueur, couleur_point, couleur_rectangle, divisions
 
 
 class Objets_jeu:
     def __init__(self):
         self.liste_joueurs = []
         self.liste_obstacles = []
+        self.grille = None
 
     def ajouter_joueur(self, objet):
         self.liste_joueurs.append(objet)
@@ -15,11 +16,15 @@ class Objets_jeu:
     def get_joueur(self, indice):
         return self.liste_joueurs[indice]
 
+    def ajouter_grille(self, objet):
+        self.grille = objet
+
 
 class Joueur:
-    def __init__(self, x, y, vitesse=15, taille=40):
+    def __init__(self, x, y, couleur=couleur_joueur, vitesse=15, taille=40):
         self.x = x
         self.y = y
+        self.couleur = couleur
         self.vitesse = vitesse
         self.taille = taille
 
@@ -41,7 +46,7 @@ class Joueur:
 
 
 class Obstacle_rect:
-    def __init__(self, x, y, largeur, hauteur, couleur):
+    def __init__(self, x, y, largeur, hauteur, couleur=couleur_rectangle):
         self.x = x
         self.y = y
         self.largeur = largeur
@@ -50,26 +55,27 @@ class Obstacle_rect:
 
 
 class Point:
-    def __init__(self, x, y):
+    def __init__(self, x, y, couleur=couleur_point):
         self.x = x
         self.y = y
+        self.couleur = couleur
 
 
 class Grille:
-    def __init__(self, nbr_division=10):
-        self.ligne = []
+    def __init__(self, nbr_division=divisions):
+        self.ecart = None
         self.grille = []
         self.nbr_division = nbr_division
 
     def diviser_ecran(self):
-        ecart = largeur / self.nbr_division
-        premier = Point(0 + ecart // 2, 0 + ecart // 2)
+        self.ecart = largeur / self.nbr_division
+        premier = Point(0 + self.ecart // 2, 0 + self.ecart // 2)
         coordonnee = premier
-        nbr_carres_hauteur = int((hauteur // ecart) + 1)
+        nbr_carres_hauteur = int((hauteur // self.ecart) + 1)
         for i in range(nbr_carres_hauteur):
+            ligne = []
             for j in range(self.nbr_division):
-                self.ligne.append(coordonnee)
-                coordonnee = Point(coordonnee.x + ecart, coordonnee.y)
-            self.grille.append(self.ligne)
-            self.ligne = []
-            coordonnee = Point(premier.x, coordonnee.y + ecart)
+                ligne.append(coordonnee)
+                coordonnee = Point(coordonnee.x + self.ecart, coordonnee.y)
+            self.grille.append(ligne)
+            coordonnee = Point(premier.x, coordonnee.y + self.ecart)

@@ -6,7 +6,9 @@ fps = 60
 
 [couleurs]
 fond = [227, 255, 80]
-joueur = [24, 200, 125]
+joueur = [24, 100, 225]
+points = [212,10,5]
+rectangle = [0,0,120]
 
 [joueur]
 vitesse = 15
@@ -29,4 +31,7 @@ red_vitesse_un_peu = "K_b"
 
 
 [grille]
-taille_cellule = 5
+divisions = 200
+
+[obstacles]
+nombre_rectangles = 20 
