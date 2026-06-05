@@ -1,5 +1,5 @@
 import math
-from configuration import largeur, hauteur
+from configuration import largeur, hauteur, couleur_point
 from Utilities import Algo_A_etoile
 
 
@@ -25,9 +25,10 @@ class Controleur:
         # self.point_cible = self.objets_jeu.grille.grille[y_point][x_point]
         # self.point_cible.couleur = (20, 250, 100)
 
-    def selection_point_cible(self, point: object):
+    def selection_point_cible(self, point):
         """Définit le point cible vers lequel le joueur doit se diriger"""
         self.point_cible = point
+        return point
 
     def determiner_chemin(self, point_arrivee):
         """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée"""
@@ -43,7 +44,8 @@ class Controleur:
             return
         if not self.aller_vers_point or self.point_cible is not None:
             return
-        self.selection_point_cible(self.liste_points.pop(0))
+        point = self.selection_point_cible(self.liste_points.pop(0))
+        self.objets_jeu.grille.changer_couleur_point(point, couleur_point)
 
     def gerer_deplacement_touches(self, dx, dy):
         """Gère le déplacement du joueur en fonction des touches pressées"""

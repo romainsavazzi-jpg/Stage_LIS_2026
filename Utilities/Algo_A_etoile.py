@@ -8,7 +8,7 @@ import heapq
 def cheminPlusCourt(controle, grille, depart, objectif):
     """
     A* sur la grille. depart et objectif sont des tuples points Point().
-    Retourne une liste de tuples points formant le chemin, ou [] si aucun chemin.
+    Retourne une liste de points formant le chemin, ou [] si aucun chemin.
     """
     def heuristique(a, b):
         return sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)

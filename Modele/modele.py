@@ -99,3 +99,6 @@ class Grille:
             point.couleur = (20, 250, 100)
         for point in liste_des_points_verifies:
             point.couleur = (250, 60, 250)
+
+    def changer_couleur_point(self, point, couleur):
+        point.couleur = couleur
