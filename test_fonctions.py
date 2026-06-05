@@ -4,6 +4,7 @@ import math
 
 
 def test_mouvement_bord():
+    '''Test les fonctions de déplacement du joueur et vérifie que les limites de l'écran sont respectées'''
     jim = modele.Joueur(0, 0)
     control = controleur.Controleur()
     model = modele.Objets_jeu()
@@ -22,6 +23,7 @@ def test_mouvement_bord():
 
 
 def test_mouvement():
+    '''Test les fonctions de déplacement du joueur'''
     jack = modele.Joueur(0, 0)
     jack.bouger_fleche(2, 8, 10)
     assert jack.x == 20
@@ -29,6 +31,7 @@ def test_mouvement():
 
 
 def test_mouvement_click_souris():
+    '''Test la fonction de déplacement avec le clic souris'''
     john = modele.Joueur(0, 0)
     controle = controleur.Controleur()
     model = modele.Objets_jeu()
@@ -48,9 +51,10 @@ def test_mouvement_click_souris():
 
 
 def test_ajout_objet():
+    """ Test les fonctions d'ajout d'objets au modèle et de récupération d'un joueur """
     Liste_objet = modele.Objets_jeu()
     jimmy = modele.Joueur(0, 0)
-    kouign_amann = modele.Obstacle_rect
+    kouign_amann = modele.Obstacle_rect()
     Liste_objet.ajouter_joueur(jimmy)
     Liste_objet.ajouter_obstacle(kouign_amann)
     assert Liste_objet.liste_joueurs[0] == jimmy

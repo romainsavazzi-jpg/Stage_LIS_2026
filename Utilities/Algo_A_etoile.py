@@ -1,6 +1,5 @@
 from math import sqrt
 import heapq
-from configuration import hauteur, largeur
 
 # ------------------------------------------------------------------------------------------------------------------------------
 # Algorithme A* :
@@ -35,12 +34,16 @@ def cheminPlusCourt(controle, grille, depart, objectif):
             # chemin.pop(0)
             # chemin.append(depart)
             chemin.reverse()
+            if closed_list != []:
+                closed_list.pop(0)
             return chemin, closed_list
 
         _, x, y = controle.selection_point(u.x, u.y)
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, 1), (1, -1)]:
             nx, ny = x + dx, y + dy
-            if not (0 <= nx < largeur and 0 <= ny < hauteur):
+            nb_colonnes = len(grille[0])
+            nb_lignes = len(grille)
+            if not (0 <= nx < nb_colonnes and 0 <= ny < nb_lignes):
                 continue
             # On ne traverse que les cases vides ou déjà routes
             if not grille[ny][nx].traversable:

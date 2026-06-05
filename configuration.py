@@ -3,12 +3,13 @@ import tomllib
 
 pygame.init()
 
-
+# importe le toml
 with open("données.toml", "rb") as f:
     tom = tomllib.load(f)
 
 info = pygame.display.Info()
 
+# vérifie si le plein écran est activé et définit la taille de l'écran en conséquence
 if tom["ecran"]["plein_ecran"]:
     largeur = info.current_w
     hauteur = info.current_h
@@ -37,5 +38,5 @@ touches = {nom: getattr(pygame, val) for nom, val in tom["touches"].items()}
 # Grille
 divisions = tom["grille"]["divisions"]
 
-# Rectangles
+# Obstacles
 nbr_rect = tom["obstacles"]["nombre_rectangles"]

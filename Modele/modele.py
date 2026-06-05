@@ -1,4 +1,4 @@
-from configuration import largeur, hauteur, couleur_joueur, couleur_point, couleur_rectangle, divisions
+from configuration import largeur, hauteur, couleur_joueur, couleur_point, couleur_rectangle, divisions, vitesse, taille
 
 
 class Objets_jeu:
@@ -8,20 +8,24 @@ class Objets_jeu:
         self.grille = None
 
     def ajouter_joueur(self, objet):
+        '''Ajoute un joueur à la liste des joueurs'''
         self.liste_joueurs.append(objet)
 
     def ajouter_obstacle(self, objet):
+        '''Ajoute un obstacle à la liste des obstacles'''
         self.liste_obstacles.append(objet)
 
     def get_joueur(self, indice):
+        """Récupère un joueur à partir de son indice dans la liste des joueurs"""
         return self.liste_joueurs[indice]
 
     def ajouter_grille(self, objet):
+        '''Ajoute une grille au modèle'''
         self.grille = objet
 
 
 class Joueur:
-    def __init__(self, x, y, couleur=couleur_joueur, vitesse=15, taille=40):
+    def __init__(self, x, y, couleur=couleur_joueur, vitesse=vitesse, taille=taille):
         self.x = x
         self.y = y
         self.couleur = couleur
@@ -29,19 +33,23 @@ class Joueur:
         self.taille = taille
 
     def bouger_fleche(self, dx, dy, facteur):
+        """Fait bouger le joueur en fonction des touches pressées et du facteur de déplacement calculé pour gérer les déplacements diagonaux et les limites de l'écran"""
         self.x += dx * facteur
         self.y += dy * facteur
 
     def tp_bord(self, marge_a_tp, direction):
+        """Téléporte le joueur au bord si il essaye de se déplacer hors de l'écran"""
         if direction == "horizontal":
             self.x += marge_a_tp
         if direction == "vertical":
             self.y += marge_a_tp
 
     def change_taille(self, increment):
+        """Change la taille du joueur"""
         self.taille += increment
 
     def change_vitesse(self, increment):
+        """Change la vitesse du joueur"""
         self.vitesse += increment
 
 
@@ -72,6 +80,7 @@ class Grille:
         self.nbr_division = nbr_division
 
     def diviser_ecran(self):
+        """Divise l'écran en une grille de points et les stocke dans une matrice"""
         self.ecart = largeur / self.nbr_division
         premier = Point(0 + self.ecart // 2, 0 + self.ecart // 2)
         coordonnee = premier
@@ -83,3 +92,10 @@ class Grille:
                 coordonnee = Point(coordonnee.x + self.ecart, coordonnee.y)
             self.grille.append(ligne)
             coordonnee = Point(premier.x, coordonnee.y + self.ecart)
+
+    def allumer_points(self, liste_points, liste_des_points_verifies):
+        """Colorie les points du meilleur chemin trouvé en vert et les points vérifiés en rose"""
+        for point in liste_points:
+            point.couleur = (20, 250, 100)
+        for point in liste_des_points_verifies:
+            point.couleur = (250, 60, 250)

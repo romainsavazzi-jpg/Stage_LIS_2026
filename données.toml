@@ -2,16 +2,16 @@
 plein_ecran = true
 largeur_fixe = 200
 hauteur_fixe = 200
-fps = 60
+fps = 120 # 60  # 120
 
 [couleurs]
-fond = [227, 255, 80]
+fond = [173, 124, 113]
 joueur = [24, 100, 225]
 points = [212,10,5]
 rectangle = [0,0,120]
 
 [joueur]
-vitesse = 15
+vitesse = 7.5 # 15  # 7.5
 taille = 40
 
 [touches]
