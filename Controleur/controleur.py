@@ -1,5 +1,6 @@
 import math
 from configuration import largeur, hauteur
+from Utilities import Algo_A_etoile
 
 
 class Controleur:
@@ -15,8 +16,22 @@ class Controleur:
         ecart = self.objets_jeu.grille.ecart
         x_point = int(mx // ecart)
         y_point = int(my // ecart)
-        self.point_cible = self.objets_jeu.grille.grille[y_point][x_point]
-        self.point_cible.couleur = (20, 250, 100)
+        return self.objets_jeu.grille.grille[y_point][x_point], x_point, y_point
+        # (x_point, y_point)
+        # self.point_cible = self.objets_jeu.grille.grille[y_point][x_point]
+        # self.point_cible.couleur = (20, 250, 100)
+
+    def selection_point_cible(self, mx, my):
+        self.point_cible, _, _ = self.selection_point(mx, my)
+
+    def allumer_points(self, point_arrivee):
+        joueur = self.objets_jeu.get_joueur(0)
+        point_joueur, _, _ = self.selection_point(joueur.x, joueur.y)
+        liste_des_points, liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(self, self.objets_jeu.grille.grille, point_joueur, point_arrivee)
+        for point in liste_des_points:
+            point.couleur = (20, 250, 100)
+        for point in liste_des_points_verifies:
+            point.couleur = (250, 60, 250)
 
     def gerer_deplacement_touches(self, dx, dy):
         joueur = self.objets_jeu.get_joueur(0)

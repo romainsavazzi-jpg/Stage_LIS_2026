@@ -9,6 +9,7 @@ class Vue:
         self.objets_jeu = None
         self.etat = True
         self.FPS = FPS
+        self.traj = False
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
@@ -41,10 +42,21 @@ class Vue:
             #     if couleur_clic == (24, 57, 125):
             #         pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                mx, my = pygame.mouse.get_pos()
-                self.controleur.selection_point(mx, my)
+                if event.button == 3:
+                    self.traj = True
 
-                # self.controleur.cible_souris = mx, my
+                    mx, my = pygame.mouse.get_pos()
+                    self.controleur.cible_souris = mx, my
+                    point_arrivee, _, _ = self.controleur.selection_point(mx, my)
+                    self.controleur.allumer_points(point_arrivee)
+
+                    # (mx_point_arrivee, my_point_arrivee) = self.controleur.selection_point(mx, my)
+                    # self.controleur.allumer_points((mx_point_arrivee, my_point_arrivee))
+                elif event.button == 1 and self.traj and self.controleur.cible_souris:
+                    self.controleur.selection_point_cible(self.controleur.cible_souris[0], self.controleur.cible_souris[1])
+                    self.traj = False
+
+                    # self.controleur.cible_souris = mx, my
 
             if event.type == pygame.KEYDOWN:
                 if event.key == touches["agrandir_un_peu"]:

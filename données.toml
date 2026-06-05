@@ -15,6 +15,7 @@ vitesse = 15
 taille = 40
 
 [touches]
+# test
 haut = "K_z"
 bas = "K_s"
 gauche = "K_q"

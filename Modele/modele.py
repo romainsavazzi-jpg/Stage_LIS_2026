@@ -55,10 +55,14 @@ class Obstacle_rect:
 
 
 class Point:
-    def __init__(self, x, y, couleur=couleur_point):
+    def __init__(self, x, y, traversable=True, couleur=couleur_point):
         self.x = x
         self.y = y
         self.couleur = couleur
+        self.traversable = traversable
+
+    def __str__(self):
+        return (str(self.x) + " " + str(self.y) + " " + str(self.traversable))
 
 
 class Grille:

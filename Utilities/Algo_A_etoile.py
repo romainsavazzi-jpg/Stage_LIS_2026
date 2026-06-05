@@ -1,14 +1,18 @@
+from math import sqrt
+import heapq
+from configuration import hauteur, largeur
 
 # ------------------------------------------------------------------------------------------------------------------------------
 # Algorithme A* :
 
-def cheminPlusCourt(grille, depart, objectif):
+
+def cheminPlusCourt(controle, grille, depart, objectif):
     """
-    A* sur la grille. depart et objectif sont des tuples (x, y).
-    Retourne une liste de tuples (x, y) formant le chemin, ou [] si aucun chemin.
+    A* sur la grille. depart et objectif sont des tuples points Point().
+    Retourne une liste de tuples points formant le chemin, ou [] si aucun chemin.
     """
     def heuristique(a, b):
-        return sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
+        return sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
 
     closed_list = []
     open_list = []
@@ -29,20 +33,20 @@ def cheminPlusCourt(grille, depart, objectif):
                 chemin.append(u)
                 u = parent[u]
             # chemin.pop(0)
-            chemin.append(depart)
+            # chemin.append(depart)
             chemin.reverse()
             return chemin, closed_list
 
-        x, y = u
+        _, x, y = controle.selection_point(u.x, u.y)
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, 1), (1, -1)]:
             nx, ny = x + dx, y + dy
-            if not (0 <= nx < GRID_SIZE and 0 <= ny < GRID_SIZE):
+            if not (0 <= nx < largeur and 0 <= ny < hauteur):
                 continue
             # On ne traverse que les cases vides ou déjà routes
-            if grille[nx][ny] != EMPTY and grille[nx][ny] != ROAD and grille[nx][ny] != 1:
+            if not grille[ny][nx].traversable:
                 continue
 
-            v = (nx, ny)
+            v = controle.objets_jeu.grille.grille[ny][nx]
             if (dx, dy) in set([(-1, -1), (-1, 1), (1, 1), (1, -1)]):
                 nouveau_cout = cout_g[u] + sqrt(2)
             else:
@@ -59,11 +63,11 @@ def cheminPlusCourt(grille, depart, objectif):
     return []  # Aucun chemin trouvé
 
 
-def remplace_chemin_plus_court(grille, depart, objectif):
-    chemin, autre = cheminPlusCourt(grille, depart, objectif)
-    print(len(chemin))
-    for (x, y) in autre:
-        grille[x][y] = VERIF
-    for (x, y) in chemin:
-        grille[x][y] = ROAD
-    return grille
+# def remplace_chemin_plus_court(grille, depart, objectif):
+#     chemin, autre = cheminPlusCourt(grille, depart, objectif)
+#     print(len(chemin))
+#     for (x, y) in autre:
+#         grille[x][y] = VERIF
+#     for (x, y) in chemin:
+#         grille[x][y] = ROAD
+#     return grille
