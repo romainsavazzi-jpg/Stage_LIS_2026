@@ -16,7 +16,7 @@ class Controleur:
         x_point = int(mx // ecart)
         y_point = int(my // ecart)
         self.point_cible = self.objets_jeu.grille.grille[y_point][x_point]
-        self.point_cible.couleur = (100, 250, 10)
+        self.point_cible.couleur = (20, 250, 100)
 
     def gerer_deplacement_touches(self, dx, dy):
         joueur = self.objets_jeu.get_joueur(0)

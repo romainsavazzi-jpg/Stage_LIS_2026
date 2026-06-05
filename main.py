@@ -8,7 +8,7 @@ import random
 # Instanciation dans le bon ordre
 joueur = modele.Joueur(largeur // 2, hauteur // 2)
 
-grille1 = modele.Grille()
+grille1 = modele.Grille(75)
 grille1.diviser_ecran()
 objets_jeu = modele.Objets_jeu()
 objets_jeu.ajouter_joueur(joueur)
