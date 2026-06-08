@@ -10,13 +10,14 @@ class Controleur:
         self.point_cible = None
         self.traj = False
         self.liste_points = []
+        self.liste_des_points_verifies = []
         self.aller_vers_point = False
 
     def attacher_modele(self, modele):
         self.objets_jeu = modele
 
     def selection_point(self, mx: float, my: float):
-        """Associe le clic souris à un point de la grille"""
+        """Associe les coordonnées du point de l'écran auquel on applique la méthode à un point de la grille"""
         ecart = self.objets_jeu.grille.ecart
         x_point = int(mx // ecart)
         y_point = int(my // ecart)
@@ -34,11 +35,11 @@ class Controleur:
         """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée"""
         joueur = self.objets_jeu.get_joueur(0)
         point_joueur, _, _ = self.selection_point(joueur.x, joueur.y)
-        self.liste_points, liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(
+        self.liste_points, self.liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(
             self, self.objets_jeu.grille.grille, point_joueur, point_arrivee
         )
         self.objets_jeu.grille.allumer_points(
-            self.liste_points, liste_des_points_verifies
+            self.liste_points, self.liste_des_points_verifies
         )
 
     def se_rendre_aux_points(self):
@@ -104,9 +105,15 @@ class Controleur:
         joueur.bouger_fleche(dx, dy, facteur)
 
     def mettre_les_points_intravesables_rect(self, joueur):
-        for ligne in self.objets_jeu.grille.grille:
-            for point in ligne:
-                point.associer_traversabilité(True)
+        # Aplatir la matrice en liste
+        liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
+
+        # Soustraire les points de la trajectoire des points à actualiser
+        Listes_points_traj_set = set(self.liste_points)  # | set(self.liste_des_points_verifies)
+        liste_grille_moins_points = [p for p in liste_grille if p not in Listes_points_traj_set]
+
+        for point in liste_grille_moins_points:
+            point.associer_traversabilité(True)
 
         for obstacle in self.objets_jeu.liste_obstacles:
             haut_gauche = (obstacle.x - joueur.taille, obstacle.y - joueur.taille)
@@ -114,16 +121,18 @@ class Controleur:
                 obstacle.x + obstacle.largeur + joueur.taille,
                 obstacle.y + obstacle.hauteur + joueur.taille,
             )
-            for ligne in self.objets_jeu.grille.grille:
-                for point in ligne:
-                    if (
-                        haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
-                    ):
-                        point.associer_traversabilité(False)
+            for point in liste_grille_moins_points:
+                if (
+                    haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
+                ) or (
+                    point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
+                ):
+                    point.associer_traversabilité(False)
 
 
 def limite_bord_et_diago(joueur, dx, dy):
-    """Empêche le joueur de dépasser les bords de l'écran"""
+    """Empêche le joueur de dépasser les bords de l'écran et change la vitesse en fonction de diagonale ou pas
+    Renvoie le déplacement et la bonne vitesse"""
     # Si déplacement diagonal : la vitesse est adaptée
     if dx != 0 and dy != 0:
         facteur = joueur.vitesse / math.sqrt(2)

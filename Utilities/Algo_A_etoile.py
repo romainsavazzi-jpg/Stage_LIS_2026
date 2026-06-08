@@ -11,7 +11,9 @@ def cheminPlusCourt(controle, grille, depart, objectif):
     Retourne une liste de points formant le chemin, ou [] si aucun chemin.
     """
     def heuristique(a, b):
-        return sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+        _, ax, ay = controle.selection_point(a.x, a.y)
+        _, bx, by = controle.selection_point(b.x, b.y)
+        return sqrt((ax - bx) ** 2 + (ay - by) ** 2)
 
     closed_list = []
     open_list = []
@@ -74,3 +76,6 @@ def cheminPlusCourt(controle, grille, depart, objectif):
 #     for (x, y) in chemin:
 #         grille[x][y] = ROAD
 #     return grille
+
+
+# print(f"Exploration de ({u.x}, {u.y}), f={cout_g[u] + heuristique(u, objectif):.2f}")
