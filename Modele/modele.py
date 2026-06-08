@@ -1,4 +1,4 @@
-from configuration import largeur, hauteur, couleur_joueur, couleur_point, couleur_rectangle, divisions, vitesse, taille
+from Configuration import configuration
 
 
 class Objets_jeu:
@@ -6,26 +6,38 @@ class Objets_jeu:
         self.liste_joueurs = []
         self.liste_obstacles = []
         self.grille = None
+        # self.controleur = None
+
+    # def attacher_controleur(self, controleur):
+    #     self.controleur = controleur
 
     def ajouter_joueur(self, objet):
-        '''Ajoute un joueur à la liste des joueurs'''
+        """Ajoute un joueur à la liste des joueurs"""
         self.liste_joueurs.append(objet)
 
     def ajouter_obstacle(self, objet):
-        '''Ajoute un obstacle à la liste des obstacles'''
+        """Ajoute un obstacle à la liste des obstacles"""
         self.liste_obstacles.append(objet)
+        # self.controleur.mettre_les_points_intravesables(self.liste_joueurs[0])
 
     def get_joueur(self, indice):
         """Récupère un joueur à partir de son indice dans la liste des joueurs"""
         return self.liste_joueurs[indice]
 
     def ajouter_grille(self, objet):
-        '''Ajoute une grille au modèle'''
+        """Ajoute une grille au modèle"""
         self.grille = objet
 
 
 class Joueur:
-    def __init__(self, x, y, couleur=couleur_joueur, vitesse=vitesse, taille=taille):
+    def __init__(
+        self,
+        x,
+        y,
+        couleur=configuration.couleur_joueur,
+        vitesse=configuration.vitesse,
+        taille=configuration.taille,
+    ):
         self.x = x
         self.y = y
         self.couleur = couleur
@@ -54,7 +66,7 @@ class Joueur:
 
 
 class Obstacle_rect:
-    def __init__(self, x, y, largeur, hauteur, couleur=couleur_rectangle):
+    def __init__(self, x, y, largeur, hauteur, couleur=configuration.couleur_rectangle):
         self.x = x
         self.y = y
         self.largeur = largeur
@@ -63,28 +75,38 @@ class Obstacle_rect:
 
 
 class Point:
-    def __init__(self, x, y, traversable=True, couleur=couleur_point):
+    def __init__(self, x, y, traversable=True, couleur=configuration.couleur_point):
         self.x = x
         self.y = y
         self.couleur = couleur
         self.traversable = traversable
 
     def __str__(self):
-        return (str(self.x) + " " + str(self.y) + " " + str(self.traversable))
+        return str(self.x) + " " + str(self.y) + " " + str(self.traversable)
+
+    def changer_couleur_point(self, couleur):
+        self.couleur = couleur
+
+    def associer_traversabilité(self, traversabilite):
+        self.traversable = traversabilite
+        if traversabilite:
+            self.changer_couleur_point(configuration.couleur_point)
+        else:
+            self.changer_couleur_point(configuration.couleur_point_intravesable)
 
 
 class Grille:
-    def __init__(self, nbr_division=divisions):
+    def __init__(self, nbr_division=configuration.divisions):
         self.ecart = None
         self.grille = []
         self.nbr_division = nbr_division
 
     def diviser_ecran(self):
         """Divise l'écran en une grille de points et les stocke dans une matrice"""
-        self.ecart = largeur / self.nbr_division
+        self.ecart = configuration.largeur / self.nbr_division
         premier = Point(0 + self.ecart // 2, 0 + self.ecart // 2)
         coordonnee = premier
-        nbr_carres_hauteur = int((hauteur // self.ecart) + 1)
+        nbr_carres_hauteur = int((configuration.hauteur // self.ecart) + 1)
         for i in range(nbr_carres_hauteur):
             ligne = []
             for j in range(self.nbr_division):
@@ -95,10 +117,7 @@ class Grille:
 
     def allumer_points(self, liste_points, liste_des_points_verifies):
         """Colorie les points du meilleur chemin trouvé en vert et les points vérifiés en rose"""
-        for point in liste_points:
-            point.couleur = (20, 250, 100)
         for point in liste_des_points_verifies:
             point.couleur = (250, 60, 250)
-
-    def changer_couleur_point(self, point, couleur):
-        point.couleur = couleur
+        for point in liste_points:
+            point.couleur = (20, 250, 100)

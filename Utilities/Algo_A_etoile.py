@@ -63,7 +63,7 @@ def cheminPlusCourt(controle, grille, depart, objectif):
                 parent[v] = u
         closed_list.append(u)
     print("Pas de chemin")
-    return []  # Aucun chemin trouvé
+    return [], []  # Aucun chemin trouvé
 
 
 # def remplace_chemin_plus_court(grille, depart, objectif):

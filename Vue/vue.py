@@ -1,10 +1,10 @@
 import pygame
-from configuration import couleur_fond, couleur_joueur, touches, FPS
+from Configuration import configuration
 from Modele import modele  # Obstacle_rect, Joueur
 
 
 class Vue:
-    def __init__(self, largeur: int, hauteur: int, FPS=FPS):
+    def __init__(self, largeur: int, hauteur: int, FPS=configuration.FPS):
         self.controleur = None
         self.objets_jeu = None
         self.etat = True
@@ -33,6 +33,7 @@ class Vue:
         """boucle principale qui permet de faire tourner les fonctions du contrôle qui nécessite une maj à chaque frame"""
         self.controleur.deplacer_vers_cible()
         self.controleur.se_rendre_aux_points()
+        self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
     def gerer_evenement(self):
         """Regarde les évènements pygame et agit en conséquence"""
@@ -63,43 +64,43 @@ class Vue:
                     # self.controleur.cible_souris = mx, my
 
             if event.type == pygame.KEYDOWN:
-                if event.key == touches["agrandir_un_peu"]:
+                if event.key == configuration.touches["agrandir_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_taille(1)
-                if event.key == touches["retrecir_un_peu"]:
+                if event.key == configuration.touches["retrecir_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_taille(-1)
-                if event.key == touches["aug_vitesse_un_peu"]:
+                if event.key == configuration.touches["aug_vitesse_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(1)
-                if event.key == touches["red_vitesse_un_peu"]:
+                if event.key == configuration.touches["red_vitesse_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
 
     def gerer_entrees(self):
         """Gère les entrées du clavier pour le déplacement du joueur et les autres actions liées au clavier"""
         touches_pressees = pygame.key.get_pressed()
-        if touches_pressees[touches["quitter"]] == 1:
+        if touches_pressees[configuration.touches["quitter"]] == 1:
             self.etat = False
-        if touches_pressees[touches["agrandir"]] == 1:
+        if touches_pressees[configuration.touches["agrandir"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_taille(0.5)
-        if touches_pressees[touches["retrecir"]] == 1:
+        if touches_pressees[configuration.touches["retrecir"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_taille(-0.5)
-        if touches_pressees[touches["aug_vitesse"]] == 1:
+        if touches_pressees[configuration.touches["aug_vitesse"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_vitesse(0.3)
-        if touches_pressees[touches["red_vitesse"]] == 1:
+        if touches_pressees[configuration.touches["red_vitesse"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
-        dx = touches_pressees[touches["droite"]] - touches_pressees[touches["gauche"]]
-        dy = touches_pressees[touches["bas"]] - touches_pressees[touches["haut"]]
+        dx = touches_pressees[configuration.touches["droite"]] - touches_pressees[configuration.touches["gauche"]]
+        dy = touches_pressees[configuration.touches["bas"]] - touches_pressees[configuration.touches["haut"]]
         self.controleur.gerer_deplacement_touches(dx, dy)
 
     def dessiner(self):
         """Dessine tous les éléments du jeu à partir des données du modèle"""
         # dessine le fond
-        self.screen.fill(couleur_fond)
+        self.screen.fill(configuration.couleur_fond)
 
         # dessine les joueurs
         for joueur in self.objets_jeu.liste_joueurs:
             if isinstance(joueur, modele.Joueur):
                 pygame.draw.circle(
                     self.screen,
-                    couleur_joueur,
+                    configuration.couleur_joueur,
                     (int(joueur.x), int(joueur.y)),
                     joueur.taille,
                 )
