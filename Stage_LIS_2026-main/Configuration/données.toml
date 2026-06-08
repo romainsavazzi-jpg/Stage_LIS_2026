@@ -1,0 +1,39 @@
+[ecran]
+plein_ecran = true
+largeur_fixe = 200
+hauteur_fixe = 200
+fps = 120 # 60  # 120
+
+[couleurs]
+fond = [173, 124, 113]
+joueur = [24, 100, 225]
+points = [212,10,5]
+rectangle = [0,0,120]
+intraversable = [0,0,0]
+
+[joueur]
+vitesse = 7.5 # 15  # 7.5
+taille = 40
+
+[touches]
+# test
+haut = "K_z"
+bas = "K_s"
+gauche = "K_q"
+droite = "K_d"
+quitter = "K_ESCAPE"
+agrandir = "K_t"
+retrecir = "K_r"
+aug_vitesse = "K_v"
+red_vitesse = "K_c" 
+agrandir_un_peu = "K_u"
+retrecir_un_peu = "K_y"
+aug_vitesse_un_peu = "K_n"
+red_vitesse_un_peu = "K_b" 
+
+
+[grille]
+divisions = 75
+
+[obstacles]
+nombre_rectangles = 6
