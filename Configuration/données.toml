@@ -33,7 +33,7 @@ red_vitesse_un_peu = "K_b"
 
 
 [grille]
-divisions = 75
+divisions = 200
 
 [obstacles]
 nombre_rectangles = 6
