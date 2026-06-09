@@ -27,10 +27,21 @@ for i in range(configuration.nbr_rect):
         modele.Obstacle_rect(
             x=random.randint(0, configuration.largeur - 100),
             y=random.randint(0, configuration.hauteur - 100),
-            largeur=random.randint(50, 100),
-            hauteur=random.randint(50, 200),
+            largeur=random.randint(5, 20),
+            hauteur=random.randint(5, 40),
         ),
     )
+
+
+# for i in range(configuration.nbr_rect):
+#     objets_jeu.ajouter_obstacle(
+#         modele.Obstacle_rect(
+#             x=random.randint(0, configuration.largeur - 100),
+#             y=random.randint(0, configuration.hauteur - 100),
+#             largeur=random.randint(50, 100),
+#             hauteur=random.randint(50, 200),
+#         ),
+#     )
 
 
 # créer une vue et lui attacher le modèle et le contrôleur

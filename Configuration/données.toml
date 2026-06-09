@@ -10,6 +10,7 @@ joueur = [24, 100, 225]
 points = [212,10,5]
 rectangle = [0,0,120]
 intraversable = [0,0,0]
+droite = [161,0,161]
 
 [joueur]
 vitesse = 7.5 # 15  # 7.5
@@ -36,4 +37,4 @@ red_vitesse_un_peu = "K_b"
 divisions = 75
 
 [obstacles]
-nombre_rectangles = 6
+nombre_rectangles = 75

@@ -29,6 +29,7 @@ couleur_joueur = tuple(tom["couleurs"]["joueur"])
 couleur_point = tuple(tom["couleurs"]["points"])
 couleur_rectangle = tuple(tom["couleurs"]["rectangle"])
 couleur_point_intravesable = tuple(tom["couleurs"]["intraversable"])
+couleur_droite = tuple(tom["couleurs"]["droite"])
 
 # Joueur
 vitesse = tom["joueur"]["vitesse"]

@@ -1,6 +1,7 @@
 import math
 from Configuration import configuration
 from Utilities import Algo_A_etoile
+from Utilities import Bresenham
 
 
 class Controleur:
@@ -11,6 +12,7 @@ class Controleur:
         self.traj = False
         self.liste_points = []
         self.liste_des_points_verifies = []
+        self.pixel_chemin = []
         self.aller_vers_point = False
 
     def attacher_modele(self, modele):
@@ -41,6 +43,12 @@ class Controleur:
         self.objets_jeu.grille.allumer_points(
             self.liste_points, self.liste_des_points_verifies
         )
+        """Détermine une liste de pixels pour tracer une droite entre les deux points de la grille"""
+        self.pixel_chemin = []
+        for i in range(len(self.liste_points) - 1):
+            self.pixel_chemin += Bresenham.bresenham(
+                self.liste_points[i], self.liste_points[i + 1]
+            )
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
@@ -104,7 +112,21 @@ class Controleur:
         dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
         joueur.bouger_fleche(dx, dy, facteur)
 
+    # def recharger_traversables(self):
+    #     # Aplatir la matrice en liste
+    #     liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
+
+    #     # Soustraire les points de la trajectoire des points à actualiser
+    #     Listes_points_traj_set = set(self.liste_points)  # | set(self.liste_des_points_verifies)
+    #     liste_grille_moins_points = [p for p in liste_grille if p not in Listes_points_traj_set]
+
+    #     for point in liste_grille_moins_points:
+    #         point.associer_traversabilité(True)
+
     def mettre_les_points_intravesables_rect(self, joueur):
+        ecart = self.objets_jeu.grille.ecart
+        largeur = configuration.largeur
+        hauteur = configuration.hauteur
         # Aplatir la matrice en liste
         liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
 
@@ -121,13 +143,121 @@ class Controleur:
                 obstacle.x + obstacle.largeur + joueur.taille,
                 obstacle.y + obstacle.hauteur + joueur.taille,
             )
-            for point in liste_grille_moins_points:
-                if (
-                    haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
-                ) or (
-                    point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
-                ):
-                    point.associer_traversabilité(False)
+            mx = haut_gauche[0]
+            my = haut_gauche[1]
+            for i in range(int((bas_droit[1] - haut_gauche[1]) // ecart) + 2):
+                mx = haut_gauche[0]
+                for j in range(int((bas_droit[0] - haut_gauche[0]) // ecart) + 2):
+                    if appartient_aux_limites_de_la_map(mx, largeur) and appartient_aux_limites_de_la_map(my, hauteur):
+                        point, _, _ = self.selection_point(mx, my)
+                        if (
+                            haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
+                        ) and point not in Listes_points_traj_set:
+                            point.associer_traversabilité(False)
+                    mx += ecart
+                my += ecart
+
+        # Collision pour les bords
+        for point in liste_grille_moins_points:
+            if (
+                point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
+            ):
+                point.associer_traversabilité(False)
+
+            # pos_x_i = haut_gauche[0]
+            # pos_y_i = haut_gauche[1]
+            # if not appartient_aux_limites_de_la_map(pos_x_i, largeur):
+            #     pos_x_i = 0
+            # if not appartient_aux_limites_de_la_map(pos_y_i, hauteur):
+            #     pos_y_i = 0
+            # pos_x, pos_y = pos_x_i, pos_y_i
+            #
+            # pos_x_f = bas_droit[0]
+            # pos_y_f = bas_droit[1]
+            # if not appartient_aux_limites_de_la_map(pos_x_f, largeur):
+            #     pos_x_f = largeur
+            # if not appartient_aux_limites_de_la_map(pos_y_f, hauteur):
+            #     pos_y_f = largeur
+            #
+            # while pos_y < pos_y_f:  # or 0 < pos_x or pos_x < configuration.largeur:
+            #     pos_x = pos_x_i
+            #     # if 0 > pos_y or pos_y > configuration.hauteur:
+            #     #     continue
+            #     while pos_x < pos_x_f:  # or 0 < pos_y or pos_y < configuration.hauteur:
+            #         # if 0 > pos_x or pos_x > configuration.largeur:
+            #         #     continue
+            #         point, _, _ = self.selection_point(pos_x, pos_y)
+            #         if (
+            #             haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
+            #         ):
+            #             point.associer_traversabilité(False)
+            #         pos_x += ecart
+            #     pos_y += ecart
+
+            # pos_x_i = haut_gauche[0]
+            # pos_y_i = haut_gauche[1]
+            # if not appartient_aux_limites_de_la_map(pos_x_i, largeur):
+            #     pos_x_i = 0
+            # if not appartient_aux_limites_de_la_map(pos_y_i, hauteur):
+            #     pos_y_i = 0
+            # pos_x, pos_y = pos_x_i, pos_y_i
+            #
+            # pos_x_f = bas_droit[0]
+            # pos_y_f = bas_droit[1]
+            # if not appartient_aux_limites_de_la_map(pos_x_f, largeur):
+            #     pos_x_f = largeur
+            # if not appartient_aux_limites_de_la_map(pos_y_f, hauteur):
+            #     pos_y_f = largeur
+            #
+            # while pos_y < pos_y_f:  # or 0 < pos_x or pos_x < configuration.largeur:
+            #     pos_x = pos_x_i
+            #     # if 0 > pos_y or pos_y > configuration.hauteur:
+            #     #     continue
+            #     while pos_x < pos_x_f:  # or 0 < pos_y or pos_y < configuration.hauteur:
+            #         # if 0 > pos_x or pos_x > configuration.largeur:
+            #         #     continue
+            #         point, _, _ = self.selection_point(pos_x, pos_y)
+            #         if (
+            #             haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
+            #         ):
+            #             point.associer_traversabilité(False)
+            #         pos_x += ecart
+            #     pos_y += ecart
+
+            # point, pos_x_h, pos_y_h = self.selection_point(haut_gauche[0], haut_gauche[1])
+            # pos_x, pos_y = pos_x_h, pos_y_h
+            # x, y = point.x, point.y
+            # while y < bas_droit[1]:
+            #     pos_x = pos_x_h
+            #     point = self.objets_jeu.grille.grille[pos_y][pos_x]
+            #     if 0 > point.y > configuration.hauteur:
+            #         continue
+            #     while x < bas_droit[0]:
+            #         if 0 > point.x > configuration.largeur:
+            #             continue
+            #         # point, _, _ = self.selection_point(pos_x, pos_y)
+            #         point.associer_traversabilité(False)
+            #         point = self.objets_jeu.grille.grille[pos_y][pos_x]
+            #         x, y = point.x, point.y
+            #         pos_x += 1
+            #     pos_y += 1
+
+            # for point in liste_grille_moins_points:
+            #     if (
+            #         haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
+            #     ) or (
+            #         point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
+            #     ):
+            #         point.associer_traversabilité(False)
+
+    def changer_taille(self, increment):
+        self.objets_jeu.liste_joueurs[0].change_taille(increment)
+        self.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+
+
+def appartient_aux_limites_de_la_map(pos_x_y, longueur):
+    if pos_x_y > 0 and pos_x_y < longueur:
+        return True
 
 
 def limite_bord_et_diago(joueur, dx, dy):

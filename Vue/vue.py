@@ -21,7 +21,8 @@ class Vue:
         self.controleur = controleur
 
     def run(self):
-        """Fait tourner une boucle qui gère toute la vue"""
+        """Initialise et fait tourner une boucle qui gère toute la vue"""
+        self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
         while self.etat:
             self.gerer_evenement()
             self.gerer_entrees()
@@ -33,7 +34,7 @@ class Vue:
         """boucle principale qui permet de faire tourner les fonctions du contrôle qui nécessite une maj à chaque frame"""
         self.controleur.deplacer_vers_cible()
         self.controleur.se_rendre_aux_points()
-        self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+        # self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
     def gerer_evenement(self):
         """Regarde les évènements pygame et agit en conséquence"""
@@ -49,10 +50,14 @@ class Vue:
                 if event.button == 3:
                     self.controleur.traj = True
 
+                    self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+
                     mx, my = pygame.mouse.get_pos()
                     self.controleur.cible_souris = mx, my
                     point_arrivee, _, _ = self.controleur.selection_point(mx, my)
                     self.controleur.determiner_chemin(point_arrivee)
+
+                    self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
                     # (mx_point_arrivee, my_point_arrivee) = self.controleur.selection_point(mx, my)
                     # self.controleur.allumer_points((mx_point_arrivee, my_point_arrivee))
@@ -79,9 +84,9 @@ class Vue:
         if touches_pressees[configuration.touches["quitter"]] == 1:
             self.etat = False
         if touches_pressees[configuration.touches["agrandir"]] == 1:
-            self.objets_jeu.liste_joueurs[0].change_taille(0.5)
+            self.controleur.changer_taille(0.5)
         if touches_pressees[configuration.touches["retrecir"]] == 1:
-            self.objets_jeu.liste_joueurs[0].change_taille(-0.5)
+            self.controleur.changer_taille(-0.5)
         if touches_pressees[configuration.touches["aug_vitesse"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_vitesse(0.3)
         if touches_pressees[configuration.touches["red_vitesse"]] == 1:
@@ -113,14 +118,18 @@ class Vue:
                 )
 
         # dessine les points de la grille
-        for ligne in self.objets_jeu.grille.grille:
-            for point_grille in ligne:
-                if isinstance(point_grille, modele.Point):
-                    pygame.draw.circle(
-                        self.screen,
-                        point_grille.couleur,
-                        (point_grille.x, point_grille.y),
-                        400 / self.objets_jeu.grille.nbr_division,
-                    )
+        # for ligne in self.objets_jeu.grille.grille:
+        #     for point_grille in ligne:
+        #         if isinstance(point_grille, modele.Point):  # and point_grille.couleur == (20, 250, 100):
+        #             pygame.draw.circle(
+        #                 self.screen,
+        #                 point_grille.couleur,
+        #                 (point_grille.x, point_grille.y),
+        #                 400 / self.objets_jeu.grille.nbr_division,
+        #             )
+
+        if self.controleur.pixel_chemin:
+            for x, y in self.controleur.pixel_chemin:
+                self.screen.set_at((x, y), configuration.couleur_droite)
 
         pygame.display.flip()
