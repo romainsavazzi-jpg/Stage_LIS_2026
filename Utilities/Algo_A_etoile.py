@@ -77,12 +77,12 @@ def determination_liste_reduite_chemin(liste_points, liste_des_points_verifies):
         dx_prec_2 = 0
         dy_prec_2 = 0
         for i in range(1, len(liste_points) - 1):
-            dx = int(liste_points[i].x - liste_points[i - 1].x)
-            dy = int(liste_points[i].y - liste_points[i - 1].y)
-            if dx != dx_prec_1 or dy != dy_prec_1:
-                liste_finale.append(liste_points[i])
-            dx_prec_1 = dx
-            dy_prec_1 = dy
+            # dx = int(liste_points[i].x - liste_points[i - 1].x)
+            # dy = int(liste_points[i].y - liste_points[i - 1].y)
+            # if dx != dx_prec_1 or dy != dy_prec_1:
+            #     liste_finale.append(liste_points[i])
+            # dx_prec_1 = dx
+            # dy_prec_1 = dy
             dx = int(liste_points[i + 1].x - liste_points[i].x)
             dy = int(liste_points[i + 1].y - liste_points[i].y)
             if dx != dx_prec_2 or dy != dy_prec_2:
