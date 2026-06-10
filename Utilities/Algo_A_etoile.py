@@ -71,24 +71,15 @@ def cheminPlusCourt(controle, grille, depart, objectif):
 def determination_liste_reduite_chemin(liste_points, liste_des_points_verifies):
     liste_finale = []
     if liste_points:
-        liste_finale.append(liste_points[0])
-        dx_prec_1 = 0
-        dy_prec_1 = 0
-        dx_prec_2 = 0
-        dy_prec_2 = 0
-        for i in range(1, len(liste_points) - 1):
-            # dx = int(liste_points[i].x - liste_points[i - 1].x)
-            # dy = int(liste_points[i].y - liste_points[i - 1].y)
-            # if dx != dx_prec_1 or dy != dy_prec_1:
-            #     liste_finale.append(liste_points[i])
-            # dx_prec_1 = dx
-            # dy_prec_1 = dy
+        dx_prec = 0
+        dy_prec = 0
+        for i in range(len(liste_points) - 1):
             dx = int(liste_points[i + 1].x - liste_points[i].x)
             dy = int(liste_points[i + 1].y - liste_points[i].y)
-            if dx != dx_prec_2 or dy != dy_prec_2:
+            if dx != dx_prec or dy != dy_prec:
                 liste_finale.append(liste_points[i])
-            dx_prec_2 = dx
-            dy_prec_2 = dy
+            dx_prec = dx
+            dy_prec = dy
         liste_finale.append(liste_points[len(liste_points) - 1])
     return liste_finale, liste_des_points_verifies
 
