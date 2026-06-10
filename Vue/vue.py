@@ -1,6 +1,6 @@
 import pygame
 from Configuration import configuration
-from Modele import modele  # Obstacle_rect, Joueur
+from modele import Joueur, Obstacle_rect  # Obstacle_rect, Joueur
 
 
 class Vue:
@@ -13,6 +13,7 @@ class Vue:
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
         self.clock = pygame.time.Clock()
+        self.touches = {nom: getattr(pygame, val) for nom, val in configuration.touches.items()}
 
     def attacher_modele(self, modele):
         self.objets_jeu = modele
@@ -22,7 +23,9 @@ class Vue:
 
     def run(self):
         """Initialise et fait tourner une boucle qui gère toute la vue"""
-        self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+        self.controleur.mettre_les_points_intravesables_rect(
+            self.objets_jeu.liste_joueurs[0]
+        )
         while self.etat:
             self.gerer_evenement()
             self.gerer_entrees()
@@ -50,18 +53,26 @@ class Vue:
                 if event.button == 3:
                     self.controleur.traj = True
 
-                    self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+                    self.controleur.mettre_les_points_intravesables_rect(
+                        self.objets_jeu.liste_joueurs[0]
+                    )
 
                     mx, my = pygame.mouse.get_pos()
                     self.controleur.cible_souris = mx, my
                     point_arrivee, _, _ = self.controleur.selection_point(mx, my)
                     self.controleur.determiner_chemin(point_arrivee)
 
-                    self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+                    self.controleur.mettre_les_points_intravesables_rect(
+                        self.objets_jeu.liste_joueurs[0]
+                    )
 
                     # (mx_point_arrivee, my_point_arrivee) = self.controleur.selection_point(mx, my)
                     # self.controleur.allumer_points((mx_point_arrivee, my_point_arrivee))
-                elif event.button == 1 and self.controleur.traj and self.controleur.cible_souris:
+                elif (
+                    event.button == 1
+                    and self.controleur.traj
+                    and self.controleur.cible_souris
+                ):
                     self.controleur.aller_vers_point = True
                     # self.controleur.selection_point_cible(self.controleur.cible_souris[0], self.controleur.cible_souris[1])
                     self.controleur.traj = False
@@ -69,30 +80,36 @@ class Vue:
                     # self.controleur.cible_souris = mx, my
 
             if event.type == pygame.KEYDOWN:
-                if event.key == configuration.touches["agrandir_un_peu"]:
+                if event.key == self.touches["agrandir_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_taille(1)
-                if event.key == configuration.touches["retrecir_un_peu"]:
+                if event.key == self.touches["retrecir_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_taille(-1)
-                if event.key == configuration.touches["aug_vitesse_un_peu"]:
+                if event.key == self.touches["aug_vitesse_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(1)
-                if event.key == configuration.touches["red_vitesse_un_peu"]:
+                if event.key == self.touches["red_vitesse_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
 
     def gerer_entrees(self):
         """Gère les entrées du clavier pour le déplacement du joueur et les autres actions liées au clavier"""
         touches_pressees = pygame.key.get_pressed()
-        if touches_pressees[configuration.touches["quitter"]] == 1:
+        if touches_pressees[self.touches["quitter"]] == 1:
             self.etat = False
-        if touches_pressees[configuration.touches["agrandir"]] == 1:
+        if touches_pressees[self.touches["agrandir"]] == 1:
             self.controleur.changer_taille(0.5)
-        if touches_pressees[configuration.touches["retrecir"]] == 1:
+        if touches_pressees[self.touches["retrecir"]] == 1:
             self.controleur.changer_taille(-0.5)
-        if touches_pressees[configuration.touches["aug_vitesse"]] == 1:
+        if touches_pressees[self.touches["aug_vitesse"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_vitesse(0.3)
-        if touches_pressees[configuration.touches["red_vitesse"]] == 1:
+        if touches_pressees[self.touches["red_vitesse"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
-        dx = touches_pressees[configuration.touches["droite"]] - touches_pressees[configuration.touches["gauche"]]
-        dy = touches_pressees[configuration.touches["bas"]] - touches_pressees[configuration.touches["haut"]]
+        dx = (
+            touches_pressees[self.touches["droite"]]
+            - touches_pressees[self.touches["gauche"]]
+        )
+        dy = (
+            touches_pressees[self.touches["bas"]]
+            - touches_pressees[self.touches["haut"]]
+        )
         self.controleur.gerer_deplacement_touches(dx, dy)
 
     def dessiner(self):
@@ -102,7 +119,7 @@ class Vue:
 
         # dessine les joueurs
         for joueur in self.objets_jeu.liste_joueurs:
-            if isinstance(joueur, modele.Joueur):
+            if isinstance(joueur, Joueur):
                 pygame.draw.circle(
                     self.screen,
                     configuration.couleur_joueur,
@@ -112,7 +129,7 @@ class Vue:
 
         # dessine les obstacles
         for obj in self.objets_jeu.liste_obstacles:
-            if isinstance(obj, modele.Obstacle_rect):
+            if isinstance(obj, Obstacle_rect):
                 pygame.draw.rect(
                     self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
                 )
