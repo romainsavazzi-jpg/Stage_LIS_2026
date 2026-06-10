@@ -42,5 +42,3 @@ divisions = tom["grille"]["divisions"]
 nbr_rect = tom["obstacles"]["nombre_rectangles"]
 
 root.destroy()
-
-test = "le miaou test"
