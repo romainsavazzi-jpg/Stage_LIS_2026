@@ -3,7 +3,6 @@ from controleur import controleur  # Controleur
 from vue import vue  # Vue
 from Configuration import configuration
 import random
-import py 
 
 # créer un joueur au centre de l'écran
 joueur = Joueur(configuration.largeur // 2, configuration.hauteur // 2)
