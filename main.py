@@ -13,7 +13,7 @@ grille1.diviser_ecran()
 
 # ajoute la grille et le joueur au modèle
 objets_jeu = Objets_jeu()
-objets_jeu.ajouter_joueur(joueur)
+objets_jeu.ajouter_joueur(joueurs)
 objets_jeu.ajouter_grille(grille1)
 # créer un controleur et lui attacher le modèle
 controleur1 = controleur.Controleur()
