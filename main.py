@@ -1,6 +1,6 @@
 from modele import Joueur, Objets_jeu, Obstacle_rect, Grille
 from controleur import controleur  # Controleur
-from Vue import vue  # Vue
+from vue import vue  # Vue
 from Configuration import configuration
 import random
 
