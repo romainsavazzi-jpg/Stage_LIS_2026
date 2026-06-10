@@ -1,12 +1,12 @@
 from modele import Joueur, Objets_jeu, Obstacle_rect  # Joueur
-from Controleur import controleur  # Controleur
+from controleur import Controleur  # Controleur
 import math
 
 
 def test_mouvement_bord():
     """Test les fonctions de déplacement du joueur et vérifie que les limites de l'écran sont respectées"""
     jim = Joueur(0, 0)
-    control = controleur.Controleur()
+    control = Controleur()
     model = Objets_jeu()
     model.ajouter_joueur(jim)
     control.attacher_modele(model)
@@ -33,7 +33,7 @@ def test_mouvement():
 def test_mouvement_click_souris():
     """Test la fonction de déplacement avec le clic souris"""
     john = Joueur(0, 0)
-    controle = controleur.Controleur()
+    controle = Controleur()
     model = Objets_jeu()
     model.ajouter_joueur(john)
     controle.attacher_modele(model)

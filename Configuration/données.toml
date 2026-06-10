@@ -37,4 +37,4 @@ red_vitesse_un_peu = "K_b"
 divisions = 75
 
 [obstacles]
-nombre_rectangles = 75
+nombre_rectangles = 150

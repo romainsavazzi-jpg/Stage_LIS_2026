@@ -39,6 +39,7 @@ class Controleur:
         self.liste_points, self.liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(
             self, self.objets_jeu.grille.grille, point_joueur, point_arrivee
         )
+        self.liste_points, self.liste_des_points_verifies = Algo_A_etoile.determination_liste_reduite_chemin(self.liste_points, self.liste_des_points_verifies)
         self.objets_jeu.grille.allumer_points(
             self.liste_points, self.liste_des_points_verifies
         )

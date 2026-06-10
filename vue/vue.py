@@ -1,6 +1,6 @@
 import pygame
 from Configuration import configuration
-from modele import Joueur, Obstacle_rect  # Obstacle_rect, Joueur
+from modele import Joueur, Obstacle_rect, Point  # Obstacle_rect, Joueur
 
 
 class Vue:
@@ -135,15 +135,15 @@ class Vue:
                 )
 
         # dessine les points de la grille
-        # for ligne in self.objets_jeu.grille.grille:
-        #     for point_grille in ligne:
-        #         if isinstance(point_grille, modele.Point):  # and point_grille.couleur == (20, 250, 100):
-        #             pygame.draw.circle(
-        #                 self.screen,
-        #                 point_grille.couleur,
-        #                 (point_grille.x, point_grille.y),
-        #                 400 / self.objets_jeu.grille.nbr_division,
-        #             )
+        for ligne in self.objets_jeu.grille.grille:
+            for point_grille in ligne:
+                if isinstance(point_grille, Point):  # and point_grille.couleur == (20, 250, 100):
+                    pygame.draw.circle(
+                        self.screen,
+                        point_grille.couleur,
+                        (point_grille.x, point_grille.y),
+                        400 / self.objets_jeu.grille.nbr_division,
+                    )
 
         if self.controleur.pixel_chemin:
             for x, y in self.controleur.pixel_chemin:
