@@ -1,6 +1,6 @@
 from Configuration import configuration
 
-
+aeiou
 class Objets_jeu:
     def __init__(self):
         self.liste_joueurs = []
