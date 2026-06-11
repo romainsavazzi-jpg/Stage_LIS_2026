@@ -8,11 +8,9 @@ class Objets_jeu:
         self.grille = None
 
     def ajouter_joueur(self, joueur):
-        """Ajoute un joueur à la liste des joueurs"""
         self.liste_joueurs.append(joueur)
 
     def ajouter_obstacle(self, obstacle):
-        """Ajoute un obstacle à la liste des obstacles"""
         self.liste_obstacles.append(obstacle)
 
     def get_joueur(self, indice):
@@ -20,7 +18,6 @@ class Objets_jeu:
         return self.liste_joueurs[indice]
 
     def ajouter_grille(self, grille):
-        """Ajoute une grille au modèle"""
         self.grille = grille
 
 
@@ -39,8 +36,8 @@ class Joueur:
         self.vitesse = vitesse
         self.taille = taille
 
-    def bouger_fleche(self, dx, dy, facteur):
-        """Fait bouger le joueur en fonction des touches pressées et du facteur de déplacement calculé pour gérer les déplacements diagonaux et les limites de l'écran"""
+    def bouger(self, dx, dy, facteur):
+        """Fait bouger le joueur en fonction du déplacement dx et dy donné (-1, 0, 1) et du facteur de déplacement calculé pour gérer les déplacements diagonaux et les limites de l'écran"""
         self.x += dx * facteur
         self.y += dy * facteur
 

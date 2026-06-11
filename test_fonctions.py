@@ -25,7 +25,7 @@ def test_mouvement_bord():
 def test_mouvement():
     """Test les fonctions de déplacement du joueur"""
     jack = Joueur(0, 0)
-    jack.bouger_fleche(2, 8, 10)
+    jack.bouger(2, 8, 10)
     assert jack.x == 20
     assert jack.y == 80
 

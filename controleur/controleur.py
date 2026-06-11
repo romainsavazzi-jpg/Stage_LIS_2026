@@ -68,7 +68,7 @@ class Controleur:
             self.point_cible = None
             self.aller_vers_point = False
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
-            joueur.bouger_fleche(dx, dy, facteur)
+            joueur.bouger(dx, dy, facteur)
 
     def deplacer_vers_cible(self):
         """Gère le déplacement du joueur vers la cible définie par le clic souris"""
@@ -104,7 +104,7 @@ class Controleur:
             self.point_cible = None
             return
         dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
-        joueur.bouger_fleche(dx, dy, facteur)
+        joueur.bouger(dx, dy, facteur)
 
     def mettre_les_points_intravesables_rect(self, joueur):
         """défini la zone de collision entre le joueur et les obstacles rectangulaires et les bords """
