@@ -11,6 +11,7 @@ class Objets_jeu:
     # def attacher_controleur(self, controleur):
     #     self.controleur = controleur
 
+<<<<<<< HEAD
     def ajouter_joueur(self, joueur):
         """Ajoute un joueur à la liste des joueurs"""
         self.liste_joueurs.append(joueur)
@@ -18,14 +19,27 @@ class Objets_jeu:
     def ajouter_obstacle(self, obstacle):
         """Ajoute un obstacle à la liste des obstacles"""
         self.liste_obstacles.append(obstacle)
+=======
+    def ajouter_joueur(self, objet):
+        self.liste_joueurs.append(objet)
+
+    def ajouter_obstacle(self, objet):
+        self.liste_obstacles.append(objet)
+        # self.controleur.mettre_les_points_intravesables(self.liste_joueurs[0])
+>>>>>>> 37385a8 (rajout com)
 
     def get_joueur(self, indice):
         """Récupère un joueur à partir de son indice dans la liste des joueurs"""
         return self.liste_joueurs[indice]
 
+<<<<<<< HEAD
     def ajouter_grille(self, grille):
         """Ajoute une grille au modèle"""
         self.grille = grille
+=======
+    def ajouter_grille(self, objet):
+        self.grille = objet
+>>>>>>> 37385a8 (rajout com)
 
 
 class Joueur:
@@ -56,11 +70,9 @@ class Joueur:
             self.y += marge_a_tp
 
     def change_taille(self, increment):
-        """Change la taille du joueur"""
         self.taille += increment
 
     def change_vitesse(self, increment):
-        """Change la vitesse du joueur"""
         self.vitesse += increment
 
 
@@ -92,7 +104,8 @@ class Point:
     def changer_couleur_point(self, couleur):
         self.couleur = couleur
 
-    def associer_traversabilité(self, traversabilite):
+    def associer_traversabilité(self, traversabilite: bool):
+        "Rend les points de la grille traversable ou non par A*"
         self.traversable = traversabilite
         if traversabilite:
             self.changer_couleur_point(configuration.couleur_point)

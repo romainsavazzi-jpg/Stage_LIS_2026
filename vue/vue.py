@@ -35,13 +35,11 @@ class Vue:
             self.clock.tick(self.FPS)
 
     def boucle_principale(self):
-        """boucle principale qui permet de faire tourner les fonctions du contrôle qui nécessite une maj à chaque frame"""
         self.controleur.deplacer_vers_cible()
         self.controleur.se_rendre_aux_points()
         # self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
     def gerer_evenement(self):
-        """Regarde les évènements pygame et agit en conséquence"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -115,7 +113,6 @@ class Vue:
         self.controleur.gerer_deplacement_touches(dx, dy)
 
     def dessiner(self):
-        """Dessine tous les éléments du jeu à partir des données du modèle"""
         # dessine le fond
         self.screen.fill(configuration.couleur_fond)
 

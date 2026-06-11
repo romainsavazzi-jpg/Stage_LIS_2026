@@ -126,6 +126,7 @@ class Controleur:
     #         point.associer_traversabilité(True)
 
     def mettre_les_points_intravesables_rect(self, joueur):
+        """défini la zone de collision entre le joueur et les obstacles rectangulaires et les bords """
         ecart = self.objets_jeu.grille.ecart
         largeur = configuration.largeur
         hauteur = configuration.hauteur
