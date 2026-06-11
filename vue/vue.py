@@ -69,9 +69,7 @@ class Vue:
                     # (mx_point_arrivee, my_point_arrivee) = self.controleur.selection_point(mx, my)
                     # self.controleur.allumer_points((mx_point_arrivee, my_point_arrivee))
                 elif (
-                    event.button == 1
-                    and self.controleur.traj
-                    and self.controleur.cible_souris
+                    event.button == 1 and self.controleur.traj and self.controleur.cible_souris
                 ):
                     self.controleur.aller_vers_point = True
                     # self.controleur.selection_point_cible(self.controleur.cible_souris[0], self.controleur.cible_souris[1])
@@ -103,12 +101,10 @@ class Vue:
         if touches_pressees[self.touches["red_vitesse"]] == 1:
             self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
         dx = (
-            touches_pressees[self.touches["droite"]]
-            - touches_pressees[self.touches["gauche"]]
+            touches_pressees[self.touches["droite"]] - touches_pressees[self.touches["gauche"]]
         )
         dy = (
-            touches_pressees[self.touches["bas"]]
-            - touches_pressees[self.touches["haut"]]
+            touches_pressees[self.touches["bas"]] - touches_pressees[self.touches["haut"]]
         )
         self.controleur.gerer_deplacement_touches(dx, dy)
 

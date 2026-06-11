@@ -13,7 +13,7 @@ def cheminPlusCourt(controle, grille, depart, objectif):
     def heuristique(a, b):
         _, ax, ay = controle.selection_point(a.x, a.y)
         _, bx, by = controle.selection_point(b.x, b.y)
-        return sqrt((ax - bx) ** 2 + (ay - by) ** 2)
+        return sqrt((ax - bx) ** 2 + (ay - by) ** 2)  # * 3  # ← léger biais (pondération de A* ce qui donne une optimalité de 300% sacrifiée en moins mais le chemin fera toujours des lignes/ diagonales longues au lieu de choisir un des chemins possibles de manière non consistante)
 
     closed_list = []
     open_list = []
