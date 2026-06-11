@@ -1,14 +1,12 @@
 
 def bresenham(
-    point_a,
-    point_b,
+    coordonees_point_a,
+    coordonnees_point_b,
 ):
-    """Retourne les points de la grille sur la droite discrète entre point_a et point_b"""
+    """Retourne les points de la grille sur la droite discrète entre coordonees_point_a et coordonnees_point_b"""
     # On initialise les points de départs et d'arrivée
-    xA, yA = int(point_a.x), int(point_a.y)
-    xB, yB = int(point_b.x), int(
-        point_b.y
-    )  # on prends des entiers car sinon on risque de ne pas trouver les pixels
+    xA, yA = int(coordonees_point_a[0]), int(coordonees_point_a[1])
+    xB, yB = int(coordonnees_point_b[0]), int(coordonnees_point_b[1])  # on prends des entiers car sinon on risque de ne pas trouver les pixels
 
     pixels = []
     dx = abs(xB - xA)

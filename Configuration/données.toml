@@ -30,11 +30,13 @@ red_vitesse = "K_c"
 agrandir_un_peu = "K_u"
 retrecir_un_peu = "K_y"
 aug_vitesse_un_peu = "K_n"
-red_vitesse_un_peu = "K_b" 
+red_vitesse_un_peu = "K_b"
+afficher_points = "K_a"
+
 
 
 [grille]
-divisions = 50
+divisions = 150
 
 [obstacles]
 nombre_rectangles = 50
