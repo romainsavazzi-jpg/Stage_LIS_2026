@@ -5,7 +5,6 @@ from Utilities import Algo_A_etoile, Bresenham
 
 class Controleur:
     def __init__(self):
-        self.cible_souris = None
         self.objets_jeu = None
         self.point_cible = None
         self.traj = False
@@ -63,9 +62,9 @@ class Controleur:
         """Gère le déplacement du joueur en fonction des touches pressées"""
         joueur = self.objets_jeu.get_joueur(0)
 
-        if dx != 0 or dy != 0:
-            self.cible_souris = None
+        if dx != 0 or dy != 0:  # Si il y a déplacement
             self.point_cible = None
+            self.pixel_chemin = []
             self.aller_vers_point = False
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             joueur.bouger(dx, dy, facteur)
@@ -100,8 +99,9 @@ class Controleur:
 
         # Arrivé à destination
         if dx == 0 and dy == 0:
-            self.cible_souris = None
             self.point_cible = None
+            if not self.liste_points:
+                self.pixel_chemin = []
             return
         dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
         joueur.bouger(dx, dy, facteur)
@@ -115,7 +115,7 @@ class Controleur:
         liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
 
         # Soustraire les points de la trajectoire des points à actualiser
-        Listes_points_traj_set = set(self.liste_points) | set(self.liste_des_points_verifies)
+        Listes_points_traj_set = set(self.liste_points)  # | set(self.liste_des_points_verifies)
         liste_grille_moins_points = [p for p in liste_grille if p not in Listes_points_traj_set]
 
         for point in liste_grille_moins_points:

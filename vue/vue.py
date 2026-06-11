@@ -52,7 +52,6 @@ class Vue:
                     )
 
                     mx, my = pygame.mouse.get_pos()
-                    self.controleur.cible_souris = mx, my
                     point_arrivee, _, _ = self.controleur.selection_point(mx, my)
                     self.controleur.determiner_chemin(point_arrivee)
 
@@ -61,7 +60,7 @@ class Vue:
                     )
 
                 elif (
-                    event.button == 1 and self.controleur.traj and self.controleur.cible_souris
+                    event.button == 1 and self.controleur.traj and self.controleur.pixel_chemin  # self.controleur.point_cible  # self.controleur.cible_souris
                 ):
                     self.controleur.aller_vers_point = True
                     self.controleur.traj = False
