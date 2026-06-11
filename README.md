@@ -7,4 +7,4 @@
 - tomli-w
 - pdoc 
 
-pour la doc lancer : pdoc --output-dir docs Configuration controleur modele Utilities vue main.py  
+pour la doc lancer :  pdoc --output-dir docs Configuration\configuration controleur\controleur modele\modele Utilities\Bresenham Utilities\Algo_A_etoile vue\vue main.py
