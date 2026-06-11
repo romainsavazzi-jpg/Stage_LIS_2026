@@ -69,6 +69,7 @@ def cheminPlusCourt(controle, grille, depart, objectif):
 
 
 def determination_liste_reduite_chemin(liste_points, liste_des_points_verifies):
+    """Rend une liste de chemin réduit aux points où on a un changement d'angle dans la trajectoire"""
     liste_finale = []
     if liste_points:
         dx_prec = 0
