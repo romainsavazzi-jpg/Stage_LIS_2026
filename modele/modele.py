@@ -11,22 +11,21 @@ class Objets_jeu:
     # def attacher_controleur(self, controleur):
     #     self.controleur = controleur
 
-    def ajouter_joueur(self, objet):
+    def ajouter_joueur(self, joueur):
         """Ajoute un joueur à la liste des joueurs"""
-        self.liste_joueurs.append(objet)
+        self.liste_joueurs.append(joueur)
 
-    def ajouter_obstacle(self, objet):
+    def ajouter_obstacle(self, obstacle):
         """Ajoute un obstacle à la liste des obstacles"""
-        self.liste_obstacles.append(objet)
-        # self.controleur.mettre_les_points_intravesables(self.liste_joueurs[0])
+        self.liste_obstacles.append(obstacle)
 
     def get_joueur(self, indice):
         """Récupère un joueur à partir de son indice dans la liste des joueurs"""
         return self.liste_joueurs[indice]
 
-    def ajouter_grille(self, objet):
+    def ajouter_grille(self, grille):
         """Ajoute une grille au modèle"""
-        self.grille = objet
+        self.grille = grille
 
 
 class Joueur:

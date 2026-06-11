@@ -133,7 +133,7 @@ class Controleur:
         liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
 
         # Soustraire les points de la trajectoire des points à actualiser
-        Listes_points_traj_set = set(self.liste_points)  # | set(self.liste_des_points_verifies)
+        Listes_points_traj_set = set(self.liste_points) | set(self.liste_des_points_verifies)
         liste_grille_moins_points = [p for p in liste_grille if p not in Listes_points_traj_set]
 
         for point in liste_grille_moins_points:
