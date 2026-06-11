@@ -6,10 +6,6 @@ class Objets_jeu:
         self.liste_joueurs = []
         self.liste_obstacles = []
         self.grille = None
-        # self.controleur = None
-
-    # def attacher_controleur(self, controleur):
-    #     self.controleur = controleur
 
     def ajouter_joueur(self, joueur):
         """Ajoute un joueur à la liste des joueurs"""
