@@ -19,8 +19,6 @@ objets_jeu.ajouter_grille(grille1)
 # créer un controleur et lui attacher le modèle
 controleur1 = Controleur()
 controleur1.attacher_modele(objets_jeu)
-# ajouter le controleur au modèle
-# objets_jeu.attacher_controleur(controleur1)
 
 # créer des obstacles et les ajoute au modèle
 for i in range(configuration.nbr_rect):

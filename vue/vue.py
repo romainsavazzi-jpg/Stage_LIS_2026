@@ -35,21 +35,14 @@ class Vue:
             self.clock.tick(self.FPS)
 
     def boucle_principale(self):
-        """boucle principale qui permet de faire tourner les fonctions du contrôle qui nécessite une maj à chaque frame"""
         self.controleur.deplacer_vers_cible()
         self.controleur.se_rendre_aux_points()
-        # self.controleur.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
     def gerer_evenement(self):
-        """Regarde les évènements pygame et agit en conséquence"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 self.etat = False
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #     couleur_clic = self.screen.get_at(event.pos)[:3]
-            #     if couleur_clic == (24, 57, 125):
-            #         pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 3:
                     self.controleur.traj = True
@@ -67,16 +60,11 @@ class Vue:
                         self.objets_jeu.liste_joueurs[0]
                     )
 
-                    # (mx_point_arrivee, my_point_arrivee) = self.controleur.selection_point(mx, my)
-                    # self.controleur.allumer_points((mx_point_arrivee, my_point_arrivee))
                 elif (
                     event.button == 1 and self.controleur.traj and self.controleur.cible_souris
                 ):
                     self.controleur.aller_vers_point = True
-                    # self.controleur.selection_point_cible(self.controleur.cible_souris[0], self.controleur.cible_souris[1])
                     self.controleur.traj = False
-
-                    # self.controleur.cible_souris = mx, my
 
             if event.type == pygame.KEYDOWN:
                 if event.key == self.touches["afficher_points"]:
@@ -85,9 +73,9 @@ class Vue:
                     else:
                         self.non = True
                 if event.key == self.touches["agrandir_un_peu"]:
-                    self.objets_jeu.liste_joueurs[0].change_taille(1)
+                    self.controleur.changer_taille(1)
                 if event.key == self.touches["retrecir_un_peu"]:
-                    self.objets_jeu.liste_joueurs[0].change_taille(-1)
+                    self.controleur.changer_taille(-1)
                 if event.key == self.touches["aug_vitesse_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(1)
                 if event.key == self.touches["red_vitesse_un_peu"]:
@@ -115,17 +103,13 @@ class Vue:
         self.controleur.gerer_deplacement_touches(dx, dy)
 
     def dessiner(self):
-        """Dessine tous les éléments du jeu à partir des données du modèle"""
         # dessine le fond
         self.screen.fill(configuration.couleur_fond)
 
-        # dessine les joueurs
         self.dessiner_joueur()
 
-        # dessine les obstacles
         self.dessiner_obstacles()
 
-        # dessine les points de la grille
         if self.non:
             self.dessiner_points()
 

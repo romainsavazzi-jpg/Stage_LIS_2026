@@ -18,7 +18,7 @@ else:
     hauteur = tom["ecran"]["hauteur_fixe"]
 
 
-FPS = tom["ecran"]["fps"]
+FPS: int = tom["ecran"]["fps"]
 
 # Couleurs
 couleur_fond = tuple(tom["couleurs"]["fond"])

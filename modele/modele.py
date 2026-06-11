@@ -52,11 +52,9 @@ class Joueur:
             self.y += marge_a_tp
 
     def change_taille(self, increment):
-        """Change la taille du joueur"""
         self.taille += increment
 
     def change_vitesse(self, increment):
-        """Change la vitesse du joueur"""
         self.vitesse += increment
 
 
@@ -88,7 +86,8 @@ class Point:
     def changer_couleur_point(self, couleur):
         self.couleur = couleur
 
-    def associer_traversabilité(self, traversabilite):
+    def associer_traversabilité(self, traversabilite: bool):
+        "Rend les points de la grille traversable ou non par A*"
         self.traversable = traversabilite
         if traversabilite:
             self.changer_couleur_point(configuration.couleur_point)
