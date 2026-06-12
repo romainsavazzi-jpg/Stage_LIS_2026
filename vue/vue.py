@@ -147,10 +147,10 @@ class Vue:
 
     def dessiner_chemin_pixels(self):
         for x, y in self.controleur.pixel_chemin:
-            pygame.draw.circle(
-                self.screen,
-                (20, 200, 20),
-                (x, y),
-                self.objets_jeu.get_joueur(0).taille,
-            )
-            # self.screen.set_at((x, y), configuration.couleur_droite)
+            # pygame.draw.circle(
+            #     self.screen,
+            #     (20, 200, 20),
+            #     (x, y),
+            #     self.objets_jeu.get_joueur(0).taille,
+            # )
+            self.screen.set_at((x, y), configuration.couleur_droite)
