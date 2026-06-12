@@ -23,7 +23,7 @@ class Controleur:
         y_point = int(my // ecart)
         return self.objets_jeu.grille.grille[y_point][x_point], x_point, y_point
 
-    def selection_point_cible(self, point):
+    def selection_point_cible(self, point):  # Test
         """Définit le point cible vers lequel le joueur doit se diriger"""
         self.point_cible = point
         return point
@@ -65,7 +65,7 @@ class Controleur:
         point = self.selection_point_cible(self.liste_points.pop(0))
         point.changer_couleur_point(configuration.couleur_point)
 
-    def gerer_deplacement_touches(self, dx, dy):
+    def gerer_deplacement_touches(self, dx, dy):  # Test
         """Gère le déplacement du joueur en fonction des touches pressées"""
         joueur = self.objets_jeu.get_joueur(0)
 
@@ -76,7 +76,7 @@ class Controleur:
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             joueur.bouger(dx, dy, facteur)
 
-    def deplacer_vers_cible(self):
+    def deplacer_vers_cible(self):  # Test
         """Gère le déplacement du joueur vers la cible définie par le clic souris"""
 
         joueur = self.objets_jeu.get_joueur(0)
@@ -166,12 +166,13 @@ class Controleur:
         self.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
 
-def appartient_aux_limites_de_la_map(pos_x_y, longueur):
+def appartient_aux_limites_de_la_map(pos_x_y, longueur):  # Test
     if pos_x_y > 0 and pos_x_y < longueur:
         return True
+    return False
 
 
-def limite_bord_et_diago(joueur, dx, dy):
+def limite_bord_et_diago(joueur, dx, dy):  # Test
     """Empêche le joueur de dépasser les bords de l'écran et change la vitesse en fonction de diagonale ou pas
     Renvoie le déplacement et la bonne vitesse"""
     # Si déplacement diagonal : la vitesse est adaptée
