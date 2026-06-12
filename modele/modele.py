@@ -1,23 +1,23 @@
 from Configuration import configuration
 
 
-class Objets_jeu:
+class Jeu:
     def __init__(self):
         self.liste_joueurs = []
         self.liste_obstacles = []
         self.grille = None
 
-    def ajouter_joueur(self, joueur):
+    def ajouter_joueur(self, joueur):  # test
         self.liste_joueurs.append(joueur)
 
-    def ajouter_obstacle(self, obstacle):
+    def ajouter_obstacle(self, obstacle):  # test
         self.liste_obstacles.append(obstacle)
 
-    def get_joueur(self, indice):
+    def get_joueur(self, indice):  # test
         """Récupère un joueur à partir de son indice dans la liste des joueurs"""
         return self.liste_joueurs[indice]
 
-    def ajouter_grille(self, grille):
+    def ajouter_grille(self, grille):  # test
         self.grille = grille
 
 
@@ -36,22 +36,22 @@ class Joueur:
         self.vitesse = vitesse
         self.taille = taille
 
-    def bouger(self, dx, dy, facteur):
+    def bouger(self, dx, dy, facteur):  # test
         """Fait bouger le joueur en fonction du déplacement dx et dy donné (-1, 0, 1) et du facteur de déplacement calculé pour gérer les déplacements diagonaux et les limites de l'écran"""
         self.x += dx * facteur
         self.y += dy * facteur
 
-    def tp_bord(self, marge_a_tp, direction):
+    def tp_bord(self, marge_a_tp, direction):  # test
         """Téléporte le joueur au bord si il essaye de se déplacer hors de l'écran"""
         if direction == "horizontal":
             self.x += marge_a_tp
         if direction == "vertical":
             self.y += marge_a_tp
 
-    def change_taille(self, increment):
+    def change_taille(self, increment):  # test
         self.taille += increment
 
-    def change_vitesse(self, increment):
+    def change_vitesse(self, increment):  # test
         self.vitesse += increment
 
 
@@ -71,13 +71,13 @@ class Point:
         self.couleur = couleur
         self.traversable = traversable
 
-    def __eq__(self, other):
+    def __eq__(self, other):  # test
         return self.x == other.x and self.y == other.y
 
-    def __hash__(self):
+    def __hash__(self):  # test
         return hash((self.x, self.y))
 
-    def __str__(self):
+    def __str__(self):  # test
         return str(self.x) + " " + str(self.y) + " " + str(self.traversable)
 
     def changer_couleur_point(self, couleur):
