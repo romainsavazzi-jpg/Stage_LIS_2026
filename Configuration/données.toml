@@ -39,4 +39,4 @@ afficher_points = "K_a"
 divisions = 150
 
 [obstacles]
-nombre_rectangles = 50
+nombre_rectangles = 70
