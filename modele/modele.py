@@ -115,6 +115,6 @@ class Grille:
     def allumer_points(self, liste_points, liste_des_points_verifies):
         """Colorie les points du meilleur chemin trouvé en vert et les points vérifiés en rose"""
         for point in liste_des_points_verifies:
-            point.couleur = (250, 60, 250)
+            point.couleur = configuration.couleur_points_verifie
         for point in liste_points:
-            point.couleur = (20, 250, 100)
+            point.couleur = configuration.couleur_points_chemin
