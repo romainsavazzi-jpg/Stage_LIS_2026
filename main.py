@@ -1,4 +1,4 @@
-from modele import Joueur, Objets_jeu, Obstacle_rect, Grille
+from modele import Joueur, Jeu, Obstacle_rect, Grille
 from controleur import Controleur  # Controleur
 from vue import Vue  # Vue
 from Configuration import configuration
@@ -12,7 +12,7 @@ grille1 = Grille(configuration.divisions)
 grille1.diviser_ecran()
 
 # ajoute la grille et le joueur au modèle
-objets_jeu = Objets_jeu()
+objets_jeu = Jeu()
 objets_jeu.ajouter_joueur(joueur)
 objets_jeu.ajouter_grille(grille1)
 
