@@ -1,7 +1,7 @@
 from Configuration import configuration
 
 
-class Jeu:
+class Objets_jeu:
     def __init__(self):
         self.liste_joueurs = []
         self.liste_obstacles = []
