@@ -78,7 +78,7 @@ def test_ecriture_points():
 
 
 def test_changer_couleur_point():
-    assert Point(0,0)    
+    assert Point(0,0)
 
 # Tests classe Grille
 
