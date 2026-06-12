@@ -53,13 +53,7 @@ class Controleur:
                 (self.liste_points[i + 1].x, self.liste_points[i + 1].y),
             )
         if self.liste_points:
-            self.pixel_chemin = (
-                Bresenham.bresenham(
-                    (joueur.x, joueur.y),
-                    (self.liste_points[0].x, self.liste_points[0].y),
-                )
-                + self.pixel_chemin
-            )
+            self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points[0].x, self.liste_points[0].y)) + self.pixel_chemin)
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
