@@ -11,6 +11,8 @@ points = [212,10,5]
 rectangle = [0,0,120]
 intraversable = [0,0,0]
 droite = [161,0,161]
+points_verifies = [250,60,250]
+points_chemin = [20,250,100]
 
 [joueur]
 vitesse = 7.5 # 15  # 7.5

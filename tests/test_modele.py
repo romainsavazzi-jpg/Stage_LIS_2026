@@ -1,4 +1,5 @@
 from modele import Joueur, Objets_jeu, Obstacle_rect, Grille, Point
+from Configuration import configuration
 
 # Tests classe Jeu
 
@@ -24,6 +25,7 @@ def test_recup_joueur():
     cave.ajouter_joueur(johnny)
     kidnappé = cave.get_joueur(1)
     assert kidnappé == johnny
+
 
 # Tests classe Joueur
 
@@ -54,6 +56,7 @@ def test_mouvement():
 
 # Tests classe points
 
+
 def test_comparaisons_points():
     assert Point(2, 5) == Point(2, 5)
     assert not Point(2, 5) == Point(15, 67)
@@ -74,6 +77,39 @@ def test_ecriture_points():
 
 
 def test_changer_couleur_point():
-    assert Point(0, 0)
+    libellule = Point(0, 0)
+    libellule.changer_couleur_point((67, 67, 67))
+    assert libellule.couleur == (67, 67, 67)
+
+
+def test_traversavilité():
+    mur = Point(3, 2)
+    mur.associer_traversabilité(True)
+    assert mur.traversable
+    assert mur.couleur == configuration.couleur_point
+    mur.associer_traversabilité(False)
+    assert not mur.traversable
+    assert mur.couleur == configuration.couleur_point_intravesable
+
 
 # Tests classe Grille
+
+
+def test_grille_nombre_colonnes():
+    grille = Grille()
+    grille.diviser_ecran()
+    for ligne in grille.grille:
+        assert len(ligne) == grille.nbr_division
+
+
+def test_allumer_points():
+    grille_pain = Grille()
+    grille_pain.diviser_ecran()
+    a = Point(0, 0)
+    b = Point(5, 6)
+    c = Point(1, 2)
+    chemin = [a, b]
+    verif = [c]
+    grille_pain.allumer_points(chemin, verif)
+    assert a.couleur == configuration.couleur_points_chemin
+    assert c.couleur == configuration.couleur_points_verifie
