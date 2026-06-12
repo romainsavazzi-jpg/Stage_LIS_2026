@@ -16,7 +16,7 @@ class Controleur:
     def attacher_modele(self, modele):
         self.objets_jeu = modele
 
-    def selection_point(self, mx: float, my: float):
+    def selection_point(self, mx: float, my: float):  # Test
         """Associe les coordonnées du point de l'écran auquel on applique la méthode à un point de la grille"""
         ecart = self.objets_jeu.grille.ecart
         x_point = int(mx // ecart)
@@ -154,8 +154,7 @@ class Controleur:
                     ) and appartient_aux_limites_de_la_map(my, hauteur):
                         point, _, _ = self.selection_point(mx, my)
                         if (
-                            haut_gauche[0] <= point.x <= bas_droit[0]
-                            and haut_gauche[1] <= point.y <= bas_droit[1]
+                            haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
                         ) and point not in Listes_points_traj_set:
                             point.associer_traversabilité(False)
                     mx += ecart
@@ -164,12 +163,7 @@ class Controleur:
         # Collision pour les bords
         for point in liste_grille_moins_points:
             if (
-                point.x <= self.objets_jeu.liste_joueurs[0].taille
-                or point.x
-                >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille
-                or point.y <= self.objets_jeu.liste_joueurs[0].taille
-                or point.y
-                >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
+                point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
             ):
                 point.associer_traversabilité(False)
 
