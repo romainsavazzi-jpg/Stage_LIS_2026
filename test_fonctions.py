@@ -1,5 +1,6 @@
-from modele import Joueur, Objets_jeu, Obstacle_rect  # Joueur
-from controleur import Controleur  # Controleur
+from modele import Joueur, Objets_jeu, Obstacle_rect
+from controleur import Controleur
+from Utilities import Bresenham, Algo_A_etoile
 import math
 
 
@@ -41,7 +42,6 @@ def test_mouvement_click_souris():
     controle.cible_souris = (coordonnees, coordonnees)
     while controle.cible_souris is not None:
         controle.deplacer_vers_cible()
-    print(john.x)
     assert john.x > coordonnees - (john.vitesse // 2 + 1) and john.x < coordonnees + (
         john.vitesse // 2 + 1
     )
@@ -54,7 +54,7 @@ def test_ajout_objet():
     """Test les fonctions d'ajout d'objets au modèle et de récupération d'un joueur"""
     Liste_objet = Objets_jeu()
     jimmy = Joueur(0, 0)
-    kouign_amann = Obstacle_rect()
+    kouign_amann = Obstacle_rect(10, 10, 20, 20)
     Liste_objet.ajouter_joueur(jimmy)
     Liste_objet.ajouter_obstacle(kouign_amann)
     assert Liste_objet.liste_joueurs[0] == jimmy
@@ -68,3 +68,11 @@ def test_recup_joueur():
     cave.ajouter_joueur(johnny)
     kidnappé = cave.get_joueur(1)
     assert kidnappé == johnny
+
+
+def test_bresenham_dans_tout_les_sens():
+    assert Bresenham.bresenham((0, 0), (4, 0)) == [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0)]  # vers la droite
+    assert Bresenham.bresenham((4, 0), (0, 0)) == [(4, 0), (3, 0), (2, 0), (1, 0), (0, 0)]  # vers la gauche
+    assert Bresenham.bresenham((0, 0), (0, 4)) == [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4)]  # vers le haut
+    assert Bresenham.bresenham((0, 4), (0, 0)) == [(0, 4), (0, 3), (0, 2), (0, 1), (0, 0)]  # vers le bas
+    assert Bresenham.bresenham((0, 0), (3, 3)) == [(0, 0), (1, 1), (2, 2), (3, 3)]  # diagonale

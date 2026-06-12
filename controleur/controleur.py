@@ -32,10 +32,16 @@ class Controleur:
         """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée"""
         joueur = self.objets_jeu.get_joueur(0)
         point_joueur, _, _ = self.selection_point(joueur.x, joueur.y)
-        self.liste_points, self.liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(
-            self, self.objets_jeu.grille.grille, point_joueur, point_arrivee
+        self.liste_points, self.liste_des_points_verifies = (
+            Algo_A_etoile.cheminPlusCourt(
+                self, self.objets_jeu.grille.grille, point_joueur, point_arrivee
+            )
         )
-        self.liste_points, self.liste_des_points_verifies = Algo_A_etoile.determination_liste_reduite_chemin(self.liste_points, self.liste_des_points_verifies)
+        self.liste_points, self.liste_des_points_verifies = (
+            Algo_A_etoile.determination_liste_reduite_chemin(
+                self.liste_points, self.liste_des_points_verifies
+            )
+        )
         self.objets_jeu.grille.allumer_points(
             self.liste_points, self.liste_des_points_verifies
         )
@@ -43,10 +49,17 @@ class Controleur:
         self.pixel_chemin = []
         for i in range(len(self.liste_points) - 1):
             self.pixel_chemin += Bresenham.bresenham(
-                (self.liste_points[i].x, self.liste_points[i].y), (self.liste_points[i + 1].x, self.liste_points[i + 1].y)
+                (self.liste_points[i].x, self.liste_points[i].y),
+                (self.liste_points[i + 1].x, self.liste_points[i + 1].y),
             )
         if self.liste_points:
-            self.pixel_chemin = Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points[0].x, self.liste_points[0].y)) + self.pixel_chemin
+            self.pixel_chemin = (
+                Bresenham.bresenham(
+                    (joueur.x, joueur.y),
+                    (self.liste_points[0].x, self.liste_points[0].y),
+                )
+                + self.pixel_chemin
+            )
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
@@ -107,7 +120,7 @@ class Controleur:
         joueur.bouger(dx, dy, facteur)
 
     def mettre_les_points_intravesables_rect(self, joueur):
-        """défini la zone de collision entre le joueur et les obstacles rectangulaires et les bords """
+        """défini la zone de collision entre le joueur et les obstacles rectangulaires et les bords"""
         ecart = self.objets_jeu.grille.ecart
         largeur = configuration.largeur
         hauteur = configuration.hauteur
@@ -115,8 +128,12 @@ class Controleur:
         liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
 
         # Soustraire les points de la trajectoire des points à actualiser
-        Listes_points_traj_set = set(self.liste_points)  # | set(self.liste_des_points_verifies)
-        liste_grille_moins_points = [p for p in liste_grille if p not in Listes_points_traj_set]
+        Listes_points_traj_set = set(self.liste_points) | set(
+            self.liste_des_points_verifies
+        )
+        liste_grille_moins_points = [
+            p for p in liste_grille if p not in Listes_points_traj_set
+        ]
 
         for point in liste_grille_moins_points:
             point.associer_traversabilité(True)
@@ -132,10 +149,13 @@ class Controleur:
             for i in range(int((bas_droit[1] - haut_gauche[1]) // ecart) + 2):
                 mx = haut_gauche[0]
                 for j in range(int((bas_droit[0] - haut_gauche[0]) // ecart) + 2):
-                    if appartient_aux_limites_de_la_map(mx, largeur) and appartient_aux_limites_de_la_map(my, hauteur):
+                    if appartient_aux_limites_de_la_map(
+                        mx, largeur
+                    ) and appartient_aux_limites_de_la_map(my, hauteur):
                         point, _, _ = self.selection_point(mx, my)
                         if (
-                            haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
+                            haut_gauche[0] <= point.x <= bas_droit[0]
+                            and haut_gauche[1] <= point.y <= bas_droit[1]
                         ) and point not in Listes_points_traj_set:
                             point.associer_traversabilité(False)
                     mx += ecart
@@ -144,7 +164,12 @@ class Controleur:
         # Collision pour les bords
         for point in liste_grille_moins_points:
             if (
-                point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
+                point.x <= self.objets_jeu.liste_joueurs[0].taille
+                or point.x
+                >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille
+                or point.y <= self.objets_jeu.liste_joueurs[0].taille
+                or point.y
+                >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
             ):
                 point.associer_traversabilité(False)
 
