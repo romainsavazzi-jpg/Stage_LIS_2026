@@ -2,7 +2,7 @@
 def bresenham(
     coordonees_point_a,
     coordonnees_point_b,
-):
+):  # Test
     """Retourne les points de la grille sur la droite discrète entre coordonees_point_a et coordonnees_point_b"""
     # On initialise les points de départs et d'arrivée
     xA, yA = int(coordonees_point_a[0]), int(coordonees_point_a[1])

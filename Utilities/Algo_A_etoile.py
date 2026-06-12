@@ -5,9 +5,9 @@ import heapq
 # Algorithme A* :
 
 
-def cheminPlusCourt(controle, grille, depart, objectif):
+def cheminPlusCourt(controle, grille, depart, objectif):  # Test
     """
-    A* sur la grille. depart et objectif sont des tuples points Point().
+    A* sur la grille. depart et objectif sont des points Point().
     Retourne une liste de points formant le chemin, ou [] si aucun chemin.
     """
     def heuristique(a, b):
@@ -51,7 +51,7 @@ def cheminPlusCourt(controle, grille, depart, objectif):
             if not grille[ny][nx].traversable:
                 continue
 
-            v = controle.objets_jeu.grille.grille[ny][nx]
+            v = grille[ny][nx]
             if (dx, dy) in set([(-1, -1), (-1, 1), (1, 1), (1, -1)]):
                 nouveau_cout = cout_g[u] + sqrt(2)
             else:
@@ -68,21 +68,21 @@ def cheminPlusCourt(controle, grille, depart, objectif):
     return [], []  # Aucun chemin trouvé
 
 
-def determination_liste_reduite_chemin(liste_points, liste_des_points_verifies):
-    """Rend une liste de chemin réduit aux points où on a un changement d'angle dans la trajectoire"""
+def determination_liste_reduite_chemin(liste_points):
+    """Rend une liste de chemin réduite aux points où il y a un changement d'angle dans la trajectoire"""
     liste_finale = []
     if liste_points:
         dx_prec = 0
         dy_prec = 0
         for i in range(len(liste_points) - 1):
-            dx = int(liste_points[i + 1].x - liste_points[i].x)
+            dx = int(liste_points[i + 1].x - liste_points[i].x)  # On prend des entiers pour être sûr que l'approximation des floats ne pose pas problème. De plus, comme on approxime plusieurs fois dans les autres méthodes il est possible qu'il y ait de petits décalages
             dy = int(liste_points[i + 1].y - liste_points[i].y)
             if dx != dx_prec or dy != dy_prec:
                 liste_finale.append(liste_points[i])
             dx_prec = dx
             dy_prec = dy
         liste_finale.append(liste_points[len(liste_points) - 1])
-    return liste_finale, liste_des_points_verifies
+    return liste_finale
 
 
 # def remplace_chemin_plus_court(grille, depart, objectif):

@@ -2,6 +2,7 @@ from Configuration import configuration
 
 
 class Objets_jeu:
+    """Objets_jeu correspond au Modèle du design patern MVC mais on trouvait le nom "Objets_jeu" plus parlant"""
     def __init__(self):
         self.liste_joueurs = []
         self.liste_obstacles = []
