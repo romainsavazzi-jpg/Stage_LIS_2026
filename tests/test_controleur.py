@@ -1,5 +1,5 @@
 from controleur import Controleur
-from modele import Joueur, Objets_jeu
+from modele import Joueur, Objets_jeu, Grille, Point
 import math
 
 
@@ -22,20 +22,35 @@ def test_mouvement_bord():
     assert jim.y == temp + jim.vitesse
 
 
-# def test_mouvement_click_souris():
-#     """Test la fonction de déplacement avec le clic souris"""
-#     john = Joueur(0, 0)
-#     controle = Controleur()
-#     model = Jeu()
-#     model.ajouter_joueur(john)
-#     controle.attacher_modele(model)
-#     coordonnees = 200
-#     controle.point_cible = (coordonnees, coordonnees)
-#     while controle.point_cible is not None:
-#         controle.deplacer_vers_cible()
-#     assert john.x > coordonnees - (john.vitesse // 2 + 1) and john.x < coordonnees + (
-#         john.vitesse // 2 + 1
-#     )
-#     assert john.y > coordonnees - (john.vitesse // 2 + 1) and john.y < coordonnees + (
-#         john.vitesse // 2 + 1
-#     )
+def test_selection_point_cible_et_mouvement():
+    """Test la fonction de déplacement avec le clic souris"""
+    john = Joueur(0, 0)
+    controleur = Controleur()
+    model = Objets_jeu()
+    grille1 = Grille(150)
+    grille1.diviser_ecran()
+    model.ajouter_grille(grille1)
+    model.ajouter_joueur(john)
+    controleur.attacher_modele(model)
+    coordonnees = 200
+    point, _, _ = controleur.selection_point(coordonnees, coordonnees)
+    controleur.selection_point_cible(point)
+    while controleur.point_cible is not None:
+        controleur.deplacer_vers_cible()
+    assert john.x > coordonnees - (john.vitesse // 2 + 1) and john.x < coordonnees + (john.vitesse // 2 + 1)
+    assert john.y > coordonnees - (john.vitesse // 2 + 1) and john.y < coordonnees + (john.vitesse // 2 + 1)
+
+
+def test_deplacer_vers_cible():
+    """Test la fonction de déplacement avec le clic souris"""
+    john = Joueur(0, 0)
+    controleur = Controleur()
+    model = Objets_jeu()
+    model.ajouter_joueur(john)
+    controleur.attacher_modele(model)
+    coordonnees = 200
+    controleur.point_cible = Point(coordonnees, coordonnees)
+    while controleur.point_cible is not None:
+        controleur.deplacer_vers_cible()
+    assert john.x > coordonnees - (john.vitesse // 2 + 1) and john.x < coordonnees + (john.vitesse // 2 + 1)
+    assert john.y > coordonnees - (john.vitesse // 2 + 1) and john.y < coordonnees + (john.vitesse // 2 + 1)
