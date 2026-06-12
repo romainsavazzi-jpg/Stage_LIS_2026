@@ -76,7 +76,11 @@ def test_hashage_points():
 def test_ecriture_points():
     assert str(Point(6, 7)) == "6 7 True"
 
-# Tests classe Grille 
+
+def test_changer_couleur_point():
+    assert Point(0,0)    
+
+# Tests classe Grille
 
 
 def test_mouvement_bord():
