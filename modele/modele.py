@@ -81,10 +81,10 @@ class Point:
     def __str__(self):  # test
         return str(self.x) + " " + str(self.y) + " " + str(self.traversable)
 
-    def changer_couleur_point(self, couleur):
+    def changer_couleur_point(self, couleur):  # Test
         self.couleur = couleur
 
-    def associer_traversabilité(self, traversabilite: bool):
+    def associer_traversabilité(self, traversabilite: bool):  # Test
         "Rend les points de la grille traversable ou non par A*"
         self.traversable = traversabilite
         if traversabilite:
@@ -99,7 +99,7 @@ class Grille:
         self.grille = []
         self.nbr_division = nbr_division
 
-    def diviser_ecran(self):
+    def diviser_ecran(self):  # Test
         """Divise l'écran en une grille de points et les stocke dans une matrice"""
         self.ecart = configuration.largeur / self.nbr_division
         premier = Point(0 + self.ecart // 2, 0 + self.ecart // 2)
@@ -113,7 +113,7 @@ class Grille:
             self.grille.append(ligne)
             coordonnee = Point(premier.x, coordonnee.y + self.ecart)
 
-    def allumer_points(self, liste_points, liste_des_points_verifies):
+    def allumer_points(self, liste_points, liste_des_points_verifies):  # Test
         """Colorie les points du meilleur chemin trouvé en vert et les points vérifiés en rose"""
         for point in liste_des_points_verifies:
             point.couleur = configuration.couleur_points_verifie

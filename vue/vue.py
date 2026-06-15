@@ -37,6 +37,9 @@ class Vue:
     def boucle_principale(self):
         self.controleur.deplacer_vers_cible()
         self.controleur.se_rendre_aux_points()
+        if self.controleur.on_deplace:
+            mx, my = pygame.mouse.get_pos()
+            self.controleur.actualiser_deplacement_point_d_accroche(mx, my)
 
     def gerer_evenement(self):
         for event in pygame.event.get():
@@ -45,25 +48,26 @@ class Vue:
                 self.etat = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 3:
-                    self.controleur.traj = True
-
                     self.controleur.mettre_les_points_intravesables_rect(
                         self.objets_jeu.liste_joueurs[0]
                     )
+
+                    self.controleur.liste_points_d_accroche = []  # Réinitialise la liste de points d'accroche
 
                     mx, my = pygame.mouse.get_pos()
-                    point_arrivee, _, _ = self.controleur.selection_point(mx, my)
-                    self.controleur.determiner_chemin(point_arrivee)
+                    self.controleur.lancer_chemin(mx, my)
 
                     self.controleur.mettre_les_points_intravesables_rect(
                         self.objets_jeu.liste_joueurs[0]
                     )
 
-                elif (
-                    event.button == 1 and self.controleur.traj and self.controleur.pixel_chemin  # self.controleur.point_cible  # self.controleur.cible_souris
-                ):
-                    self.controleur.aller_vers_point = True
-                    self.controleur.traj = False
+                elif event.button == 1 and self.controleur.traj:
+                    mx, my = pygame.mouse.get_pos()
+                    return self.controleur.selection_point_d_accroche(mx, my)
+
+            if event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1 and self.controleur.on_deplace:  # clic gauche relâché
+                    self.controleur.on_deplace = False
 
             if event.type == pygame.KEYDOWN:
                 if event.key == self.touches["afficher_points"]:
@@ -79,6 +83,13 @@ class Vue:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(1)
                 if event.key == self.touches["red_vitesse_un_peu"]:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
+
+                if (
+                    event.key == pygame.K_g and self.controleur.traj and self.controleur.pixel_chemin  # self.controleur.point_cible  # self.controleur.cible_souris
+                ):
+                    self.controleur.aller_vers_point = True
+                    # self.controleur.liste_points_d_accroche = []  # Réinitialise la liste de points d'accroche
+                    self.controleur.traj = False
 
     def gerer_entrees(self):
         """Gère les entrées du clavier pour le déplacement du joueur et les autres actions liées au clavier"""

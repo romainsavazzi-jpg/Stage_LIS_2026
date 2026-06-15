@@ -9,12 +9,20 @@ class Controleur:
         self.point_cible = None
         self.traj = False
         self.liste_points = []
+        self.liste_points_reduite = []
         self.liste_des_points_verifies = []
         self.pixel_chemin = []
+        self.liste_points_d_accroche = []
         self.aller_vers_point = False
+        self.on_deplace = False
+        self.indice_accroche = 0
 
     def attacher_modele(self, modele):
         self.objets_jeu = modele
+
+    def changer_taille(self, increment):
+        self.objets_jeu.liste_joueurs[0].change_taille(increment)
+        self.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
     def selection_point(self, mx: float, my: float):  # Test
         """Associe les coordonnées du point de l'écran auquel on applique la méthode à un point de la grille"""
@@ -28,37 +36,77 @@ class Controleur:
         self.point_cible = point
         return point
 
-    def determiner_chemin(self, point_arrivee):
+    def determiner_chemin(self):
         """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée"""
+        # Initialisation du chemin
         joueur = self.objets_jeu.get_joueur(0)
+        self.liste_points = []
         point_joueur, _, _ = self.selection_point(joueur.x, joueur.y)
-        self.liste_points, self.liste_des_points_verifies = (
-            Algo_A_etoile.cheminPlusCourt(
-                self, self.objets_jeu.grille.grille, point_joueur, point_arrivee
+        point_1 = point_joueur
+
+        # Boucle déterminant le chemin
+        for point_d_accroche in self.liste_points_d_accroche:
+            point_2 = point_d_accroche
+            liste_points_a_rajouter, self.liste_des_points_verifies = (
+                Algo_A_etoile.cheminPlusCourt(
+                    self, self.objets_jeu.grille.grille, point_1, point_2
+                )
             )
-        )
-        self.liste_points = (Algo_A_etoile.determination_liste_reduite_chemin(self.liste_points))
+            if liste_points_a_rajouter:
+                self.liste_points += liste_points_a_rajouter
+            point_1 = point_2
+
+        # Détermination liste réduite du chemin
+        self.liste_points_reduite = (Algo_A_etoile.determination_liste_reduite_chemin(self.liste_points))
         self.objets_jeu.grille.allumer_points(
-            self.liste_points, self.liste_des_points_verifies
+            self.liste_points_reduite, self.liste_des_points_verifies
         )
         """Détermine une liste de pixels pour tracer une droite entre les deux points de la grille"""
         self.pixel_chemin = []
-        for i in range(len(self.liste_points) - 1):
+        for i in range(len(self.liste_points_reduite) - 1):
             self.pixel_chemin += Bresenham.bresenham(
-                (self.liste_points[i].x, self.liste_points[i].y),
-                (self.liste_points[i + 1].x, self.liste_points[i + 1].y),
+                (self.liste_points_reduite[i].x, self.liste_points_reduite[i].y),
+                (self.liste_points_reduite[i + 1].x, self.liste_points_reduite[i + 1].y),
             )
-        if self.liste_points:
-            self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points[0].x, self.liste_points[0].y)) + self.pixel_chemin)
+        if self.liste_points_reduite:
+            self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points_reduite[0].x, self.liste_points_reduite[0].y)) + self.pixel_chemin)
+
+    def lancer_chemin(self, mx, my):
+        point_arrivee, _, _ = self.selection_point(mx, my)
+        if point_arrivee.traversable:
+            self.traj = True
+            self.liste_points_d_accroche.append(point_arrivee)
+        self.determiner_chemin()
+
+    def actualiser_deplacement_point_d_accroche(self, mx, my):
+        point_d_accroche, _, _ = self.selection_point(mx, my)
+        if point_d_accroche.traversable:
+            self.liste_points_d_accroche[self.indice_accroche] = point_d_accroche
+        self.determiner_chemin()
+
+    def selection_point_d_accroche(self, mx, my):
+        point_ou_pas, _, _ = self.selection_point(mx, my)
+        self.indice_accroche = 0
+        if point_ou_pas in self.liste_points_d_accroche:
+            self.indice_accroche = self.liste_points_d_accroche.index(point_ou_pas)
+            self.on_deplace = True
+            return
+        for point in self.liste_points:
+            if point in self.liste_points_d_accroche:
+                self.indice_accroche += 1
+            if point == point_ou_pas:
+                self.liste_points_d_accroche.insert(self.indice_accroche, point)
+                self.on_deplace = True
+                break
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
-        if self.liste_points == []:
+        if self.liste_points_reduite == []:
             self.aller_vers_point = False
             return
         if not self.aller_vers_point or self.point_cible is not None:
             return
-        point = self.selection_point_cible(self.liste_points.pop(0))
+        point = self.selection_point_cible(self.liste_points_reduite.pop(0))
         point.changer_couleur_point(configuration.couleur_point)
 
     def gerer_deplacement_touches(self, dx, dy):  # Test
@@ -156,10 +204,6 @@ class Controleur:
                 point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
             ):
                 point.associer_traversabilité(False)
-
-    def changer_taille(self, increment):
-        self.objets_jeu.liste_joueurs[0].change_taille(increment)
-        self.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
 
 
 def appartient_aux_limites_de_la_map(pos_x_y, longueur):  # Test
