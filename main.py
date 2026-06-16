@@ -46,5 +46,5 @@ vue1 = Vue(configuration.largeur, configuration.hauteur)
 vue1.attacher_modele(objets_jeu)
 vue1.attacher_controleur(controleur1)
 
-# lancer la boucle
+# lancer la boucleq
 vue1.run()

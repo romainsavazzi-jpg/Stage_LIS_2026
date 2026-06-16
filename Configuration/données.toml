@@ -43,5 +43,5 @@ go = "K_g"
 divisions = 150
 
 [obstacles]
-nombre_rectangles = 4
+nombre_rectangles = 25
 nombre_cercles = 15

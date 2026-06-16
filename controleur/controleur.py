@@ -120,8 +120,9 @@ class Controleur:
             self.aller_vers_point = False
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             for obj in self.objets_jeu.liste_obstacles:
-                if joueur.collision_cercle_cercle(obj, dx, dy, facteur):
-                    dx, dy = 0, 0
+                if isinstance(obj, Obstacle_cercle):
+                    if joueur.collision_cercle_cercle(obj, dx, dy, facteur):
+                        dx, dy = 0, 0
             joueur.bouger(dx, dy, facteur)
 
     def deplacer_vers_cible(self):  # Test
