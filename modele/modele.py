@@ -1,4 +1,5 @@
 from Configuration import configuration
+# from math import sqrt, cos, sin
 
 
 class Objets_jeu:
@@ -22,7 +23,24 @@ class Objets_jeu:
         self.grille = grille
 
 
-class Joueur:
+class Collisions:
+    def __init__(self):
+        pass
+
+    # def collision_cercle_rectangle(self, other, dx, dy, facteur):
+    #     if sqrt(self.taille ** 2 + self.taille ** 2) < self.taille
+    #     if sqrt(dx ** 2 + dy ** 2):
+    #         other.x
+    #         other.y
+
+    def collision_cercle_cercle(self, other, dx, dy, facteur):
+        if isinstance(other, Obstacle_cercle):
+            distance_entre_centres = (((self.x + dx * facteur) - other.x) ** 2 + ((self.y + dy * facteur) - other.y) ** 2)
+            if distance_entre_centres < (self.taille + other.taille) ** 2:
+                return True
+
+
+class Joueur(Collisions):
     def __init__(
         self,
         x,
@@ -56,13 +74,25 @@ class Joueur:
         self.vitesse += increment
 
 
-class Obstacle_rect:
-    def __init__(self, x, y, largeur, hauteur, couleur=configuration.couleur_rectangle):
+class Obstacle:
+    def __init__(self, x, y):
         self.x = x
         self.y = y
+
+
+class Obstacle_rect(Obstacle):
+    def __init__(self, x, y, largeur, hauteur, couleur=configuration.couleur_rectangle):
+        super().__init__(x, y)
+        self.couleur = couleur
         self.largeur = largeur
         self.hauteur = hauteur
+
+
+class Obstacle_cercle(Obstacle):
+    def __init__(self, x, y, taille=configuration.taille, couleur=configuration.couleur_cercle):
+        super().__init__(x, y)
         self.couleur = couleur
+        self.taille = taille
 
 
 class Point:

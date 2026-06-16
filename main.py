@@ -1,4 +1,4 @@
-from modele import Joueur, Objets_jeu, Obstacle_rect, Grille
+from modele import Joueur, Objets_jeu, Obstacle_rect, Obstacle_cercle, Grille
 from controleur import Controleur  # Controleur
 from vue import Vue  # Vue
 from Configuration import configuration
@@ -28,6 +28,15 @@ for i in range(configuration.nbr_rect):
             y=random.randint(0, configuration.hauteur),
             largeur=random.randint(5, 20),
             hauteur=random.randint(5, 40),
+        ),
+    )
+
+for i in range(configuration.nbr_cercles):
+    objets_jeu.ajouter_obstacle(
+        Obstacle_cercle(
+            x=random.randint(0, configuration.largeur),
+            y=random.randint(0, configuration.hauteur),
+            taille=random.randint(5, 20),
         ),
     )
 

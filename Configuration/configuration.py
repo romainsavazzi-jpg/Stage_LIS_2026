@@ -25,6 +25,7 @@ couleur_fond = tuple(tom["couleurs"]["fond"])
 couleur_joueur = tuple(tom["couleurs"]["joueur"])
 couleur_point = tuple(tom["couleurs"]["points"])
 couleur_rectangle = tuple(tom["couleurs"]["rectangle"])
+couleur_cercle = tuple(tom["couleurs"]["cercle"])
 couleur_point_intravesable = tuple(tom["couleurs"]["intraversable"])
 couleur_droite = tuple(tom["couleurs"]["droite"])
 couleur_points_chemin = tuple(tom["couleurs"]["points_chemin"])
@@ -42,5 +43,6 @@ divisions = tom["grille"]["divisions"]
 
 # Obstacles
 nbr_rect = tom["obstacles"]["nombre_rectangles"]
+nbr_cercles = tom["obstacles"]["nombre_cercles"]
 
 root.destroy()

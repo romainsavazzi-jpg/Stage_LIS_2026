@@ -9,6 +9,7 @@ fond = [173, 124, 113]
 joueur = [24, 100, 225]
 points = [212,10,5]
 rectangle = [0,0,120]
+cercle = [10, 100, 5]
 intraversable = [0,0,0]
 droite = [161,0,161]
 points_verifies = [250,60,250]
@@ -42,4 +43,5 @@ go = "K_g"
 divisions = 150
 
 [obstacles]
-nombre_rectangles = 70
+nombre_rectangles = 4
+nombre_cercles = 15

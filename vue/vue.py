@@ -1,6 +1,6 @@
 import pygame
 from Configuration import configuration
-from modele import Joueur, Obstacle_rect, Point  # Obstacle_rect, Joueur
+from modele import Joueur, Obstacle_rect, Obstacle_cercle, Point  # Obstacles, Joueur, Point
 
 
 class Vue:
@@ -133,7 +133,7 @@ class Vue:
             if isinstance(joueur, Joueur):
                 pygame.draw.circle(
                     self.screen,
-                    configuration.couleur_joueur,
+                    joueur.couleur,
                     (int(joueur.x), int(joueur.y)),
                     joueur.taille,
                 )
@@ -143,6 +143,13 @@ class Vue:
             if isinstance(obj, Obstacle_rect):
                 pygame.draw.rect(
                     self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
+                )
+            if isinstance(obj, Obstacle_cercle):
+                pygame.draw.circle(
+                    self.screen,
+                    obj.couleur,
+                    (int(obj.x), int(obj.y)),
+                    obj.taille,
                 )
 
     def dessiner_points(self):
