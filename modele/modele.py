@@ -46,6 +46,11 @@ class Collisions:
         if ((x - x_autre) ** 2 + (y - y_autre) ** 2) < rayon ** 2:
             return True
 
+    def collision_cercle_rect(self, rect, dx, dy, facteur):
+        carre_autour_du_cercle = Obstacle_rect(self.x - self.taille, self.y - self.taille / 2, 2 * self.taille, 2 * self.taille)
+        if not carre_autour_du_cercle.collision_rect_rect(rect, dx, dy, facteur):
+            return False
+
 
 class Joueur(Collisions):
     def __init__(
@@ -81,7 +86,7 @@ class Joueur(Collisions):
         self.vitesse += increment
 
 
-class Obstacle:
+class Obstacle(Collisions):
     def __init__(self, x, y):
         self.x = x
         self.y = y
