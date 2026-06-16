@@ -27,6 +27,16 @@ class Collisions:
     def __init__(self):
         pass
 
+    def collision_rect_rect(self, rect, dx, dy, facteur):
+        if (
+            self.x + dx * facteur >= rect.x + rect.largeur
+            or self.x + dx * facteur <= rect.x - self.largeur
+            or self.y + dy * facteur <= rect.y - self.hauteur
+            or self.y + dy * facteur >= rect.y + rect.hauteur
+        ):
+            return False
+        return True
+
     def collision_cercle_cercle(self, other, dx, dy, facteur):
         distance_entre_centres = (((self.x + dx * facteur) - other.x) ** 2 + ((self.y + dy * facteur) - other.y) ** 2)
         if distance_entre_centres < (self.taille + other.taille) ** 2:
