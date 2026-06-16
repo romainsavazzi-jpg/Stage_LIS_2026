@@ -34,6 +34,7 @@ retrecir_un_peu = "K_y"
 aug_vitesse_un_peu = "K_n"
 red_vitesse_un_peu = "K_b"
 afficher_points = "K_a"
+go = "K_g"
 
 
 

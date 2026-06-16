@@ -85,7 +85,7 @@ class Vue:
                     self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
 
                 if (
-                    event.key == pygame.K_g and self.controleur.traj and self.controleur.pixel_chemin  # self.controleur.point_cible  # self.controleur.cible_souris
+                    event.key == self.touches["go"] and self.controleur.traj and self.controleur.pixel_chemin  # self.controleur.point_cible  # self.controleur.cible_souris
                 ):
                     self.controleur.aller_vers_point = True
                     # self.controleur.liste_points_d_accroche = []  # Réinitialise la liste de points d'accroche
