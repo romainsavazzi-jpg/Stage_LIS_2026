@@ -86,28 +86,25 @@ class Controleur:
         self.determiner_chemin()
 
     def selection_point_d_accroche(self, mx, my):
-        point_ou_pas, _, _ = self.selection_point(mx, my)
+        points_potentiels = []
         self.indice_accroche = 0
-        if point_ou_pas in self.liste_points_d_accroche:
-            self.indice_accroche = self.liste_points_d_accroche.index(point_ou_pas)
+        for point in self.liste_points:
+            if point.collision_cercle_point(point.x, point.y, configuration.taille_selec_point_d_accroche, mx, my):
+                if point in self.liste_points_d_accroche:
+                    self.indice_accroche = self.liste_points_d_accroche.index(point)
+                    self.on_deplace = True
+                    return
+                points_potentiels.append(point)
+
+        if points_potentiels:
+            meilleur_point = points_potentiels[0]
+            ancienne_distance_au_click = (mx - meilleur_point.x) ** 2 + (my - meilleur_point.y) ** 2
+            for point in points_potentiels:
+                distance_au_click = (mx - point.x) ** 2 + (my - point.y) ** 2
+                if distance_au_click < ancienne_distance_au_click:
+                    meilleur_point = point
+            self.liste_points_d_accroche.insert(self.indice_accroche, point)
             self.on_deplace = True
-            return
-        for point in self.liste_points:
-            if point in self.liste_points_d_accroche and point.collision_cercle_point(point.x, point.y, configuration.taille_selec_point_d_accroche, mx, my):
-                self.indice_accroche = self.liste_points_d_accroche.index(point)
-                self.on_deplace = True
-                return
-        for point in self.liste_points:
-            if point in self.liste_points_d_accroche:
-                self.indice_accroche = self.liste_points_d_accroche.index(point) + 1
-            if point == point_ou_pas:
-                self.liste_points_d_accroche.insert(self.indice_accroche, point)
-                self.on_deplace = True
-                break
-            # if point.collision_cercle_point(point.x, point.y, configuration.taille_selec_point_d_accroche, mx, my):
-            #     self.liste_points_d_accroche.insert(self.indice_accroche, point)
-            #     self.on_deplace = True
-            #     break
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
