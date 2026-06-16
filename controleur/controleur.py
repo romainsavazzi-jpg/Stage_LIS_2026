@@ -93,12 +93,21 @@ class Controleur:
             self.on_deplace = True
             return
         for point in self.liste_points:
+            if point in self.liste_points_d_accroche and point.collision_cercle_point(point.x, point.y, configuration.taille_selec_point_d_accroche, mx, my):
+                self.indice_accroche = self.liste_points_d_accroche.index(point)
+                self.on_deplace = True
+                return
+        for point in self.liste_points:
             if point in self.liste_points_d_accroche:
                 self.indice_accroche = self.liste_points_d_accroche.index(point) + 1
             if point == point_ou_pas:
                 self.liste_points_d_accroche.insert(self.indice_accroche, point)
                 self.on_deplace = True
                 break
+            # if point.collision_cercle_point(point.x, point.y, configuration.taille_selec_point_d_accroche, mx, my):
+            #     self.liste_points_d_accroche.insert(self.indice_accroche, point)
+            #     self.on_deplace = True
+            #     break
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
@@ -120,8 +129,9 @@ class Controleur:
             self.aller_vers_point = False
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             for obj in self.objets_jeu.liste_obstacles:
-                if joueur.collision_cercle_cercle(obj, dx, dy, facteur):
-                    dx, dy = 0, 0
+                if isinstance(obj, Obstacle_cercle):
+                    if joueur.collision_cercle_cercle(obj, dx, dy, facteur):
+                        dx, dy = 0, 0
             joueur.bouger(dx, dy, facteur)
 
     def deplacer_vers_cible(self):  # Test
@@ -189,26 +199,6 @@ class Controleur:
                                 obstacle.x - joueur.taille <= point.x <= obstacle.x + obstacle.largeur + joueur.taille and obstacle.y - joueur.taille <= point.y <= obstacle.y + obstacle.hauteur + joueur.taille
                             ) and point not in Listes_points_traj_set:
                                 point.associer_traversabilité(False)
-                # haut_gauche = (obstacle.x - joueur.taille, obstacle.y - joueur.taille)
-                # bas_droit = (
-                #     obstacle.x + obstacle.largeur + joueur.taille,
-                #     obstacle.y + obstacle.hauteur + joueur.taille,
-                # )
-                # mx = haut_gauche[0]
-                # my = haut_gauche[1]
-                # for i in range(int((bas_droit[1] - haut_gauche[1]) // ecart) + 2):
-                #     mx = haut_gauche[0]
-                #     for j in range(int((bas_droit[0] - haut_gauche[0]) // ecart) + 2):
-                #         if appartient_aux_limites_de_la_map(
-                #             mx, largeur
-                #         ) and appartient_aux_limites_de_la_map(my, hauteur):
-                #             point, _, _ = self.selection_point(mx, my)
-                #             if (
-                #                 haut_gauche[0] <= point.x <= bas_droit[0] and haut_gauche[1] <= point.y <= bas_droit[1]
-                #             ) and point not in Listes_points_traj_set:
-                #                 point.associer_traversabilité(False)
-                #         mx += ecart
-                #     my += ecart
             elif isinstance(obstacle, Obstacle_cercle):
                 rayon_collision = obstacle.taille + joueur.taille
                 for dx in range(int(- (rayon_collision)), int((rayon_collision) + 1), int(ecart)):

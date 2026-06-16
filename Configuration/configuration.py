@@ -45,4 +45,7 @@ divisions = tom["grille"]["divisions"]
 nbr_rect = tom["obstacles"]["nombre_rectangles"]
 nbr_cercles = tom["obstacles"]["nombre_cercles"]
 
+# User Interface
+taille_selec_point_d_accroche = tom["user_interface"]["taille_selec_point_d_accroche"]
+
 root.destroy()

@@ -126,6 +126,9 @@ class Vue:
         if self.controleur.pixel_chemin:
             self.dessiner_chemin_pixels()
 
+        if self.controleur.liste_points_d_accroche:
+            self.dessiner_points_d_accroche()
+
         pygame.display.flip()
 
     def dessiner_joueur(self):
@@ -172,3 +175,13 @@ class Vue:
             #     self.objets_jeu.get_joueur(0).taille,
             # )
             self.screen.set_at((x, y), configuration.couleur_droite)
+
+    def dessiner_points_d_accroche(self):
+        for point in self.controleur.liste_points_d_accroche:
+            pygame.draw.circle(
+                self.screen,
+                point.couleur,
+                (point.x, point.y),
+                configuration.taille_selec_point_d_accroche,
+                width=2
+            )

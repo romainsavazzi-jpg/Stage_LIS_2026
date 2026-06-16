@@ -45,3 +45,6 @@ divisions = 150
 [obstacles]
 nombre_rectangles = 4
 nombre_cercles = 15
+
+[user_interface]
+taille_selec_point_d_accroche = 15

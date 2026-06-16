@@ -27,17 +27,14 @@ class Collisions:
     def __init__(self):
         pass
 
-    # def collision_cercle_rectangle(self, other, dx, dy, facteur):
-    #     if sqrt(self.taille ** 2 + self.taille ** 2) < self.taille
-    #     if sqrt(dx ** 2 + dy ** 2):
-    #         other.x
-    #         other.y
-
     def collision_cercle_cercle(self, other, dx, dy, facteur):
-        if isinstance(other, Obstacle_cercle):
-            distance_entre_centres = (((self.x + dx * facteur) - other.x) ** 2 + ((self.y + dy * facteur) - other.y) ** 2)
-            if distance_entre_centres < (self.taille + other.taille) ** 2:
-                return True
+        distance_entre_centres = (((self.x + dx * facteur) - other.x) ** 2 + ((self.y + dy * facteur) - other.y) ** 2)
+        if distance_entre_centres < (self.taille + other.taille) ** 2:
+            return True
+
+    def collision_cercle_point(self, x, y, rayon, x_autre, y_autre):
+        if ((x - x_autre) ** 2 + (y - y_autre) ** 2) < rayon ** 2:
+            return True
 
 
 class Joueur(Collisions):
@@ -95,7 +92,7 @@ class Obstacle_cercle(Obstacle):
         self.taille = taille
 
 
-class Point:
+class Point(Collisions):
     def __init__(self, x, y, traversable=True, couleur=configuration.couleur_point):
         self.x = x
         self.y = y
@@ -145,7 +142,7 @@ class Grille:
 
     def allumer_points(self, liste_points, liste_des_points_verifies):  # Test
         """Colorie les points du meilleur chemin trouvé en vert et les points vérifiés en rose"""
-        for point in liste_des_points_verifies:
-            point.couleur = configuration.couleur_points_verifie
+        # for point in liste_des_points_verifies:
+        #     point.couleur = configuration.couleur_points_verifie
         for point in liste_points:
             point.couleur = configuration.couleur_points_chemin
