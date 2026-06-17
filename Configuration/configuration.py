@@ -23,11 +23,11 @@ FPS: int = tom["ecran"]["fps"]
 # Couleurs
 couleur_fond = tuple(tom["couleurs"]["fond"])
 couleur_joueur = tuple(tom["couleurs"]["joueur"])
-couleur_point = tuple(tom["couleurs"]["points"])
 couleur_rectangle = tuple(tom["couleurs"]["rectangle"])
 couleur_cercle = tuple(tom["couleurs"]["cercle"])
-couleur_point_intravesable = tuple(tom["couleurs"]["intraversable"])
 couleur_droite = tuple(tom["couleurs"]["droite"])
+couleur_point = tuple(tom["couleurs"]["points"])
+couleur_point_intravesable = tuple(tom["couleurs"]["intraversable"])
 couleur_points_chemin = tuple(tom["couleurs"]["points_chemin"])
 couleur_points_verifie = tuple(tom["couleurs"]["points_verifies"])
 

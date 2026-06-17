@@ -180,7 +180,7 @@ class Vue:
         for point in self.controleur.liste_points_d_accroche:
             pygame.draw.circle(
                 self.screen,
-                point.couleur,
+                configuration.couleur_points_chemin,
                 (point.x, point.y),
                 configuration.taille_selec_point_d_accroche,
                 width=2

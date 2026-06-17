@@ -47,4 +47,4 @@ nombre_rectangles = 25
 nombre_cercles = 15
 
 [user_interface]
-taille_selec_point_d_accroche = 15
+taille_selec_point_d_accroche = 15  # 15

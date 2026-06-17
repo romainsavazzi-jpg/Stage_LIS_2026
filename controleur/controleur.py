@@ -103,8 +103,14 @@ class Controleur:
                 distance_au_click = (mx - point.x) ** 2 + (my - point.y) ** 2
                 if distance_au_click < ancienne_distance_au_click:
                     meilleur_point = point
-            self.liste_points_d_accroche.insert(self.indice_accroche, point)
-            self.on_deplace = True
+                    ancienne_distance_au_click = distance_au_click
+            for point in self.liste_points:
+                if point in self.liste_points_d_accroche:
+                    self.indice_accroche += 1
+                if point == meilleur_point:
+                    self.liste_points_d_accroche.insert(self.indice_accroche, meilleur_point)
+                    self.on_deplace = True
+                    break
 
     def se_rendre_aux_points(self):
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
