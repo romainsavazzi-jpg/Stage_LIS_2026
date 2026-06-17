@@ -106,7 +106,9 @@ class Controleur:
                     ancienne_distance_au_click = distance_au_click
             for point in self.liste_points:
                 if point in self.liste_points_d_accroche:
-                    self.indice_accroche += 1
+                    indice_point_d_accroche_regarde = self.liste_points_d_accroche.index(point) + 1
+                    if self.indice_accroche < indice_point_d_accroche_regarde:
+                        self.indice_accroche = indice_point_d_accroche_regarde
                 if point == meilleur_point:
                     self.liste_points_d_accroche.insert(self.indice_accroche, meilleur_point)
                     self.on_deplace = True
