@@ -1,4 +1,5 @@
 from Configuration import configuration
+from Utilities.projection import projection_point_sur_segment
 # from math import sqrt, cos, sin
 
 
@@ -43,13 +44,27 @@ class Collisions:
             return True
 
     def collision_cercle_point(self, x, y, rayon, x_autre, y_autre):
-        if ((x - x_autre) ** 2 + (y - y_autre) ** 2) < rayon ** 2:
+        if ((x - x_autre) ** 2 + (y - y_autre) ** 2) <= rayon ** 2:
             return True
 
     def collision_cercle_rect(self, rect, dx, dy, facteur):
-        carre_autour_du_cercle = Obstacle_rect(self.x - self.taille, self.y - self.taille / 2, 2 * self.taille, 2 * self.taille)
-        if not carre_autour_du_cercle.collision_rect_rect(rect, dx, dy, facteur):
+        carre_autour_du_cercle = Obstacle_rect(self.x - self.taille, self.y - self.taille, 2 * self.taille, 2 * self.taille)
+        if not carre_autour_du_cercle.collision_rect_rect(rect, dx, dy, facteur):  # si les deux rectangles ont rien en commun in s'arrète pas de le collisions
             return False
+
+        # sinon on regarde si l'un des coins du rectangle est dans le cercle
+        if (
+            self.collision_cercle_point(rect.x, rect.y, self.taille, self.x + dx * facteur, self.y + dy * facteur)
+            or self.collision_cercle_point(rect.x, rect.y + rect.hauteur, self.taille, self.x + dx * facteur, self.y + dy * facteur)
+            or self.collision_cercle_point(rect.x + rect.largeur, rect.y, self.taille, self.x + dx * facteur, self.y + dy * facteur)
+            or self.collision_cercle_point(rect.x + rect.largeur, rect.y + rect.hauteur, self.taille, self.x + dx * facteur, self.y + dy * facteur)
+        ):
+            return True
+
+        return projection_point_sur_segment(self.x + dx * facteur, self.y + dy * facteur, rect.x, rect.y, rect.x + rect.largeur, rect.y) or projection_point_sur_segment(self.x + dx * facteur, self.y + dy * facteur, rect.x, rect.y, rect.x, rect.y + rect.hauteur)  # Dernier cas qui regarde si le cercle coupe le rectangle au milieu d'un segment ou si on est dans un angle de la box autour du cercle
+
+
+# sinon on regarde si le cercle est en collisions avec les bords du rectangle
 
 
 class Joueur(Collisions):

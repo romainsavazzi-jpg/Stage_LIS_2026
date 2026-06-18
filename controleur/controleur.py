@@ -137,6 +137,9 @@ class Controleur:
                 if isinstance(obj, Obstacle_cercle):
                     if joueur.collision_cercle_cercle(obj, dx, dy, facteur):
                         dx, dy = 0, 0
+                if isinstance(obj, Obstacle_rect):
+                    if joueur.collision_cercle_rect(obj, dx, dy, facteur):
+                        dx, dy = 0, 0
             joueur.bouger(dx, dy, facteur)
 
     def deplacer_vers_cible(self):  # Test
