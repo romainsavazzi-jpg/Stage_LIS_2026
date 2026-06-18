@@ -118,6 +118,8 @@ class Controleur:
         """Fait suivre au joueur les points de la liste des points du chemin un par un"""
         if self.liste_points_reduite == []:
             self.aller_vers_point = False
+            self.liste_points_d_accroche = []
+            self.pixel_chemin = []
             return
         if not self.aller_vers_point or self.point_cible is not None:
             return
@@ -132,6 +134,7 @@ class Controleur:
             self.point_cible = None
             self.pixel_chemin = []
             self.aller_vers_point = False
+            self.liste_points_d_accroche = []
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             for obj in self.objets_jeu.liste_obstacles:
                 if isinstance(obj, Obstacle_cercle):

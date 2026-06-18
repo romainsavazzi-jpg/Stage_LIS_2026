@@ -95,10 +95,12 @@ class Joueur(Collisions):
             self.y += marge_a_tp
 
     def change_taille(self, increment):  # test
-        self.taille += increment
+        if self.taille + increment >= 0:
+            self.taille += increment
 
     def change_vitesse(self, increment):  # test
-        self.vitesse += increment
+        if self.vitesse + increment >= 0:
+            self.vitesse += increment
 
 
 class Obstacle(Collisions):
