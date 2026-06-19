@@ -49,7 +49,7 @@ class Collisions:
 
     def collision_cercle_rect(self, rect, dx, dy, facteur):
         carre_autour_du_cercle = Obstacle_rect(self.x - self.taille, self.y - self.taille, 2 * self.taille, 2 * self.taille)
-        if not carre_autour_du_cercle.collision_rect_rect(rect, dx, dy, facteur):  # si les deux rectangles ont rien en commun in s'arrète pas de le collisions
+        if not carre_autour_du_cercle.collision_rect_rect(rect, dx, dy, facteur):  # si les deux rectangles ont rien en commun il s'arrète pas de le collisions
             return False
 
         # sinon on regarde si l'un des coins du rectangle est dans le cercle
@@ -63,8 +63,7 @@ class Collisions:
 
         return projection_point_sur_segment(self.x + dx * facteur, self.y + dy * facteur, rect.x, rect.y, rect.x + rect.largeur, rect.y) or projection_point_sur_segment(self.x + dx * facteur, self.y + dy * facteur, rect.x, rect.y, rect.x, rect.y + rect.hauteur)  # Dernier cas qui regarde si le cercle coupe le rectangle au milieu d'un segment ou si on est dans un angle de la box autour du cercle
 
-
-# sinon on regarde si le cercle est en collisions avec les bords du rectangle
+        # sinon on regarde si le cercle est en collisions avec les bords du rectangle
 
 
 class Joueur(Collisions):
@@ -161,7 +160,7 @@ class Grille:
     def diviser_ecran(self):  # Test
         """Divise l'écran en une grille de points et les stocke dans une matrice"""
         self.ecart = configuration.largeur / self.nbr_division
-        premier = Point(0 + self.ecart // 2, 0 + self.ecart // 2)
+        premier = Point(0 + self.ecart / 2, 0 + self.ecart / 2)
         coordonnee = premier
         nbr_carres_hauteur = int((configuration.hauteur // self.ecart) + 1)
         for i in range(nbr_carres_hauteur):

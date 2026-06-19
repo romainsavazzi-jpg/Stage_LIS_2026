@@ -17,6 +17,7 @@ class Controleur:
         self.aller_vers_point = False
         self.on_deplace = False
         self.indice_accroche = 0
+        self.bon_point_d_accroche = None
 
     def attacher_modele(self, modele):
         self.objets_jeu = modele
@@ -53,8 +54,9 @@ class Controleur:
                     self, self.objets_jeu.grille.grille, point_1, point_2
                 )
             )
-            if liste_points_a_rajouter:
-                self.liste_points += liste_points_a_rajouter
+            if not liste_points_a_rajouter:
+                return False  # Si un des trajets du nouveau chemin n'est pas possible on renvoie False pour que le point d'accroche ne s'actualise pas
+            self.liste_points += liste_points_a_rajouter
             point_1 = point_2
 
         # Détermination liste réduite du chemin
@@ -71,6 +73,7 @@ class Controleur:
             )
         if self.liste_points_reduite:
             self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points_reduite[0].x, self.liste_points_reduite[0].y)) + self.pixel_chemin)
+        return True
 
     def lancer_chemin(self, mx, my):
         point_arrivee, _, _ = self.selection_point(mx, my)
@@ -83,7 +86,12 @@ class Controleur:
         point_d_accroche, _, _ = self.selection_point(mx, my)
         if point_d_accroche.traversable:
             self.liste_points_d_accroche[self.indice_accroche] = point_d_accroche
-        self.determiner_chemin()
+            chemin_possible = self.determiner_chemin()
+            if chemin_possible:
+                self.bon_point_d_accroche = point_d_accroche
+            else:
+                self.liste_points_d_accroche[self.indice_accroche] = self.bon_point_d_accroche
+                chemin_possible = self.determiner_chemin()
 
     def selection_point_d_accroche(self, mx, my):
         points_potentiels = []
@@ -120,6 +128,7 @@ class Controleur:
             self.aller_vers_point = False
             self.liste_points_d_accroche = []
             self.pixel_chemin = []
+            self.liste_points = []
             return
         if not self.aller_vers_point or self.point_cible is not None:
             return
@@ -135,6 +144,7 @@ class Controleur:
             self.pixel_chemin = []
             self.aller_vers_point = False
             self.liste_points_d_accroche = []
+            self.liste_points = []
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
             for obj in self.objets_jeu.liste_obstacles:
                 if isinstance(obj, Obstacle_cercle):
@@ -201,8 +211,8 @@ class Controleur:
 
         for obstacle in self.objets_jeu.liste_obstacles:
             if isinstance(obstacle, Obstacle_rect):
-                for dx in range(int(- (obstacle.x + joueur.taille)), int((obstacle.x + obstacle.largeur + joueur.taille) + 1), int(ecart)):
-                    for dy in range(int(- (obstacle.y + joueur.taille)), int((obstacle.y + obstacle.hauteur + joueur.taille) + 1), int(ecart)):
+                for dx in range(int(- (joueur.taille)), int((obstacle.largeur + joueur.taille) + ecart), int(ecart)):
+                    for dy in range(int(- (joueur.taille)), int((obstacle.hauteur + joueur.taille) + ecart), int(ecart)):
                         nx, ny = obstacle.x + dx, obstacle.y + dy
                         if appartient_aux_limites_de_la_map(nx, largeur) and appartient_aux_limites_de_la_map(ny, hauteur):
                             point, _, _ = self.selection_point(nx, ny)
@@ -212,12 +222,13 @@ class Controleur:
                                 point.associer_traversabilité(False)
             elif isinstance(obstacle, Obstacle_cercle):
                 rayon_collision = obstacle.taille + joueur.taille
-                for dx in range(int(- (rayon_collision)), int((rayon_collision) + 1), int(ecart)):
-                    for dy in range(int(- (rayon_collision)), int((rayon_collision) + 1), int(ecart)):
+                for dx in range(int(-rayon_collision), int(rayon_collision + ecart), int(ecart)):
+                    for dy in range(int(-rayon_collision), int(rayon_collision + ecart), int(ecart)):
                         nx, ny = obstacle.x + dx, obstacle.y + dy
                         if appartient_aux_limites_de_la_map(nx, largeur) and appartient_aux_limites_de_la_map(ny, hauteur):
-                            if (dx ** 2 + dy ** 2) < rayon_collision ** 2:
-                                point, _, _ = self.selection_point(nx, ny)
+                            point, _, _ = self.selection_point(nx, ny)
+                            distance_carre = (point.x - obstacle.x) ** 2 + (point.y - obstacle.y) ** 2
+                            if distance_carre < rayon_collision ** 2 and point not in Listes_points_traj_set:
                                 point.associer_traversabilité(False)
 
         # Collision pour les bords

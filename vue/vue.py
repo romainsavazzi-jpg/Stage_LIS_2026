@@ -67,6 +67,7 @@ class Vue:
 
             if event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1 and self.controleur.on_deplace:  # clic gauche relâché
+                    self.controleur.determiner_chemin()
                     self.controleur.on_deplace = False
 
             if event.type == pygame.KEYDOWN:
@@ -90,6 +91,13 @@ class Vue:
                     self.controleur.aller_vers_point = True
                     # self.controleur.liste_points_d_accroche = []  # Réinitialise la liste de points d'accroche
                     self.controleur.traj = False
+
+                # Fonction de pour le test pour pas être bloqué
+                if event.key == pygame.K_e:
+                    mx, my = pygame.mouse.get_pos()
+                    joueur = self.objets_jeu.get_joueur(0)
+                    joueur.x = mx
+                    joueur.y = my
 
     def gerer_entrees(self):
         """Gère les entrées du clavier pour le déplacement du joueur et les autres actions liées au clavier"""
