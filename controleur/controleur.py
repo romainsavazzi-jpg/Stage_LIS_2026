@@ -24,7 +24,7 @@ class Controleur:
 
     def changer_taille(self, increment):
         self.objets_jeu.liste_joueurs[0].change_taille(increment)
-        self.mettre_les_points_intravesables_rect(self.objets_jeu.liste_joueurs[0])
+        self.mettre_les_points_intravesables(self.objets_jeu.liste_joueurs[0])
 
     def selection_point(self, mx: float, my: float):  # Test
         """Associe les coordonnées du point de l'écran auquel on applique la méthode à un point de la grille"""
@@ -39,7 +39,8 @@ class Controleur:
         return point
 
     def determiner_chemin(self):
-        """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée"""
+        """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée en passant par tous les points d'accroche
+        Renvoie True or False si un chemin est trouvé ou pas pour aller d'un point à un autre pour donner une inforlmation à l'actualisation du point d'accroche"""
         # Initialisation du chemin
         joueur = self.objets_jeu.get_joueur(0)
         self.liste_points = []
@@ -64,7 +65,7 @@ class Controleur:
         self.objets_jeu.grille.allumer_points(
             self.liste_points_reduite, self.liste_des_points_verifies
         )
-        """Détermine une liste de pixels pour tracer une droite entre les deux points de la grille"""
+        """Détermine une liste de pixels pour tracer une droite entre deux points du chemin de la liste réduite"""
         self.pixel_chemin = []
         for i in range(len(self.liste_points_reduite) - 1):
             self.pixel_chemin += Bresenham.bresenham(
@@ -76,6 +77,7 @@ class Controleur:
         return True
 
     def lancer_chemin(self, mx, my):
+        """ Permet de lancer le chemin en initalisant la liste de point d'accroche au point de coordonnées mx, my"""
         point_arrivee, _, _ = self.selection_point(mx, my)
         if point_arrivee.traversable:
             self.traj = True
@@ -83,6 +85,8 @@ class Controleur:
         self.determiner_chemin()
 
     def actualiser_deplacement_point_d_accroche(self, mx, my):
+        """ Change, actualise le point d'accroche actuellement sélectionné (à l'indice self.indice_accroche dans la liste des points d'accroche) au point corrspondant aux coordonnées de mx, my
+        seulement si un chemin est possible"""
         point_d_accroche, _, _ = self.selection_point(mx, my)
         if point_d_accroche.traversable:
             self.liste_points_d_accroche[self.indice_accroche] = point_d_accroche
@@ -94,6 +98,8 @@ class Controleur:
                 chemin_possible = self.determiner_chemin()
 
     def selection_point_d_accroche(self, mx, my):
+        """Détecte si le point aux coordonnées mx, my est proche de configuration.taille_selec_point_d_accroche d'un point du chemin.
+        Si oui il sélectionne le point d'accroche ou si il n'y en a pas dans la zone il en créer un et le rajoute au bon endroit dans la liste de points d'accroche"""
         points_potentiels = []
         self.indice_accroche = 0
         for point in self.liste_points:
@@ -156,7 +162,7 @@ class Controleur:
             joueur.bouger(dx, dy, facteur)
 
     def deplacer_vers_cible(self):  # Test
-        """Gère le déplacement du joueur vers la cible définie par le clic souris"""
+        """Gère le déplacement du joueur vers le point cible self.point_cible """
 
         joueur = self.objets_jeu.get_joueur(0)
 
@@ -192,8 +198,8 @@ class Controleur:
         dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
         joueur.bouger(dx, dy, facteur)
 
-    def mettre_les_points_intravesables_rect(self, joueur):
-        """défini la zone de collision entre le joueur et les obstacles rectangulaires et les bords"""
+    def mettre_les_points_intravesables(self, joueur):
+        """Défini la zone de collision pour A* entre le joueur et les obstacles et les bords et rend les points de la grille sur cette zone intraversables par A*"""
         ecart = self.objets_jeu.grille.ecart
         largeur = configuration.largeur
         hauteur = configuration.hauteur
@@ -246,7 +252,7 @@ def appartient_aux_limites_de_la_map(pos_x_y, longueur):  # Test
 
 
 def limite_bord_et_diago(joueur, dx, dy):  # Test
-    """Empêche le joueur de dépasser les bords de l'écran et change la vitesse en fonction de diagonale ou pas
+    """Empêche le joueur de dépasser les bords de l'écran et change la vitesse en fonction de diagonale ou pas.
     Renvoie le déplacement et la bonne vitesse"""
     # Si déplacement diagonal : la vitesse est adaptée
     if dx != 0 and dy != 0:

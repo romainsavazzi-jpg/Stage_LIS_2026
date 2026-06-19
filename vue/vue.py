@@ -24,7 +24,7 @@ class Vue:
 
     def run(self):
         """Initialise et fait tourner une boucle qui gère toute la vue"""
-        self.controleur.mettre_les_points_intravesables_rect(
+        self.controleur.mettre_les_points_intravesables(
             self.objets_jeu.liste_joueurs[0]
         )
         while self.etat:
@@ -48,7 +48,7 @@ class Vue:
                 self.etat = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 3:
-                    self.controleur.mettre_les_points_intravesables_rect(
+                    self.controleur.mettre_les_points_intravesables(
                         self.objets_jeu.liste_joueurs[0]
                     )
 
@@ -57,7 +57,7 @@ class Vue:
                     mx, my = pygame.mouse.get_pos()
                     self.controleur.lancer_chemin(mx, my)
 
-                    self.controleur.mettre_les_points_intravesables_rect(
+                    self.controleur.mettre_les_points_intravesables(
                         self.objets_jeu.liste_joueurs[0]
                     )
 

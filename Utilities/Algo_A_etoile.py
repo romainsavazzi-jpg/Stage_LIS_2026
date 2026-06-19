@@ -8,7 +8,7 @@ import heapq
 def cheminPlusCourt(controle, grille, depart, objectif):  # Test
     """
     A* sur la grille. depart et objectif sont des points Point().
-    Retourne une liste de points formant le chemin, ou [] si aucun chemin.
+    Retourne une liste de points formant le chemin, ou [ ] si aucun chemin.
     """
     def heuristique(a, b):
         _, ax, ay = controle.selection_point(a.x, a.y)

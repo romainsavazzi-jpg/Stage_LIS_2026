@@ -45,16 +45,25 @@
                     <a class="variable" href="#couleur_joueur">couleur_joueur</a>
             </li>
             <li>
-                    <a class="variable" href="#couleur_point">couleur_point</a>
+                    <a class="variable" href="#couleur_rectangle">couleur_rectangle</a>
             </li>
             <li>
-                    <a class="variable" href="#couleur_rectangle">couleur_rectangle</a>
+                    <a class="variable" href="#couleur_cercle">couleur_cercle</a>
+            </li>
+            <li>
+                    <a class="variable" href="#couleur_droite">couleur_droite</a>
+            </li>
+            <li>
+                    <a class="variable" href="#couleur_point">couleur_point</a>
             </li>
             <li>
                     <a class="variable" href="#couleur_point_intravesable">couleur_point_intravesable</a>
             </li>
             <li>
-                    <a class="variable" href="#couleur_droite">couleur_droite</a>
+                    <a class="variable" href="#couleur_points_chemin">couleur_points_chemin</a>
+            </li>
+            <li>
+                    <a class="variable" href="#couleur_points_verifie">couleur_points_verifie</a>
             </li>
             <li>
                     <a class="variable" href="#vitesse">vitesse</a>
@@ -70,6 +79,12 @@
             </li>
             <li>
                     <a class="variable" href="#nbr_rect">nbr_rect</a>
+            </li>
+            <li>
+                    <a class="variable" href="#nbr_cercles">nbr_cercles</a>
+            </li>
+            <li>
+                    <a class="variable" href="#taille_selec_point_d_accroche">taille_selec_point_d_accroche</a>
             </li>
     </ul>
 
@@ -117,25 +132,32 @@ Configuration<wbr>.configuration    </h1>
 </span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="c1"># Couleurs</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="n">couleur_fond</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;fond&quot;</span><span class="p">])</span>
 </span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="n">couleur_joueur</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;joueur&quot;</span><span class="p">])</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="n">couleur_point</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;points&quot;</span><span class="p">])</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="n">couleur_rectangle</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;rectangle&quot;</span><span class="p">])</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="n">couleur_point_intravesable</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;intraversable&quot;</span><span class="p">])</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="n">couleur_droite</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;droite&quot;</span><span class="p">])</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="c1"># Joueur</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="n">vitesse</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;joueur&quot;</span><span class="p">][</span><span class="s2">&quot;vitesse&quot;</span><span class="p">]</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="n">taille</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;joueur&quot;</span><span class="p">][</span><span class="s2">&quot;taille&quot;</span><span class="p">]</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="c1"># Touches — on résout les getattr ici une bonne fois pour toutes</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="n">touches</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;touches&quot;</span><span class="p">]</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="n">couleur_rectangle</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;rectangle&quot;</span><span class="p">])</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="n">couleur_cercle</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;cercle&quot;</span><span class="p">])</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="n">couleur_droite</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;droite&quot;</span><span class="p">])</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="n">couleur_point</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;points&quot;</span><span class="p">])</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="n">couleur_point_intravesable</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;intraversable&quot;</span><span class="p">])</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="n">couleur_points_chemin</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;points_chemin&quot;</span><span class="p">])</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="n">couleur_points_verifie</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">tom</span><span class="p">[</span><span class="s2">&quot;couleurs&quot;</span><span class="p">][</span><span class="s2">&quot;points_verifies&quot;</span><span class="p">])</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="c1"># Joueur</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="n">vitesse</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;joueur&quot;</span><span class="p">][</span><span class="s2">&quot;vitesse&quot;</span><span class="p">]</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="n">taille</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;joueur&quot;</span><span class="p">][</span><span class="s2">&quot;taille&quot;</span><span class="p">]</span>
 </span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="c1"># Grille</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="n">divisions</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;grille&quot;</span><span class="p">][</span><span class="s2">&quot;divisions&quot;</span><span class="p">]</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="c1"># Touches — on résout les getattr ici une bonne fois pour toutes</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="n">touches</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;touches&quot;</span><span class="p">]</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="c1"># Obstacles</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="n">nbr_rect</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;obstacles&quot;</span><span class="p">][</span><span class="s2">&quot;nombre_rectangles&quot;</span><span class="p">]</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="c1"># Grille</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="n">divisions</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;grille&quot;</span><span class="p">][</span><span class="s2">&quot;divisions&quot;</span><span class="p">]</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="c1"># Obstacles</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="n">nbr_rect</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;obstacles&quot;</span><span class="p">][</span><span class="s2">&quot;nombre_rectangles&quot;</span><span class="p">]</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="n">nbr_cercles</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;obstacles&quot;</span><span class="p">][</span><span class="s2">&quot;nombre_cercles&quot;</span><span class="p">]</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="c1"># User Interface</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="n">taille_selec_point_d_accroche</span> <span class="o">=</span> <span class="n">tom</span><span class="p">[</span><span class="s2">&quot;user_interface&quot;</span><span class="p">][</span><span class="s2">&quot;taille_selec_point_d_accroche&quot;</span><span class="p">]</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="n">root</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -188,18 +210,6 @@ Configuration<wbr>.configuration    </h1>
     
 
                 </section>
-                <section id="couleur_point">
-                    <div class="attr variable">
-            <span class="name">couleur_point</span>        =
-<span class="default_value">(212, 10, 5)</span>
-
-        
-    </div>
-    <a class="headerlink" href="#couleur_point"></a>
-    
-    
-
-                </section>
                 <section id="couleur_rectangle">
                     <div class="attr variable">
             <span class="name">couleur_rectangle</span>        =
@@ -208,6 +218,42 @@ Configuration<wbr>.configuration    </h1>
         
     </div>
     <a class="headerlink" href="#couleur_rectangle"></a>
+    
+    
+
+                </section>
+                <section id="couleur_cercle">
+                    <div class="attr variable">
+            <span class="name">couleur_cercle</span>        =
+<span class="default_value">(10, 100, 5)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#couleur_cercle"></a>
+    
+    
+
+                </section>
+                <section id="couleur_droite">
+                    <div class="attr variable">
+            <span class="name">couleur_droite</span>        =
+<span class="default_value">(161, 0, 161)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#couleur_droite"></a>
+    
+    
+
+                </section>
+                <section id="couleur_point">
+                    <div class="attr variable">
+            <span class="name">couleur_point</span>        =
+<span class="default_value">(212, 10, 5)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#couleur_point"></a>
     
     
 
@@ -224,14 +270,26 @@ Configuration<wbr>.configuration    </h1>
     
 
                 </section>
-                <section id="couleur_droite">
+                <section id="couleur_points_chemin">
                     <div class="attr variable">
-            <span class="name">couleur_droite</span>        =
-<span class="default_value">(161, 0, 161)</span>
+            <span class="name">couleur_points_chemin</span>        =
+<span class="default_value">(20, 250, 100)</span>
 
         
     </div>
-    <a class="headerlink" href="#couleur_droite"></a>
+    <a class="headerlink" href="#couleur_points_chemin"></a>
+    
+    
+
+                </section>
+                <section id="couleur_points_verifie">
+                    <div class="attr variable">
+            <span class="name">couleur_points_verifie</span>        =
+<span class="default_value">(250, 60, 250)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#couleur_points_verifie"></a>
     
     
 
@@ -264,7 +322,7 @@ Configuration<wbr>.configuration    </h1>
                     <div class="attr variable">
             <span class="name">touches</span>        =
 <input id="touches-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="touches-view-value"></label><span class="default_value">{&#39;haut&#39;: &#39;K_z&#39;, &#39;bas&#39;: &#39;K_s&#39;, &#39;gauche&#39;: &#39;K_q&#39;, &#39;droite&#39;: &#39;K_d&#39;, &#39;quitter&#39;: &#39;K_ESCAPE&#39;, &#39;agrandir&#39;: &#39;K_t&#39;, &#39;retrecir&#39;: &#39;K_r&#39;, &#39;aug_vitesse&#39;: &#39;K_v&#39;, &#39;red_vitesse&#39;: &#39;K_c&#39;, &#39;agrandir_un_peu&#39;: &#39;K_u&#39;, &#39;retrecir_un_peu&#39;: &#39;K_y&#39;, &#39;aug_vitesse_un_peu&#39;: &#39;K_n&#39;, &#39;red_vitesse_un_peu&#39;: &#39;K_b&#39;, &#39;afficher_points&#39;: &#39;K_a&#39;}</span>
+            <label class="view-value-button pdoc-button" for="touches-view-value"></label><span class="default_value">{&#39;haut&#39;: &#39;K_z&#39;, &#39;bas&#39;: &#39;K_s&#39;, &#39;gauche&#39;: &#39;K_q&#39;, &#39;droite&#39;: &#39;K_d&#39;, &#39;quitter&#39;: &#39;K_ESCAPE&#39;, &#39;agrandir&#39;: &#39;K_t&#39;, &#39;retrecir&#39;: &#39;K_r&#39;, &#39;aug_vitesse&#39;: &#39;K_v&#39;, &#39;red_vitesse&#39;: &#39;K_c&#39;, &#39;agrandir_un_peu&#39;: &#39;K_u&#39;, &#39;retrecir_un_peu&#39;: &#39;K_y&#39;, &#39;aug_vitesse_un_peu&#39;: &#39;K_n&#39;, &#39;red_vitesse_un_peu&#39;: &#39;K_b&#39;, &#39;afficher_points&#39;: &#39;K_a&#39;, &#39;go&#39;: &#39;K_g&#39;}</span>
 
         
     </div>
@@ -288,11 +346,35 @@ Configuration<wbr>.configuration    </h1>
                 <section id="nbr_rect">
                     <div class="attr variable">
             <span class="name">nbr_rect</span>        =
-<span class="default_value">70</span>
+<span class="default_value">25</span>
 
         
     </div>
     <a class="headerlink" href="#nbr_rect"></a>
+    
+    
+
+                </section>
+                <section id="nbr_cercles">
+                    <div class="attr variable">
+            <span class="name">nbr_cercles</span>        =
+<span class="default_value">15</span>
+
+        
+    </div>
+    <a class="headerlink" href="#nbr_cercles"></a>
+    
+    
+
+                </section>
+                <section id="taille_selec_point_d_accroche">
+                    <div class="attr variable">
+            <span class="name">taille_selec_point_d_accroche</span>        =
+<span class="default_value">15</span>
+
+        
+    </div>
+    <a class="headerlink" href="#taille_selec_point_d_accroche"></a>
     
     
 

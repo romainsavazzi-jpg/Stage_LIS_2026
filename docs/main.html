@@ -68,7 +68,7 @@ main    </h1>
 
                         <label class="view-source-button" for="mod-main-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">modele</span><span class="w"> </span><span class="kn">import</span> <span class="n">Joueur</span><span class="p">,</span> <span class="n">Objets_jeu</span><span class="p">,</span> <span class="n">Obstacle_rect</span><span class="p">,</span> <span class="n">Grille</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">modele</span><span class="w"> </span><span class="kn">import</span> <span class="n">Joueur</span><span class="p">,</span> <span class="n">Objets_jeu</span><span class="p">,</span> <span class="n">Obstacle_rect</span><span class="p">,</span> <span class="n">Obstacle_cercle</span><span class="p">,</span> <span class="n">Grille</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">controleur</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controleur</span>  <span class="c1"># Controleur</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">vue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vue</span>  <span class="c1"># Vue</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">Configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">configuration</span>
@@ -101,14 +101,23 @@ main    </h1>
 </span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>        <span class="p">),</span>
 </span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="p">)</span>
 </span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="c1"># créer une vue et lui attacher le modèle et le contrôleur</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="n">vue1</span> <span class="o">=</span> <span class="n">Vue</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">largeur</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">hauteur</span><span class="p">)</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="n">vue1</span><span class="o">.</span><span class="n">attacher_modele</span><span class="p">(</span><span class="n">objets_jeu</span><span class="p">)</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="n">vue1</span><span class="o">.</span><span class="n">attacher_controleur</span><span class="p">(</span><span class="n">controleur1</span><span class="p">)</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="c1"># lancer la boucle</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="n">vue1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">nbr_cercles</span><span class="p">):</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="n">objets_jeu</span><span class="o">.</span><span class="n">ajouter_obstacle</span><span class="p">(</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>        <span class="n">Obstacle_cercle</span><span class="p">(</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>            <span class="n">x</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">largeur</span><span class="p">),</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>            <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">hauteur</span><span class="p">),</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="n">taille</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>        <span class="p">),</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="p">)</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="c1"># créer une vue et lui attacher le modèle et le contrôleur</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="n">vue1</span> <span class="o">=</span> <span class="n">Vue</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">largeur</span><span class="p">,</span> <span class="n">configuration</span><span class="o">.</span><span class="n">hauteur</span><span class="p">)</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="n">vue1</span><span class="o">.</span><span class="n">attacher_modele</span><span class="p">(</span><span class="n">objets_jeu</span><span class="p">)</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="n">vue1</span><span class="o">.</span><span class="n">attacher_controleur</span><span class="p">(</span><span class="n">controleur1</span><span class="p">)</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="c1"># lancer la boucle</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="n">vue1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </span></pre></div>
 
 
