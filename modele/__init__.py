@@ -1,1 +1,1 @@
-from .modele import Objets_jeu, Joueur, Obstacle_rect, Obstacle_cercle, Grille, Point
+from .modele import Objets_jeu, Joueur, Obstacle_rect, Obstacle_cercle, Grille, Point, Collisions

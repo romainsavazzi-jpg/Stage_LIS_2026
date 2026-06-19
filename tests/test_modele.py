@@ -1,4 +1,4 @@
-from modele import Joueur, Objets_jeu, Obstacle_rect, Grille, Point
+from modele import Joueur, Objets_jeu, Obstacle_rect, Obstacle_cercle, Grille, Point
 from Configuration import configuration
 
 # Tests classe Jeu
@@ -113,3 +113,48 @@ def test_allumer_points():
     grille_pain.allumer_points(chemin, verif)
     assert a.couleur == configuration.couleur_points_chemin
     # assert c.couleur == configuration.couleur_points_verifie
+
+
+# Tests classe collision
+
+
+def test_collisions_rect_rect():
+    gerbille = Obstacle_rect(5, 5, 3, 2)
+    souris = Obstacle_rect(3, 3, 2, 3)
+    rat = Obstacle_rect(9, 1, 1, 2)
+    assert souris.collision_rect_rect(gerbille, 1, 0, 1)
+    assert not souris.collision_rect_rect(gerbille, 0, 1, 1)
+    assert souris.collision_rect_rect(gerbille, 1, 1, 1)
+    assert not souris.collision_rect_rect(gerbille, 1, 1, 0)
+    assert not rat.collision_rect_rect(gerbille, -1, -1, 1)
+
+
+def test_collisions_cercle_cercle():
+    lune = Obstacle_cercle(8, 4, 1)
+    terre = Obstacle_cercle(7, 2, 1)
+    boule_de_petanque = Obstacle_cercle(1, 1, 1)
+    assert terre.collision_cercle_cercle(lune, 1, 1, 1)
+    assert not terre.collision_cercle_cercle(lune, 1, 0, 1)
+    assert not boule_de_petanque.collision_cercle_cercle(lune, 1, 1, 2)
+
+
+def test_collisions_cercle_points():
+    frisbee = Obstacle_cercle(8, 4, 1)
+    grenouille = Point(8, 4)
+    crapaud = Point(8, 5)
+    tétard = Point(8, 2)
+    assert frisbee.collision_cercle_point(grenouille.x, grenouille.y, frisbee.taille, frisbee.x, frisbee.y)
+    assert frisbee.collision_cercle_point(crapaud.x, crapaud.y, frisbee.taille, frisbee.x, frisbee.y)
+    assert not frisbee.collision_cercle_point(tétard.x, tétard.y, frisbee.taille, frisbee.x, frisbee.y)
+
+
+def test_collisions_cercle_rect():
+    jerry = Joueur(4, 3, configuration.couleur_joueur, configuration.vitesse, 2)
+    bus = Obstacle_rect(1, 0, 2, 6)
+    velo = Obstacle_rect(8, 3, 1, 2)
+    quad = Obstacle_rect(5, 4, 2, 2)
+    voiture = Obstacle_rect(5.5, 0, 3, 1.2)
+    assert jerry.collision_cercle_rect(bus, 0, 0, 0)  # test collisions avec un côté du rectangle
+    assert jerry.collision_cercle_rect(quad, 0, 0, 0)  # test collisions avec le coin du rectangle
+    assert not jerry.collision_cercle_rect(velo, 0, 0, 0)  # test pas de collisions lorsque les deux hitboxs ne sont pas en contact
+    assert not jerry.collision_cercle_rect(voiture, 0, 0, 0)  # test pas de collisions quand les hitbox se touchent mais qu'on est dans le coin de la hitbox

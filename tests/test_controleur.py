@@ -65,7 +65,7 @@ def test_selection_point_cible_et_mouvement():
     controleur.attacher_modele(model)
     coordonnees = 200
     point, coordonnee_grille_x, coordonnee_grille_y = controleur.selection_point(coordonnees, coordonnees)
-    assert point == controleur.objets_jeu.grille.grille[coordonnee_grille_y][coordonnee_grille_x]
+    assert point == controleur.modele.grille.grille[coordonnee_grille_y][coordonnee_grille_x]
     controleur.selection_point_cible(point)
     while controleur.point_cible is not None:
         controleur.deplacer_vers_cible()
@@ -86,3 +86,42 @@ def test_deplacer_vers_cible():
         controleur.deplacer_vers_cible()
     assert john.x > coordonnees - (john.vitesse // 2 + 1) and john.x < coordonnees + (john.vitesse // 2 + 1)
     assert john.y > coordonnees - (john.vitesse // 2 + 1) and john.y < coordonnees + (john.vitesse // 2 + 1)
+
+
+def test_attacher_modele():
+    ceinture = Objets_jeu()
+    adrien = Controleur()
+    adrien.attacher_modele(ceinture)
+    assert adrien.modele == ceinture
+
+
+def test_changer_taille():
+    barbableu = Joueur(0, 0, configuration.couleur_joueur, configuration.vitesse, 1.5)
+    latour = Objets_jeu()
+    latour.ajouter_joueur(barbableu)
+    controleur = Controleur()
+    controleur.attacher_modele(latour)
+    grille = Grille(150)
+    grille.diviser_ecran()
+    latour.ajouter_grille(grille)
+    point = controleur.modele.grille.grille[0][0]
+    assert point.traversable
+    controleur.changer_taille(1)
+    assert barbableu.taille == 2.5
+    assert not point.traversable
+
+
+def test_lancer_chemin():
+    barbableu = Joueur(0, 0, configuration.couleur_joueur, configuration.vitesse, 1.5)
+    latour = Objets_jeu()
+    latour.ajouter_joueur(barbableu)
+    controleur = Controleur()
+    controleur.attacher_modele(latour)
+    grille = Grille(150)
+    grille.diviser_ecran()
+    latour.ajouter_grille(grille) 
+    controleur.lancer_chemin(2, 2)
+    point_arrivee, _, _ = controleur.selection_point(2, 2)
+    assert controleur.traj
+    assert controleur.liste_points_d_accroche == [point_arrivee]
+    # tester l'appel de l'autre fonction
