@@ -6,10 +6,10 @@ from modele import Joueur, Obstacle_rect, Obstacle_cercle, Point  # Obstacles, J
 class Vue:
     def __init__(self, largeur: int, hauteur: int, FPS=configuration.FPS):
         self.controleur = None
-        self.objets_jeu = None
+        self.modele = None
         self.etat = True
         self.FPS = FPS
-        self.non = True
+        self.affichage_points = True
 
         pygame.init()
         self.screen = pygame.display.set_mode((largeur, hauteur))
@@ -17,7 +17,7 @@ class Vue:
         self.touches = {nom: getattr(pygame, val) for nom, val in configuration.touches.items()}
 
     def attacher_modele(self, modele):
-        self.objets_jeu = modele
+        self.modele = modele
 
     def attacher_controleur(self, controleur):
         self.controleur = controleur
@@ -25,7 +25,7 @@ class Vue:
     def run(self):
         """Initialise et fait tourner une boucle qui gère toute la vue"""
         self.controleur.mettre_les_points_intravesables(
-            self.objets_jeu.liste_joueurs[0]
+            self.modele.liste_joueurs[0]
         )
         while self.etat:
             self.gerer_evenement()
@@ -49,7 +49,7 @@ class Vue:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 3:
                     self.controleur.mettre_les_points_intravesables(
-                        self.objets_jeu.liste_joueurs[0]
+                        self.modele.liste_joueurs[0]
                     )
 
                     self.controleur.liste_points_d_accroche = []  # Réinitialise la liste de points d'accroche
@@ -58,7 +58,7 @@ class Vue:
                     self.controleur.lancer_chemin(mx, my)
 
                     self.controleur.mettre_les_points_intravesables(
-                        self.objets_jeu.liste_joueurs[0]
+                        self.modele.liste_joueurs[0]
                     )
 
                 elif event.button == 1 and self.controleur.traj:
@@ -72,18 +72,18 @@ class Vue:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == self.touches["afficher_points"]:
-                    if self.non:
-                        self.non = False
+                    if self.affichage_points:
+                        self.affichage_points = False
                     else:
-                        self.non = True
+                        self.affichage_points = True
                 if event.key == self.touches["agrandir_un_peu"]:
                     self.controleur.changer_taille(1)
                 if event.key == self.touches["retrecir_un_peu"]:
                     self.controleur.changer_taille(-1)
                 if event.key == self.touches["aug_vitesse_un_peu"]:
-                    self.objets_jeu.liste_joueurs[0].change_vitesse(1)
+                    self.modele.liste_joueurs[0].change_vitesse(1)
                 if event.key == self.touches["red_vitesse_un_peu"]:
-                    self.objets_jeu.liste_joueurs[0].change_vitesse(-1)
+                    self.modele.liste_joueurs[0].change_vitesse(-1)
 
                 if (
                     event.key == self.touches["go"] and self.controleur.traj and self.controleur.pixel_chemin  # self.controleur.point_cible  # self.controleur.cible_souris
@@ -109,9 +109,9 @@ class Vue:
         if touches_pressees[self.touches["retrecir"]] == 1:
             self.controleur.changer_taille(-0.5)
         if touches_pressees[self.touches["aug_vitesse"]] == 1:
-            self.objets_jeu.liste_joueurs[0].change_vitesse(0.3)
+            self.modele.liste_joueurs[0].change_vitesse(0.3)
         if touches_pressees[self.touches["red_vitesse"]] == 1:
-            self.objets_jeu.liste_joueurs[0].change_vitesse(-0.3)
+            self.modele.liste_joueurs[0].change_vitesse(-0.3)
         dx = (
             touches_pressees[self.touches["droite"]] - touches_pressees[self.touches["gauche"]]
         )
@@ -128,7 +128,7 @@ class Vue:
 
         self.dessiner_obstacles()
 
-        if self.non:
+        if self.affichage_points:
             self.dessiner_points()
 
         if self.controleur.pixel_chemin:
@@ -140,7 +140,7 @@ class Vue:
         pygame.display.flip()
 
     def dessiner_joueur(self):
-        for joueur in self.objets_jeu.liste_joueurs:
+        for joueur in self.modele.liste_joueurs:
             if isinstance(joueur, Joueur):
                 pygame.draw.circle(
                     self.screen,
@@ -150,7 +150,7 @@ class Vue:
                 )
 
     def dessiner_obstacles(self):
-        for obj in self.objets_jeu.liste_obstacles:
+        for obj in self.modele.liste_obstacles:
             if isinstance(obj, Obstacle_rect):
                 pygame.draw.rect(
                     self.screen, obj.couleur, (obj.x, obj.y, obj.largeur, obj.hauteur)
@@ -164,14 +164,14 @@ class Vue:
                 )
 
     def dessiner_points(self):
-        for ligne in self.objets_jeu.grille.grille:
+        for ligne in self.modele.grille.grille:
             for point_grille in ligne:
                 if isinstance(point_grille, Point):  # and point_grille.couleur == (20, 250, 100):
                     pygame.draw.circle(
                         self.screen,
                         point_grille.couleur,
                         (point_grille.x, point_grille.y),
-                        400 / self.objets_jeu.grille.nbr_division,
+                        400 / self.modele.grille.nbr_division,
                     )
 
     def dessiner_chemin_pixels(self):
