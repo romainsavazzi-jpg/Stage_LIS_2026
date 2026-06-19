@@ -76,7 +76,7 @@ class Controleur:
             self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points_reduite[0].x, self.liste_points_reduite[0].y)) + self.pixel_chemin)
         return True
 
-    def lancer_chemin(self, mx, my):
+    def lancer_chemin(self, mx: float, my: float):
         """ Permet de lancer le chemin en initalisant la liste de point d'accroche au point de coordonnées mx, my"""
         point_arrivee, _, _ = self.selection_point(mx, my)
         if point_arrivee.traversable:
@@ -84,7 +84,7 @@ class Controleur:
             self.liste_points_d_accroche.append(point_arrivee)
         self.determiner_chemin()
 
-    def actualiser_deplacement_point_d_accroche(self, mx, my):
+    def actualiser_deplacement_point_d_accroche(self, mx: float, my: float):
         """ Change, actualise le point d'accroche actuellement sélectionné (à l'indice self.indice_accroche dans la liste des points d'accroche) au point corrspondant aux coordonnées de mx, my
         seulement si un chemin est possible"""
         point_d_accroche, _, _ = self.selection_point(mx, my)
@@ -97,7 +97,7 @@ class Controleur:
                 self.liste_points_d_accroche[self.indice_accroche] = self.bon_point_d_accroche
                 chemin_possible = self.determiner_chemin()
 
-    def selection_point_d_accroche(self, mx, my):
+    def selection_point_d_accroche(self, mx: float, my: float):
         """Détecte si le point aux coordonnées mx, my est proche de configuration.taille_selec_point_d_accroche d'un point du chemin.
         Si oui il sélectionne le point d'accroche ou si il n'y en a pas dans la zone il en créer un et le rajoute au bon endroit dans la liste de points d'accroche"""
         points_potentiels = []
@@ -141,7 +141,7 @@ class Controleur:
         point = self.selection_point_cible(self.liste_points_reduite.pop(0))
         point.changer_couleur_point(configuration.couleur_point)
 
-    def gerer_deplacement_touches(self, dx, dy):  # Test
+    def gerer_deplacement_touches(self, dx: int, dy: int):  # Test
         """Gère le déplacement du joueur en fonction des touches pressées"""
         joueur = self.objets_jeu.get_joueur(0)
 
@@ -245,13 +245,13 @@ class Controleur:
                 point.associer_traversabilité(False)
 
 
-def appartient_aux_limites_de_la_map(pos_x_y, longueur):  # Test
+def appartient_aux_limites_de_la_map(pos_x_y: float, longueur: int):  # Test
     if pos_x_y > 0 and pos_x_y < longueur:
         return True
     return False
 
 
-def limite_bord_et_diago(joueur, dx, dy):  # Test
+def limite_bord_et_diago(joueur, dx: int, dy: int):  # Test
     """Empêche le joueur de dépasser les bords de l'écran et change la vitesse en fonction de diagonale ou pas.
     Renvoie le déplacement et la bonne vitesse"""
     # Si déplacement diagonal : la vitesse est adaptée

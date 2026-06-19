@@ -127,8 +127,8 @@ class Point(Collisions):
     def __init__(self, x, y, traversable=True, couleur=configuration.couleur_point):
         self.x = x
         self.y = y
-        self.couleur = couleur
         self.traversable = traversable
+        self.couleur = couleur
 
     def __eq__(self, other):  # test
         return self.x == other.x and self.y == other.y
