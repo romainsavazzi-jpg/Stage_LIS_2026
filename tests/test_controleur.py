@@ -128,16 +128,19 @@ def test_lancer_chemin():
 
 
 def test_actualiser_deplacement_points_d_accroche():
-    barbableu = Joueur(0, 0, configuration.couleur_joueur, configuration.vitesse, 1.5)
+    barbableu = Joueur(3, 3, configuration.couleur_joueur, configuration.vitesse, 15)
     latour = Objets_jeu()
     latour.ajouter_joueur(barbableu)
-    controleur = Controleur()
-    controleur.attacher_modele(latour)
     grille = Grille(150)
     grille.diviser_ecran()
-    latour.ajouter_grille(grille) 
+    latour.ajouter_grille(grille)
+    controleur = Controleur()
+    controleur.attacher_modele(latour)
     point1, _, _ = controleur.selection_point(2, 2)
     point1.traversable = True
+    controleur.lancer_chemin(15, 15)
+    print(latour.grille.ecart)
+    print(latour.grille.grille[0][0])
     controleur.actualiser_deplacement_point_d_accroche(2, 2)
     assert controleur.liste_points_d_accroche[0] == point1
     assert controleur.bon_point_d_accroche == point1
