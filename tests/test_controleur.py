@@ -125,3 +125,25 @@ def test_lancer_chemin():
     assert controleur.traj
     assert controleur.liste_points_d_accroche == [point_arrivee]
     # tester l'appel de l'autre fonction
+
+
+def test_actualiser_deplacement_points_d_accroche():
+    barbableu = Joueur(0, 0, configuration.couleur_joueur, configuration.vitesse, 1.5)
+    latour = Objets_jeu()
+    latour.ajouter_joueur(barbableu)
+    controleur = Controleur()
+    controleur.attacher_modele(latour)
+    grille = Grille(150)
+    grille.diviser_ecran()
+    latour.ajouter_grille(grille) 
+    point1, _, _ = controleur.selection_point(2, 2)
+    point1.traversable = True
+    controleur.actualiser_deplacement_point_d_accroche(2, 2)
+    assert controleur.liste_points_d_accroche[0] == point1
+    assert controleur.bon_point_d_accroche == point1
+    point2, _, _ = controleur.selection_point(3, 3)
+    point2.traversable = False
+    controleur.actualiser_deplacement_point_d_accroche(3, 3)
+    assert controleur.bon_point_d_accroche == point1
+    assert controleur.liste_points_d_accroche[0] == point1
+

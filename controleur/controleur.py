@@ -76,7 +76,7 @@ class Controleur:
             self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points_reduite[0].x, self.liste_points_reduite[0].y)) + self.pixel_chemin)
         return True
 
-    def lancer_chemin(self, mx: float, my: float):
+    def lancer_chemin(self, mx: float, my: float):  # test incomplet
         """ Permet de lancer le chemin en initalisant la liste de point d'accroche au point de coordonnées mx, my"""
         point_arrivee, _, _ = self.selection_point(mx, my)
         if point_arrivee.traversable:
@@ -84,7 +84,7 @@ class Controleur:
             self.liste_points_d_accroche.append(point_arrivee)
         self.determiner_chemin()
 
-    def actualiser_deplacement_point_d_accroche(self, mx: float, my: float):
+    def actualiser_deplacement_point_d_accroche(self, mx: float, my: float):  # test incomplet
         """ Change, actualise le point d'accroche actuellement sélectionné (à l'indice self.indice_accroche dans la liste des points d'accroche) au point corrspondant aux coordonnées de mx, my
         seulement si un chemin est possible"""
         point_d_accroche, _, _ = self.selection_point(mx, my)
