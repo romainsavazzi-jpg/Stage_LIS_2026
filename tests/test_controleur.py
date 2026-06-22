@@ -149,4 +149,4 @@ def test_actualiser_deplacement_points_d_accroche():
     controleur.actualiser_deplacement_point_d_accroche(3, 3)
     assert controleur.bon_point_d_accroche == point1
     assert controleur.liste_points_d_accroche[0] == point1
-
+    

@@ -20,6 +20,7 @@ vitesse = 7.5 # 15  # 7.5
 taille = 40
 
 [touches]
+# https://www.pygame.org/docs/ref/key.html docu des touches possibles
 # test
 haut = "K_z"
 bas = "K_s"
