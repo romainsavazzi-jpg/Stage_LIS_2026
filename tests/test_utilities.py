@@ -1,4 +1,4 @@
-from Utilities import Bresenham, Algo_A_etoile
+from Utilities import Bresenham, Algo_A_etoile, projection
 from modele import Joueur, Objets_jeu, Grille, Point
 from controleur import Controleur
 
@@ -32,9 +32,9 @@ def test_A_etoile():
     modele.ajouter_grille(grille1)
     modele.ajouter_joueur(jacky)
     controleur.attacher_modele(modele)
-    controleur.objets_jeu.grille.grille = grille_de_test
+    controleur.modele.grille.grille = grille_de_test
 
-    controleur.objets_jeu.grille.ecart = 1
+    controleur.modele.grille.ecart = 1
 
     liste_points, liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(controleur, grille_de_test, Point(1, 4, True), Point(8, 4, True))
     vraie_liste_points = [Point(2, 5), Point(2, 6), Point(3, 7), Point(4, 7), Point(5, 6), Point(6, 5), Point(7, 5), Point(8, 4)]
@@ -54,7 +54,7 @@ def test_A_etoile():
         [Point(0, 7, True), Point(1, 9, True), Point(2, 9, True), Point(3, 9, False), Point(4, 9, True), Point(5, 9, True), Point(6, 9, True), Point(7, 9, True), Point(8, 9, True), Point(9, 9, True)],
     ]
 
-    controleur.objets_jeu.grille.grille = grille_de_test
+    controleur.modele.grille.grille = grille_de_test
 
     liste_points, liste_des_points_verifies = Algo_A_etoile.cheminPlusCourt(controleur, grille_de_test, Point(1, 4, True), Point(8, 4, True))
     assert liste_points == []
@@ -71,3 +71,12 @@ def test_determination_liste_reduite_chemin():
     assert liste_reduite == vraie_liste_reduite
     liste_points = []
     assert Algo_A_etoile.determination_liste_reduite_chemin(liste_points) == []
+
+
+def test_projection():
+    assert projection.projection_point_sur_segment(1, 2, 0, 0, 3, 0)
+    assert projection.projection_point_sur_segment(1, -3, 0, 0, 3, 0)
+    assert not projection.projection_point_sur_segment(4, 5, 0, 0, 3, 0)
+    assert not projection.projection_point_sur_segment(-2, 2, 0, 0, 3, 0)
+    assert projection.projection_point_sur_segment(6, 2, 0, 0, 0, 3)
+    assert projection.projection_point_sur_segment(1, 2, 0, 0, 2, 4)

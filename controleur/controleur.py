@@ -6,7 +6,7 @@ from modele import Obstacle_rect, Obstacle_cercle
 
 class Controleur:
     def __init__(self):
-        self.objets_jeu = None
+        self.modele = None
         self.point_cible = None
         self.traj = False
         self.liste_points = []
@@ -19,19 +19,19 @@ class Controleur:
         self.indice_accroche = 0
         self.bon_point_d_accroche = None
 
-    def attacher_modele(self, modele):
-        self.objets_jeu = modele
+    def attacher_modele(self, modele):  # Test
+        self.modele = modele
 
-    def changer_taille(self, increment):
-        self.objets_jeu.liste_joueurs[0].change_taille(increment)
-        self.mettre_les_points_intravesables(self.objets_jeu.liste_joueurs[0])
+    def changer_taille(self, increment):  # Test
+        self.modele.liste_joueurs[0].change_taille(increment)
+        self.mettre_les_points_intravesables(self.modele.liste_joueurs[0])
 
     def selection_point(self, mx: float, my: float):  # Test
         """Associe les coordonnées du point de l'écran auquel on applique la méthode à un point de la grille"""
-        ecart = self.objets_jeu.grille.ecart
+        ecart = self.modele.grille.ecart
         x_point = int(mx // ecart)
         y_point = int(my // ecart)
-        return self.objets_jeu.grille.grille[y_point][x_point], x_point, y_point
+        return self.modele.grille.grille[y_point][x_point], x_point, y_point
 
     def selection_point_cible(self, point):  # Test
         """Définit le point cible vers lequel le joueur doit se diriger"""
@@ -42,7 +42,7 @@ class Controleur:
         """Créer une liste de points à suivre pour aller de la position du joueur au point d'arrivée en passant par tous les points d'accroche
         Renvoie True or False si un chemin est trouvé ou pas pour aller d'un point à un autre pour donner une inforlmation à l'actualisation du point d'accroche"""
         # Initialisation du chemin
-        joueur = self.objets_jeu.get_joueur(0)
+        joueur = self.modele.get_joueur(0)
         self.liste_points = []
         point_joueur, _, _ = self.selection_point(joueur.x, joueur.y)
         point_1 = point_joueur
@@ -52,7 +52,7 @@ class Controleur:
             point_2 = point_d_accroche
             liste_points_a_rajouter, self.liste_des_points_verifies = (
                 Algo_A_etoile.cheminPlusCourt(
-                    self, self.objets_jeu.grille.grille, point_1, point_2
+                    self, self.modele.grille.grille, point_1, point_2
                 )
             )
             if not liste_points_a_rajouter:
@@ -62,7 +62,7 @@ class Controleur:
 
         # Détermination liste réduite du chemin
         self.liste_points_reduite = (Algo_A_etoile.determination_liste_reduite_chemin(self.liste_points))
-        self.objets_jeu.grille.allumer_points(
+        self.modele.grille.allumer_points(
             self.liste_points_reduite, self.liste_des_points_verifies
         )
         """Détermine une liste de pixels pour tracer une droite entre deux points du chemin de la liste réduite"""
@@ -76,7 +76,7 @@ class Controleur:
             self.pixel_chemin = (Bresenham.bresenham((joueur.x, joueur.y), (self.liste_points_reduite[0].x, self.liste_points_reduite[0].y)) + self.pixel_chemin)
         return True
 
-    def lancer_chemin(self, mx: float, my: float):
+    def lancer_chemin(self, mx: float, my: float):  # test incomplet
         """ Permet de lancer le chemin en initalisant la liste de point d'accroche au point de coordonnées mx, my"""
         point_arrivee, _, _ = self.selection_point(mx, my)
         if point_arrivee.traversable:
@@ -84,7 +84,7 @@ class Controleur:
             self.liste_points_d_accroche.append(point_arrivee)
         self.determiner_chemin()
 
-    def actualiser_deplacement_point_d_accroche(self, mx: float, my: float):
+    def actualiser_deplacement_point_d_accroche(self, mx: float, my: float):  # test incomplet
         """ Change, actualise le point d'accroche actuellement sélectionné (à l'indice self.indice_accroche dans la liste des points d'accroche) au point corrspondant aux coordonnées de mx, my
         seulement si un chemin est possible"""
         point_d_accroche, _, _ = self.selection_point(mx, my)
@@ -143,7 +143,7 @@ class Controleur:
 
     def gerer_deplacement_touches(self, dx: int, dy: int):  # Test
         """Gère le déplacement du joueur en fonction des touches pressées"""
-        joueur = self.objets_jeu.get_joueur(0)
+        joueur = self.modele.get_joueur(0)
 
         if dx != 0 or dy != 0:  # Si il y a déplacement
             self.point_cible = None
@@ -152,7 +152,7 @@ class Controleur:
             self.liste_points_d_accroche = []
             self.liste_points = []
             dx, dy, facteur = limite_bord_et_diago(joueur, dx, dy)
-            for obj in self.objets_jeu.liste_obstacles:
+            for obj in self.modele.liste_obstacles:
                 if isinstance(obj, Obstacle_cercle):
                     if joueur.collision_cercle_cercle(obj, dx, dy, facteur):
                         dx, dy = 0, 0
@@ -164,7 +164,7 @@ class Controleur:
     def deplacer_vers_cible(self):  # Test
         """Gère le déplacement du joueur vers le point cible self.point_cible """
 
-        joueur = self.objets_jeu.get_joueur(0)
+        joueur = self.modele.get_joueur(0)
 
         if self.point_cible is None:
             return
@@ -200,11 +200,11 @@ class Controleur:
 
     def mettre_les_points_intravesables(self, joueur):
         """Défini la zone de collision pour A* entre le joueur et les obstacles et les bords et rend les points de la grille sur cette zone intraversables par A*"""
-        ecart = self.objets_jeu.grille.ecart
+        ecart = self.modele.grille.ecart
         largeur = configuration.largeur
         hauteur = configuration.hauteur
         # Aplatir la matrice en liste
-        liste_grille = [p for ligne in self.objets_jeu.grille.grille for p in ligne]
+        liste_grille = [p for ligne in self.modele.grille.grille for p in ligne]
 
         # Soustraire les points de la trajectoire des points à actualiser
         Listes_points_traj_set = set(self.liste_points)  # | set(self.liste_des_points_verifies)
@@ -215,7 +215,7 @@ class Controleur:
         for point in liste_grille_moins_points:
             point.associer_traversabilité(True)
 
-        for obstacle in self.objets_jeu.liste_obstacles:
+        for obstacle in self.modele.liste_obstacles:
             if isinstance(obstacle, Obstacle_rect):
                 for dx in range(int(- (joueur.taille)), int((obstacle.largeur + joueur.taille) + ecart), int(ecart)):
                     for dy in range(int(- (joueur.taille)), int((obstacle.hauteur + joueur.taille) + ecart), int(ecart)):
@@ -240,7 +240,7 @@ class Controleur:
         # Collision pour les bords
         for point in liste_grille_moins_points:
             if (
-                point.x <= self.objets_jeu.liste_joueurs[0].taille or point.x >= configuration.largeur - self.objets_jeu.liste_joueurs[0].taille or point.y <= self.objets_jeu.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.objets_jeu.liste_joueurs[0].taille
+                point.x <= self.modele.liste_joueurs[0].taille or point.x >= configuration.largeur - self.modele.liste_joueurs[0].taille or point.y <= self.modele.liste_joueurs[0].taille or point.y >= configuration.hauteur - self.modele.liste_joueurs[0].taille
             ):
                 point.associer_traversabilité(False)
 

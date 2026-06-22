@@ -28,7 +28,7 @@ class Collisions:
     def __init__(self):
         pass
 
-    def collision_rect_rect(self, rect, dx, dy, facteur):
+    def collision_rect_rect(self, rect, dx, dy, facteur):  # Test
         if (
             self.x + dx * facteur >= rect.x + rect.largeur
             or self.x + dx * facteur <= rect.x - self.largeur
@@ -38,16 +38,17 @@ class Collisions:
             return False
         return True
 
-    def collision_cercle_cercle(self, other, dx, dy, facteur):
+    def collision_cercle_cercle(self, other, dx, dy, facteur):  # Test
         distance_entre_centres = (((self.x + dx * facteur) - other.x) ** 2 + ((self.y + dy * facteur) - other.y) ** 2)
         if distance_entre_centres < (self.taille + other.taille) ** 2:
             return True
+        return False
 
-    def collision_cercle_point(self, x, y, rayon, x_autre, y_autre):
+    def collision_cercle_point(self, x, y, rayon, x_autre, y_autre):  # Test
         if ((x - x_autre) ** 2 + (y - y_autre) ** 2) <= rayon ** 2:
             return True
 
-    def collision_cercle_rect(self, rect, dx, dy, facteur):
+    def collision_cercle_rect(self, rect, dx, dy, facteur):  # Test
         carre_autour_du_cercle = Obstacle_rect(self.x - self.taille, self.y - self.taille, 2 * self.taille, 2 * self.taille)
         if not carre_autour_du_cercle.collision_rect_rect(rect, dx, dy, facteur):  # si les deux rectangles ont rien en commun il s'arrète pas de le collisions
             return False
