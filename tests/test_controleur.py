@@ -135,7 +135,7 @@ def test_actualiser_deplacement_points_d_accroche():
     controleur.attacher_modele(latour)
     grille = Grille(150)
     grille.diviser_ecran()
-    latour.ajouter_grille(grille) 
+    latour.ajouter_grille(grille)
     point1, _, _ = controleur.selection_point(2, 2)
     point1.traversable = True
     controleur.actualiser_deplacement_point_d_accroche(2, 2)
@@ -146,4 +146,4 @@ def test_actualiser_deplacement_points_d_accroche():
     controleur.actualiser_deplacement_point_d_accroche(3, 3)
     assert controleur.bon_point_d_accroche == point1
     assert controleur.liste_points_d_accroche[0] == point1
-
+    
