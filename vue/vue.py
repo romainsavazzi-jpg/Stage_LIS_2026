@@ -95,7 +95,7 @@ class Vue:
                 # Fonction de pour le test pour pas être bloqué
                 if event.key == pygame.K_e:
                     mx, my = pygame.mouse.get_pos()
-                    joueur = self.objets_jeu.get_joueur(0)
+                    joueur = self.modele.get_joueur(0)
                     joueur.x = mx
                     joueur.y = my
 
@@ -180,7 +180,7 @@ class Vue:
             #     self.screen,
             #     (20, 200, 20),
             #     (x, y),
-            #     self.objets_jeu.get_joueur(0).taille,
+            #     self.modele.get_joueur(0).taille,
             # )
             self.screen.set_at((x, y), configuration.couleur_droite)
 

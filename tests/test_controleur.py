@@ -1,5 +1,5 @@
 from controleur import Controleur, appartient_aux_limites_de_la_map, limite_bord_et_diago
-from modele import Joueur, Objets_jeu, Grille, Point
+from modele import Joueur, Modele, Grille, Point
 from Configuration import configuration
 import math
 
@@ -13,7 +13,7 @@ def test_appartient_aux_limites_de_la_map():
 def test_limite_bord_et_diago():
     jacousteau = Joueur(200, 200, vitesse=5, taille=10)
     controleur = Controleur()
-    modele = Objets_jeu()
+    modele = Modele()
     configuration.largeur = 500
     configuration.hauteur = 500
     modele.ajouter_joueur(jacousteau)
@@ -38,7 +38,7 @@ def test_mouvement_bord_clavier():
     """Test les fonctions de déplacement du joueur et vérifie que les limites de l'écran sont respectées"""
     jim = Joueur(0, 0)
     control = Controleur()
-    modele = Objets_jeu()
+    modele = Modele()
     modele.ajouter_joueur(jim)
     control.attacher_modele(modele)
     control.gerer_deplacement_touches(-1, -1)
@@ -57,7 +57,7 @@ def test_selection_point_cible_et_mouvement():
     """Test la fonction de déplacement avec le clic souris"""
     john = Joueur(0, 0)
     controleur = Controleur()
-    model = Objets_jeu()
+    model = Modele()
     grille1 = Grille(150)
     grille1.diviser_ecran()
     model.ajouter_grille(grille1)
@@ -77,7 +77,7 @@ def test_deplacer_vers_cible():
     """Test la fonction de déplacement avec le clic souris"""
     john = Joueur(0, 0)
     controleur = Controleur()
-    model = Objets_jeu()
+    model = Modele()
     model.ajouter_joueur(john)
     controleur.attacher_modele(model)
     coordonnees = 200
@@ -89,7 +89,7 @@ def test_deplacer_vers_cible():
 
 
 def test_attacher_modele():
-    ceinture = Objets_jeu()
+    ceinture = Modele()
     adrien = Controleur()
     adrien.attacher_modele(ceinture)
     assert adrien.modele == ceinture
@@ -97,7 +97,7 @@ def test_attacher_modele():
 
 def test_changer_taille():
     barbableu = Joueur(0, 0, configuration.couleur_joueur, configuration.vitesse, 1.5)
-    latour = Objets_jeu()
+    latour = Modele()
     latour.ajouter_joueur(barbableu)
     controleur = Controleur()
     controleur.attacher_modele(latour)
@@ -113,13 +113,13 @@ def test_changer_taille():
 
 def test_lancer_chemin():
     barbableu = Joueur(0, 0, configuration.couleur_joueur, configuration.vitesse, 1.5)
-    latour = Objets_jeu()
+    latour = Modele()
     latour.ajouter_joueur(barbableu)
     controleur = Controleur()
     controleur.attacher_modele(latour)
     grille = Grille(150)
     grille.diviser_ecran()
-    latour.ajouter_grille(grille) 
+    latour.ajouter_grille(grille)
     controleur.lancer_chemin(2, 2)
     point_arrivee, _, _ = controleur.selection_point(2, 2)
     assert controleur.traj
@@ -128,25 +128,32 @@ def test_lancer_chemin():
 
 
 def test_actualiser_deplacement_points_d_accroche():
-    barbableu = Joueur(3, 3, configuration.couleur_joueur, configuration.vitesse, 15)
-    latour = Objets_jeu()
+    barbableu = Joueur(20, 20, configuration.couleur_joueur, configuration.vitesse, 15)
+    latour = Modele()
     latour.ajouter_joueur(barbableu)
     grille = Grille(150)
     grille.diviser_ecran()
     latour.ajouter_grille(grille)
     controleur = Controleur()
     controleur.attacher_modele(latour)
-    point1, _, _ = controleur.selection_point(2, 2)
+
+    controleur.indice_accroche = 0  # On s'assure que l'indice du point d'accroche qu'on va modifier pour tout le test est bien 0
+
+    point1, _, _ = controleur.selection_point(20, 20)
     point1.traversable = True
     controleur.lancer_chemin(15, 15)
-    print(latour.grille.ecart)
-    print(latour.grille.grille[0][0])
-    controleur.actualiser_deplacement_point_d_accroche(2, 2)
+    controleur.actualiser_deplacement_point_d_accroche(point1.x, point1.y)
     assert controleur.liste_points_d_accroche[0] == point1
     assert controleur.bon_point_d_accroche == point1
-    point2, _, _ = controleur.selection_point(3, 3)
-    point2.traversable = False
-    controleur.actualiser_deplacement_point_d_accroche(3, 3)
-    assert controleur.bon_point_d_accroche == point1
-    assert controleur.liste_points_d_accroche[0] == point1
 
+    point2, _, _ = controleur.selection_point(200, 180)
+    point2.traversable = True
+    controleur.actualiser_deplacement_point_d_accroche(point2.x, point2.y)
+    assert controleur.liste_points_d_accroche[0] == point2
+    assert controleur.bon_point_d_accroche == point2
+
+    point3, _, _ = controleur.selection_point(3, 3)
+    point3.traversable = False
+    controleur.actualiser_deplacement_point_d_accroche(point3.x, point3.y)
+    assert controleur.bon_point_d_accroche == point2
+    assert controleur.liste_points_d_accroche[0] == point2

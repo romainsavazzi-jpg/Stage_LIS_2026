@@ -44,8 +44,8 @@ go = "K_g"
 divisions = 150
 
 [obstacles]
-nombre_rectangles = 25
-nombre_cercles = 15
+nombre_rectangles = 25   # 25
+nombre_cercles = 15      # 15
 
 [user_interface]
 taille_selec_point_d_accroche = 15  # 15

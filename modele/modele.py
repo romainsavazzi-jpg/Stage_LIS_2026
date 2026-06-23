@@ -3,8 +3,7 @@ from Utilities.projection import projection_point_sur_segment
 # from math import sqrt, cos, sin
 
 
-class Objets_jeu:
-    """Objets_jeu correspond au Modèle du design patern MVC mais on trouvait le nom "Objets_jeu" plus parlant"""
+class Modele:
     def __init__(self):
         self.liste_joueurs = []
         self.liste_obstacles = []

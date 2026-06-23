@@ -1,5 +1,5 @@
 from Utilities import Bresenham, Algo_A_etoile, projection
-from modele import Joueur, Objets_jeu, Grille, Point
+from modele import Joueur, Modele, Grille, Point
 from controleur import Controleur
 
 
@@ -27,7 +27,7 @@ def test_A_etoile():
     ]
     jacky = Joueur(0, 0)
     controleur = Controleur()
-    modele = Objets_jeu()
+    modele = Modele()
     grille1 = Grille()
     modele.ajouter_grille(grille1)
     modele.ajouter_joueur(jacky)

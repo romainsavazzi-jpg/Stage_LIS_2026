@@ -1,4 +1,4 @@
-from modele import Joueur, Objets_jeu, Obstacle_rect, Obstacle_cercle, Grille, Point
+from modele import Joueur, Modele, Obstacle_rect, Obstacle_cercle, Grille, Point
 from Configuration import configuration
 
 # Tests classe Jeu
@@ -6,7 +6,7 @@ from Configuration import configuration
 
 def test_ajout_objet():
     """Test les fonctions d'ajout d'objets au modèle et de récupération d'un joueur"""
-    Liste_objet = Objets_jeu()
+    Liste_objet = Modele()
     jimmy = Joueur(0, 0)
     kouign_amann = Obstacle_rect(10, 10, 20, 20)
     grille = Grille()
@@ -20,7 +20,7 @@ def test_ajout_objet():
 
 def test_recup_joueur():
     johnny = Joueur(0, 0)
-    cave = Objets_jeu()
+    cave = Modele()
     cave.ajouter_joueur(johnny)
     cave.ajouter_joueur(johnny)
     kidnappé = cave.get_joueur(1)

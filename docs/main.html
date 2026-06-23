@@ -68,7 +68,7 @@ main    </h1>
 
                         <label class="view-source-button" for="mod-main-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">modele</span><span class="w"> </span><span class="kn">import</span> <span class="n">Joueur</span><span class="p">,</span> <span class="n">Objets_jeu</span><span class="p">,</span> <span class="n">Obstacle_rect</span><span class="p">,</span> <span class="n">Obstacle_cercle</span><span class="p">,</span> <span class="n">Grille</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">modele</span><span class="w"> </span><span class="kn">import</span> <span class="n">Joueur</span><span class="p">,</span> <span class="n">Modele</span><span class="p">,</span> <span class="n">Obstacle_rect</span><span class="p">,</span> <span class="n">Obstacle_cercle</span><span class="p">,</span> <span class="n">Grille</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">controleur</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controleur</span>  <span class="c1"># Controleur</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">vue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vue</span>  <span class="c1"># Vue</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">Configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">configuration</span>
@@ -82,7 +82,7 @@ main    </h1>
 </span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="n">grille1</span><span class="o">.</span><span class="n">diviser_ecran</span><span class="p">()</span>
 </span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
 </span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="c1"># ajoute la grille et le joueur au modèle</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="n">objets_jeu</span> <span class="o">=</span> <span class="n">Objets_jeu</span><span class="p">()</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="n">objets_jeu</span> <span class="o">=</span> <span class="n">Modele</span><span class="p">()</span>
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="n">objets_jeu</span><span class="o">.</span><span class="n">ajouter_joueur</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="n">objets_jeu</span><span class="o">.</span><span class="n">ajouter_grille</span><span class="p">(</span><span class="n">grille1</span><span class="p">)</span>
 </span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
@@ -149,7 +149,7 @@ main    </h1>
                 <section id="objets_jeu">
                     <div class="attr variable">
             <span class="name">objets_jeu</span>        =
-<span class="default_value">&lt;<a href="modele/modele.html#Objets_jeu">modele.modele.Objets_jeu</a> object&gt;</span>
+<span class="default_value">&lt;<a href="modele/modele.html#Modele">modele.modele.Modele</a> object&gt;</span>
 
         
     </div>

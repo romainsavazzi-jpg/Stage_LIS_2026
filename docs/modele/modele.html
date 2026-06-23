@@ -33,28 +33,28 @@
             <h2>API Documentation</h2>
                 <ul class="memberlist">
             <li>
-                    <a class="class" href="#Objets_jeu">Objets_jeu</a>
+                    <a class="class" href="#Modele">Modele</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="variable" href="#Objets_jeu.liste_joueurs">liste_joueurs</a>
+                                <a class="variable" href="#Modele.liste_joueurs">liste_joueurs</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Objets_jeu.liste_obstacles">liste_obstacles</a>
+                                <a class="variable" href="#Modele.liste_obstacles">liste_obstacles</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Objets_jeu.grille">grille</a>
+                                <a class="variable" href="#Modele.grille">grille</a>
                         </li>
                         <li>
-                                <a class="function" href="#Objets_jeu.ajouter_joueur">ajouter_joueur</a>
+                                <a class="function" href="#Modele.ajouter_joueur">ajouter_joueur</a>
                         </li>
                         <li>
-                                <a class="function" href="#Objets_jeu.ajouter_obstacle">ajouter_obstacle</a>
+                                <a class="function" href="#Modele.ajouter_obstacle">ajouter_obstacle</a>
                         </li>
                         <li>
-                                <a class="function" href="#Objets_jeu.get_joueur">get_joueur</a>
+                                <a class="function" href="#Modele.get_joueur">get_joueur</a>
                         </li>
                         <li>
-                                <a class="function" href="#Objets_jeu.ajouter_grille">ajouter_grille</a>
+                                <a class="function" href="#Modele.ajouter_grille">ajouter_grille</a>
                         </li>
                 </ul>
 
@@ -174,10 +174,10 @@
                                 <a class="variable" href="#Point.y">y</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Point.couleur">couleur</a>
+                                <a class="variable" href="#Point.traversable">traversable</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Point.traversable">traversable</a>
+                                <a class="variable" href="#Point.couleur">couleur</a>
                         </li>
                         <li>
                                 <a class="function" href="#Point.changer_couleur_point">changer_couleur_point</a>
@@ -238,51 +238,51 @@ modele<wbr>.modele    </h1>
 </span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="c1"># from math import sqrt, cos, sin</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Objets_jeu</span><span class="p">:</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Objets_jeu correspond au Modèle du design patern MVC mais on trouvait le nom &quot;Objets_jeu&quot; plus parlant&quot;&quot;&quot;</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joueur</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obstacle</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obstacle</span><span class="p">)</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indice</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Récupère un joueur à partir de son indice dans la liste des joueurs&quot;&quot;&quot;</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_grille</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grille</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="n">grille</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Modele</span><span class="p">:</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joueur</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obstacle</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obstacle</span><span class="p">)</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indice</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Récupère un joueur à partir de son indice dans la liste des joueurs&quot;&quot;&quot;</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_grille</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grille</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="n">grille</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>
 </span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Collisions</span><span class="p">:</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="k">pass</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_rect_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>        <span class="k">if</span> <span class="p">(</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">largeur</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">hauteur</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="p">):</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_cercle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="n">distance_entre_centres</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="k">if</span> <span class="n">distance_entre_centres</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Collisions</span><span class="p">:</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="k">pass</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_rect_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>        <span class="k">if</span> <span class="p">(</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">largeur</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">hauteur</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>        <span class="p">):</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_cercle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="n">distance_entre_centres</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="k">if</span> <span class="n">distance_entre_centres</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rayon</span><span class="p">,</span> <span class="n">x_autre</span><span class="p">,</span> <span class="n">y_autre</span><span class="p">):</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rayon</span><span class="p">,</span> <span class="n">x_autre</span><span class="p">,</span> <span class="n">y_autre</span><span class="p">):</span>  <span class="c1"># Test</span>
 </span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_autre</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_autre</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">rayon</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
 </span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>            <span class="k">return</span> <span class="kc">True</span>
 </span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
 </span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="n">carre_autour_du_cercle</span> <span class="o">=</span> <span class="n">Obstacle_rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span>
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">carre_autour_du_cercle</span><span class="o">.</span><span class="n">collision_rect_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># si les deux rectangles ont rien en commun il s&#39;arrète pas de le collisions</span>
 </span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>            <span class="k">return</span> <span class="kc">False</span>
@@ -362,8 +362,8 @@ modele<wbr>.modele    </h1>
 </span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">traversable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">couleur</span><span class="o">=</span><span class="n">configuration</span><span class="o">.</span><span class="n">couleur_point</span><span class="p">):</span>
 </span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
 </span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">couleur</span> <span class="o">=</span> <span class="n">couleur</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">traversable</span> <span class="o">=</span> <span class="n">traversable</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">traversable</span> <span class="o">=</span> <span class="n">traversable</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">couleur</span> <span class="o">=</span> <span class="n">couleur</span>
 </span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
 </span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># test</span>
 </span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
@@ -416,128 +416,125 @@ modele<wbr>.modele    </h1>
 
 
             </section>
-                <section id="Objets_jeu">
-                            <input id="Objets_jeu-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="Modele">
+                            <input id="Modele-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr class">
             
     <span class="def">class</span>
-    <span class="name">Objets_jeu</span>:
+    <span class="name">Modele</span>:
 
-                <label class="view-source-button" for="Objets_jeu-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="Modele-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#Objets_jeu"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Objets_jeu-7"><a href="#Objets_jeu-7"><span class="linenos"> 7</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Objets_jeu</span><span class="p">:</span>
-</span><span id="Objets_jeu-8"><a href="#Objets_jeu-8"><span class="linenos"> 8</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Objets_jeu correspond au Modèle du design patern MVC mais on trouvait le nom &quot;Objets_jeu&quot; plus parlant&quot;&quot;&quot;</span>
-</span><span id="Objets_jeu-9"><a href="#Objets_jeu-9"><span class="linenos"> 9</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Objets_jeu-10"><a href="#Objets_jeu-10"><span class="linenos">10</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="Objets_jeu-11"><a href="#Objets_jeu-11"><span class="linenos">11</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="Objets_jeu-12"><a href="#Objets_jeu-12"><span class="linenos">12</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Objets_jeu-13"><a href="#Objets_jeu-13"><span class="linenos">13</span></a>
-</span><span id="Objets_jeu-14"><a href="#Objets_jeu-14"><span class="linenos">14</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joueur</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu-15"><a href="#Objets_jeu-15"><span class="linenos">15</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
-</span><span id="Objets_jeu-16"><a href="#Objets_jeu-16"><span class="linenos">16</span></a>
-</span><span id="Objets_jeu-17"><a href="#Objets_jeu-17"><span class="linenos">17</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obstacle</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu-18"><a href="#Objets_jeu-18"><span class="linenos">18</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obstacle</span><span class="p">)</span>
-</span><span id="Objets_jeu-19"><a href="#Objets_jeu-19"><span class="linenos">19</span></a>
-</span><span id="Objets_jeu-20"><a href="#Objets_jeu-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indice</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu-21"><a href="#Objets_jeu-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Récupère un joueur à partir de son indice dans la liste des joueurs&quot;&quot;&quot;</span>
-</span><span id="Objets_jeu-22"><a href="#Objets_jeu-22"><span class="linenos">22</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
-</span><span id="Objets_jeu-23"><a href="#Objets_jeu-23"><span class="linenos">23</span></a>
-</span><span id="Objets_jeu-24"><a href="#Objets_jeu-24"><span class="linenos">24</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_grille</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grille</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu-25"><a href="#Objets_jeu-25"><span class="linenos">25</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="n">grille</span>
+    <a class="headerlink" href="#Modele"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Modele-7"><a href="#Modele-7"><span class="linenos"> 7</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Modele</span><span class="p">:</span>
+</span><span id="Modele-8"><a href="#Modele-8"><span class="linenos"> 8</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Modele-9"><a href="#Modele-9"><span class="linenos"> 9</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="Modele-10"><a href="#Modele-10"><span class="linenos">10</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="Modele-11"><a href="#Modele-11"><span class="linenos">11</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Modele-12"><a href="#Modele-12"><span class="linenos">12</span></a>
+</span><span id="Modele-13"><a href="#Modele-13"><span class="linenos">13</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joueur</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele-14"><a href="#Modele-14"><span class="linenos">14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
+</span><span id="Modele-15"><a href="#Modele-15"><span class="linenos">15</span></a>
+</span><span id="Modele-16"><a href="#Modele-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obstacle</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele-17"><a href="#Modele-17"><span class="linenos">17</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obstacle</span><span class="p">)</span>
+</span><span id="Modele-18"><a href="#Modele-18"><span class="linenos">18</span></a>
+</span><span id="Modele-19"><a href="#Modele-19"><span class="linenos">19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indice</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele-20"><a href="#Modele-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Récupère un joueur à partir de son indice dans la liste des joueurs&quot;&quot;&quot;</span>
+</span><span id="Modele-21"><a href="#Modele-21"><span class="linenos">21</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
+</span><span id="Modele-22"><a href="#Modele-22"><span class="linenos">22</span></a>
+</span><span id="Modele-23"><a href="#Modele-23"><span class="linenos">23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_grille</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grille</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele-24"><a href="#Modele-24"><span class="linenos">24</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="n">grille</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Objets_jeu correspond au Modèle du design patern MVC mais on trouvait le nom "Objets_jeu" plus parlant</p>
-</div>
+    
 
-
-                            <div id="Objets_jeu.liste_joueurs" class="classattr">
+                            <div id="Modele.liste_joueurs" class="classattr">
                                 <div class="attr variable">
             <span class="name">liste_joueurs</span>
 
         
     </div>
-    <a class="headerlink" href="#Objets_jeu.liste_joueurs"></a>
+    <a class="headerlink" href="#Modele.liste_joueurs"></a>
     
     
 
                             </div>
-                            <div id="Objets_jeu.liste_obstacles" class="classattr">
+                            <div id="Modele.liste_obstacles" class="classattr">
                                 <div class="attr variable">
             <span class="name">liste_obstacles</span>
 
         
     </div>
-    <a class="headerlink" href="#Objets_jeu.liste_obstacles"></a>
+    <a class="headerlink" href="#Modele.liste_obstacles"></a>
     
     
 
                             </div>
-                            <div id="Objets_jeu.grille" class="classattr">
+                            <div id="Modele.grille" class="classattr">
                                 <div class="attr variable">
             <span class="name">grille</span>
 
         
     </div>
-    <a class="headerlink" href="#Objets_jeu.grille"></a>
+    <a class="headerlink" href="#Modele.grille"></a>
     
     
 
                             </div>
-                            <div id="Objets_jeu.ajouter_joueur" class="classattr">
-                                        <input id="Objets_jeu.ajouter_joueur-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="Modele.ajouter_joueur" class="classattr">
+                                        <input id="Modele.ajouter_joueur-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">ajouter_joueur</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">joueur</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="Objets_jeu.ajouter_joueur-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="Modele.ajouter_joueur-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#Objets_jeu.ajouter_joueur"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Objets_jeu.ajouter_joueur-14"><a href="#Objets_jeu.ajouter_joueur-14"><span class="linenos">14</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joueur</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu.ajouter_joueur-15"><a href="#Objets_jeu.ajouter_joueur-15"><span class="linenos">15</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
+    <a class="headerlink" href="#Modele.ajouter_joueur"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Modele.ajouter_joueur-13"><a href="#Modele.ajouter_joueur-13"><span class="linenos">13</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joueur</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele.ajouter_joueur-14"><a href="#Modele.ajouter_joueur-14"><span class="linenos">14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joueur</span><span class="p">)</span>
 </span></pre></div>
 
 
     
 
                             </div>
-                            <div id="Objets_jeu.ajouter_obstacle" class="classattr">
-                                        <input id="Objets_jeu.ajouter_obstacle-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="Modele.ajouter_obstacle" class="classattr">
+                                        <input id="Modele.ajouter_obstacle-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">ajouter_obstacle</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">obstacle</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="Objets_jeu.ajouter_obstacle-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="Modele.ajouter_obstacle-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#Objets_jeu.ajouter_obstacle"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Objets_jeu.ajouter_obstacle-17"><a href="#Objets_jeu.ajouter_obstacle-17"><span class="linenos">17</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obstacle</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu.ajouter_obstacle-18"><a href="#Objets_jeu.ajouter_obstacle-18"><span class="linenos">18</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obstacle</span><span class="p">)</span>
+    <a class="headerlink" href="#Modele.ajouter_obstacle"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Modele.ajouter_obstacle-16"><a href="#Modele.ajouter_obstacle-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obstacle</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele.ajouter_obstacle-17"><a href="#Modele.ajouter_obstacle-17"><span class="linenos">17</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">liste_obstacles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obstacle</span><span class="p">)</span>
 </span></pre></div>
 
 
     
 
                             </div>
-                            <div id="Objets_jeu.get_joueur" class="classattr">
-                                        <input id="Objets_jeu.get_joueur-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="Modele.get_joueur" class="classattr">
+                                        <input id="Modele.get_joueur-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">get_joueur</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">indice</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="Objets_jeu.get_joueur-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="Modele.get_joueur-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#Objets_jeu.get_joueur"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Objets_jeu.get_joueur-20"><a href="#Objets_jeu.get_joueur-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indice</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu.get_joueur-21"><a href="#Objets_jeu.get_joueur-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Récupère un joueur à partir de son indice dans la liste des joueurs&quot;&quot;&quot;</span>
-</span><span id="Objets_jeu.get_joueur-22"><a href="#Objets_jeu.get_joueur-22"><span class="linenos">22</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
+    <a class="headerlink" href="#Modele.get_joueur"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Modele.get_joueur-19"><a href="#Modele.get_joueur-19"><span class="linenos">19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_joueur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indice</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele.get_joueur-20"><a href="#Modele.get_joueur-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Récupère un joueur à partir de son indice dans la liste des joueurs&quot;&quot;&quot;</span>
+</span><span id="Modele.get_joueur-21"><a href="#Modele.get_joueur-21"><span class="linenos">21</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_joueurs</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -546,19 +543,19 @@ modele<wbr>.modele    </h1>
 
 
                             </div>
-                            <div id="Objets_jeu.ajouter_grille" class="classattr">
-                                        <input id="Objets_jeu.ajouter_grille-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="Modele.ajouter_grille" class="classattr">
+                                        <input id="Modele.ajouter_grille-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
         <span class="name">ajouter_grille</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">grille</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="Objets_jeu.ajouter_grille-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="Modele.ajouter_grille-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#Objets_jeu.ajouter_grille"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Objets_jeu.ajouter_grille-24"><a href="#Objets_jeu.ajouter_grille-24"><span class="linenos">24</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_grille</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grille</span><span class="p">):</span>  <span class="c1"># test</span>
-</span><span id="Objets_jeu.ajouter_grille-25"><a href="#Objets_jeu.ajouter_grille-25"><span class="linenos">25</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="n">grille</span>
+    <a class="headerlink" href="#Modele.ajouter_grille"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Modele.ajouter_grille-23"><a href="#Modele.ajouter_grille-23"><span class="linenos">23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajouter_grille</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grille</span><span class="p">):</span>  <span class="c1"># test</span>
+</span><span id="Modele.ajouter_grille-24"><a href="#Modele.ajouter_grille-24"><span class="linenos">24</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">grille</span> <span class="o">=</span> <span class="n">grille</span>
 </span></pre></div>
 
 
@@ -577,30 +574,31 @@ modele<wbr>.modele    </h1>
 
     </div>
     <a class="headerlink" href="#Collisions"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions-28"><a href="#Collisions-28"><span class="linenos">28</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Collisions</span><span class="p">:</span>
-</span><span id="Collisions-29"><a href="#Collisions-29"><span class="linenos">29</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Collisions-30"><a href="#Collisions-30"><span class="linenos">30</span></a>        <span class="k">pass</span>
-</span><span id="Collisions-31"><a href="#Collisions-31"><span class="linenos">31</span></a>
-</span><span id="Collisions-32"><a href="#Collisions-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_rect_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
-</span><span id="Collisions-33"><a href="#Collisions-33"><span class="linenos">33</span></a>        <span class="k">if</span> <span class="p">(</span>
-</span><span id="Collisions-34"><a href="#Collisions-34"><span class="linenos">34</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">largeur</span>
-</span><span id="Collisions-35"><a href="#Collisions-35"><span class="linenos">35</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
-</span><span id="Collisions-36"><a href="#Collisions-36"><span class="linenos">36</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span>
-</span><span id="Collisions-37"><a href="#Collisions-37"><span class="linenos">37</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">hauteur</span>
-</span><span id="Collisions-38"><a href="#Collisions-38"><span class="linenos">38</span></a>        <span class="p">):</span>
-</span><span id="Collisions-39"><a href="#Collisions-39"><span class="linenos">39</span></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Collisions-40"><a href="#Collisions-40"><span class="linenos">40</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Collisions-41"><a href="#Collisions-41"><span class="linenos">41</span></a>
-</span><span id="Collisions-42"><a href="#Collisions-42"><span class="linenos">42</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_cercle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
-</span><span id="Collisions-43"><a href="#Collisions-43"><span class="linenos">43</span></a>        <span class="n">distance_entre_centres</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="Collisions-44"><a href="#Collisions-44"><span class="linenos">44</span></a>        <span class="k">if</span> <span class="n">distance_entre_centres</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="Collisions-45"><a href="#Collisions-45"><span class="linenos">45</span></a>            <span class="k">return</span> <span class="kc">True</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions-27"><a href="#Collisions-27"><span class="linenos">27</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Collisions</span><span class="p">:</span>
+</span><span id="Collisions-28"><a href="#Collisions-28"><span class="linenos">28</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Collisions-29"><a href="#Collisions-29"><span class="linenos">29</span></a>        <span class="k">pass</span>
+</span><span id="Collisions-30"><a href="#Collisions-30"><span class="linenos">30</span></a>
+</span><span id="Collisions-31"><a href="#Collisions-31"><span class="linenos">31</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_rect_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
+</span><span id="Collisions-32"><a href="#Collisions-32"><span class="linenos">32</span></a>        <span class="k">if</span> <span class="p">(</span>
+</span><span id="Collisions-33"><a href="#Collisions-33"><span class="linenos">33</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">largeur</span>
+</span><span id="Collisions-34"><a href="#Collisions-34"><span class="linenos">34</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
+</span><span id="Collisions-35"><a href="#Collisions-35"><span class="linenos">35</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span>
+</span><span id="Collisions-36"><a href="#Collisions-36"><span class="linenos">36</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">hauteur</span>
+</span><span id="Collisions-37"><a href="#Collisions-37"><span class="linenos">37</span></a>        <span class="p">):</span>
+</span><span id="Collisions-38"><a href="#Collisions-38"><span class="linenos">38</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Collisions-39"><a href="#Collisions-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Collisions-40"><a href="#Collisions-40"><span class="linenos">40</span></a>
+</span><span id="Collisions-41"><a href="#Collisions-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_cercle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
+</span><span id="Collisions-42"><a href="#Collisions-42"><span class="linenos">42</span></a>        <span class="n">distance_entre_centres</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="Collisions-43"><a href="#Collisions-43"><span class="linenos">43</span></a>        <span class="k">if</span> <span class="n">distance_entre_centres</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="Collisions-44"><a href="#Collisions-44"><span class="linenos">44</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Collisions-45"><a href="#Collisions-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span><span id="Collisions-46"><a href="#Collisions-46"><span class="linenos">46</span></a>
-</span><span id="Collisions-47"><a href="#Collisions-47"><span class="linenos">47</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rayon</span><span class="p">,</span> <span class="n">x_autre</span><span class="p">,</span> <span class="n">y_autre</span><span class="p">):</span>
+</span><span id="Collisions-47"><a href="#Collisions-47"><span class="linenos">47</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rayon</span><span class="p">,</span> <span class="n">x_autre</span><span class="p">,</span> <span class="n">y_autre</span><span class="p">):</span>  <span class="c1"># Test</span>
 </span><span id="Collisions-48"><a href="#Collisions-48"><span class="linenos">48</span></a>        <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_autre</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_autre</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">rayon</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
 </span><span id="Collisions-49"><a href="#Collisions-49"><span class="linenos">49</span></a>            <span class="k">return</span> <span class="kc">True</span>
 </span><span id="Collisions-50"><a href="#Collisions-50"><span class="linenos">50</span></a>
-</span><span id="Collisions-51"><a href="#Collisions-51"><span class="linenos">51</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
+</span><span id="Collisions-51"><a href="#Collisions-51"><span class="linenos">51</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
 </span><span id="Collisions-52"><a href="#Collisions-52"><span class="linenos">52</span></a>        <span class="n">carre_autour_du_cercle</span> <span class="o">=</span> <span class="n">Obstacle_rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span>
 </span><span id="Collisions-53"><a href="#Collisions-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">carre_autour_du_cercle</span><span class="o">.</span><span class="n">collision_rect_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># si les deux rectangles ont rien en commun il s&#39;arrète pas de le collisions</span>
 </span><span id="Collisions-54"><a href="#Collisions-54"><span class="linenos">54</span></a>            <span class="k">return</span> <span class="kc">False</span>
@@ -633,15 +631,15 @@ modele<wbr>.modele    </h1>
 
     </div>
     <a class="headerlink" href="#Collisions.collision_rect_rect"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_rect_rect-32"><a href="#Collisions.collision_rect_rect-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_rect_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
-</span><span id="Collisions.collision_rect_rect-33"><a href="#Collisions.collision_rect_rect-33"><span class="linenos">33</span></a>        <span class="k">if</span> <span class="p">(</span>
-</span><span id="Collisions.collision_rect_rect-34"><a href="#Collisions.collision_rect_rect-34"><span class="linenos">34</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">largeur</span>
-</span><span id="Collisions.collision_rect_rect-35"><a href="#Collisions.collision_rect_rect-35"><span class="linenos">35</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
-</span><span id="Collisions.collision_rect_rect-36"><a href="#Collisions.collision_rect_rect-36"><span class="linenos">36</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span>
-</span><span id="Collisions.collision_rect_rect-37"><a href="#Collisions.collision_rect_rect-37"><span class="linenos">37</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">hauteur</span>
-</span><span id="Collisions.collision_rect_rect-38"><a href="#Collisions.collision_rect_rect-38"><span class="linenos">38</span></a>        <span class="p">):</span>
-</span><span id="Collisions.collision_rect_rect-39"><a href="#Collisions.collision_rect_rect-39"><span class="linenos">39</span></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Collisions.collision_rect_rect-40"><a href="#Collisions.collision_rect_rect-40"><span class="linenos">40</span></a>        <span class="k">return</span> <span class="kc">True</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_rect_rect-31"><a href="#Collisions.collision_rect_rect-31"><span class="linenos">31</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_rect_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
+</span><span id="Collisions.collision_rect_rect-32"><a href="#Collisions.collision_rect_rect-32"><span class="linenos">32</span></a>        <span class="k">if</span> <span class="p">(</span>
+</span><span id="Collisions.collision_rect_rect-33"><a href="#Collisions.collision_rect_rect-33"><span class="linenos">33</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">largeur</span>
+</span><span id="Collisions.collision_rect_rect-34"><a href="#Collisions.collision_rect_rect-34"><span class="linenos">34</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">largeur</span>
+</span><span id="Collisions.collision_rect_rect-35"><a href="#Collisions.collision_rect_rect-35"><span class="linenos">35</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">hauteur</span>
+</span><span id="Collisions.collision_rect_rect-36"><a href="#Collisions.collision_rect_rect-36"><span class="linenos">36</span></a>            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span> <span class="o">&gt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">hauteur</span>
+</span><span id="Collisions.collision_rect_rect-37"><a href="#Collisions.collision_rect_rect-37"><span class="linenos">37</span></a>        <span class="p">):</span>
+</span><span id="Collisions.collision_rect_rect-38"><a href="#Collisions.collision_rect_rect-38"><span class="linenos">38</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Collisions.collision_rect_rect-39"><a href="#Collisions.collision_rect_rect-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 
@@ -659,10 +657,11 @@ modele<wbr>.modele    </h1>
 
     </div>
     <a class="headerlink" href="#Collisions.collision_cercle_cercle"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_cercle_cercle-42"><a href="#Collisions.collision_cercle_cercle-42"><span class="linenos">42</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_cercle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
-</span><span id="Collisions.collision_cercle_cercle-43"><a href="#Collisions.collision_cercle_cercle-43"><span class="linenos">43</span></a>        <span class="n">distance_entre_centres</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="Collisions.collision_cercle_cercle-44"><a href="#Collisions.collision_cercle_cercle-44"><span class="linenos">44</span></a>        <span class="k">if</span> <span class="n">distance_entre_centres</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="Collisions.collision_cercle_cercle-45"><a href="#Collisions.collision_cercle_cercle-45"><span class="linenos">45</span></a>            <span class="k">return</span> <span class="kc">True</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_cercle_cercle-41"><a href="#Collisions.collision_cercle_cercle-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_cercle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
+</span><span id="Collisions.collision_cercle_cercle-42"><a href="#Collisions.collision_cercle_cercle-42"><span class="linenos">42</span></a>        <span class="n">distance_entre_centres</span> <span class="o">=</span> <span class="p">(((</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">facteur</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="Collisions.collision_cercle_cercle-43"><a href="#Collisions.collision_cercle_cercle-43"><span class="linenos">43</span></a>        <span class="k">if</span> <span class="n">distance_entre_centres</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taille</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="Collisions.collision_cercle_cercle-44"><a href="#Collisions.collision_cercle_cercle-44"><span class="linenos">44</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Collisions.collision_cercle_cercle-45"><a href="#Collisions.collision_cercle_cercle-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span></pre></div>
 
 
@@ -680,7 +679,7 @@ modele<wbr>.modele    </h1>
 
     </div>
     <a class="headerlink" href="#Collisions.collision_cercle_point"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_cercle_point-47"><a href="#Collisions.collision_cercle_point-47"><span class="linenos">47</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rayon</span><span class="p">,</span> <span class="n">x_autre</span><span class="p">,</span> <span class="n">y_autre</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_cercle_point-47"><a href="#Collisions.collision_cercle_point-47"><span class="linenos">47</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rayon</span><span class="p">,</span> <span class="n">x_autre</span><span class="p">,</span> <span class="n">y_autre</span><span class="p">):</span>  <span class="c1"># Test</span>
 </span><span id="Collisions.collision_cercle_point-48"><a href="#Collisions.collision_cercle_point-48"><span class="linenos">48</span></a>        <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_autre</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_autre</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">rayon</span> <span class="o">**</span> <span class="mi">2</span><span class="p">:</span>
 </span><span id="Collisions.collision_cercle_point-49"><a href="#Collisions.collision_cercle_point-49"><span class="linenos">49</span></a>            <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
@@ -700,7 +699,7 @@ modele<wbr>.modele    </h1>
 
     </div>
     <a class="headerlink" href="#Collisions.collision_cercle_rect"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_cercle_rect-51"><a href="#Collisions.collision_cercle_rect-51"><span class="linenos">51</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Collisions.collision_cercle_rect-51"><a href="#Collisions.collision_cercle_rect-51"><span class="linenos">51</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collision_cercle_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># Test</span>
 </span><span id="Collisions.collision_cercle_rect-52"><a href="#Collisions.collision_cercle_rect-52"><span class="linenos">52</span></a>        <span class="n">carre_autour_du_cercle</span> <span class="o">=</span> <span class="n">Obstacle_rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">taille</span><span class="p">)</span>
 </span><span id="Collisions.collision_cercle_rect-53"><a href="#Collisions.collision_cercle_rect-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">carre_autour_du_cercle</span><span class="o">.</span><span class="n">collision_rect_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">facteur</span><span class="p">):</span>  <span class="c1"># si les deux rectangles ont rien en commun il s&#39;arrète pas de le collisions</span>
 </span><span id="Collisions.collision_cercle_rect-54"><a href="#Collisions.collision_cercle_rect-54"><span class="linenos">54</span></a>            <span class="k">return</span> <span class="kc">False</span>
@@ -1223,8 +1222,8 @@ modele<wbr>.modele    </h1>
 </span><span id="Point-128"><a href="#Point-128"><span class="linenos">128</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">traversable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">couleur</span><span class="o">=</span><span class="n">configuration</span><span class="o">.</span><span class="n">couleur_point</span><span class="p">):</span>
 </span><span id="Point-129"><a href="#Point-129"><span class="linenos">129</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
 </span><span id="Point-130"><a href="#Point-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-</span><span id="Point-131"><a href="#Point-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">couleur</span> <span class="o">=</span> <span class="n">couleur</span>
-</span><span id="Point-132"><a href="#Point-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">traversable</span> <span class="o">=</span> <span class="n">traversable</span>
+</span><span id="Point-131"><a href="#Point-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">traversable</span> <span class="o">=</span> <span class="n">traversable</span>
+</span><span id="Point-132"><a href="#Point-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">couleur</span> <span class="o">=</span> <span class="n">couleur</span>
 </span><span id="Point-133"><a href="#Point-133"><span class="linenos">133</span></a>
 </span><span id="Point-134"><a href="#Point-134"><span class="linenos">134</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># test</span>
 </span><span id="Point-135"><a href="#Point-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
@@ -1263,8 +1262,8 @@ modele<wbr>.modele    </h1>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Point.__init__-128"><a href="#Point.__init__-128"><span class="linenos">128</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">traversable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">couleur</span><span class="o">=</span><span class="n">configuration</span><span class="o">.</span><span class="n">couleur_point</span><span class="p">):</span>
 </span><span id="Point.__init__-129"><a href="#Point.__init__-129"><span class="linenos">129</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
 </span><span id="Point.__init__-130"><a href="#Point.__init__-130"><span class="linenos">130</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-</span><span id="Point.__init__-131"><a href="#Point.__init__-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">couleur</span> <span class="o">=</span> <span class="n">couleur</span>
-</span><span id="Point.__init__-132"><a href="#Point.__init__-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">traversable</span> <span class="o">=</span> <span class="n">traversable</span>
+</span><span id="Point.__init__-131"><a href="#Point.__init__-131"><span class="linenos">131</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">traversable</span> <span class="o">=</span> <span class="n">traversable</span>
+</span><span id="Point.__init__-132"><a href="#Point.__init__-132"><span class="linenos">132</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">couleur</span> <span class="o">=</span> <span class="n">couleur</span>
 </span></pre></div>
 
 
@@ -1293,17 +1292,6 @@ modele<wbr>.modele    </h1>
     
 
                             </div>
-                            <div id="Point.couleur" class="classattr">
-                                <div class="attr variable">
-            <span class="name">couleur</span>
-
-        
-    </div>
-    <a class="headerlink" href="#Point.couleur"></a>
-    
-    
-
-                            </div>
                             <div id="Point.traversable" class="classattr">
                                 <div class="attr variable">
             <span class="name">traversable</span>
@@ -1311,6 +1299,17 @@ modele<wbr>.modele    </h1>
         
     </div>
     <a class="headerlink" href="#Point.traversable"></a>
+    
+    
+
+                            </div>
+                            <div id="Point.couleur" class="classattr">
+                                <div class="attr variable">
+            <span class="name">couleur</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Point.couleur"></a>
     
     
 

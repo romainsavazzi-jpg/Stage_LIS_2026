@@ -93,9 +93,11 @@ class Controleur:
             chemin_possible = self.determiner_chemin()
             if chemin_possible:
                 self.bon_point_d_accroche = point_d_accroche
-            else:
+            elif self.bon_point_d_accroche:
                 self.liste_points_d_accroche[self.indice_accroche] = self.bon_point_d_accroche
                 chemin_possible = self.determiner_chemin()
+            else:
+                self.bon_point_d_accroche = point_d_accroche
 
     def selection_point_d_accroche(self, mx: float, my: float):
         """Détecte si le point aux coordonnées mx, my est proche de configuration.taille_selec_point_d_accroche d'un point du chemin.
